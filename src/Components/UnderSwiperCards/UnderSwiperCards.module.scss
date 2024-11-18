@@ -1,0 +1,31 @@
+.cards-block {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  &-item {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    outline: 1px solid rgb(232, 232, 236);
+    padding: 100px;
+    & img {
+      justify-self: center;
+      align-self: center;
+    }
+    &-tag {
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      font-family: "SF-Pro-Display-Regular";
+    }
+    &-price {
+      color: #454545;
+      font-family: "SF-Pro-Display-Regular_light";
+    }
+  }
+  &-price-block {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+}

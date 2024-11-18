@@ -1,0 +1,70 @@
+.trade-in-block {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 140px;
+    margin-left: 90px;
+    
+    & h2:first-child {
+        font-family: "SF-Pro-Display-Regular";
+        font-size: 2.6rem;
+        font-weight: 1000;
+        width: 55%;
+        text-wrap: balance;
+    }
+    
+    & h4 {
+        font-family: "SF-Pro-Display-Regular";
+        font-size: 1.6rem;
+        font-weight: 1000;
+        width: 40%;
+        text-wrap: balance;
+    }
+
+    & span {
+        font-family: "SF-Pro-Display-Regular_light";
+        font-size: 1.6rem;
+        color: #474242;
+        width: 50%;
+        text-wrap: balance;
+    }
+}
+
+.faq-block {
+    width: 90%;
+    margin-bottom: 180px;
+    font-size: 1rem;
+    font-family: "SF-Pro-Display-Regular";
+    & h3 {
+        font-family: "SF-Pro-Display-Regular";
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 60px;
+    }
+}
+
+.images-block {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 100px;
+    margin-top: 20px;
+    &-card {
+        display: grid;
+        grid-template-rows: 2fr 1fr;
+        gap: 20px;
+        cursor: pointer;
+        & img {
+            width: 240px;
+            height: 250px;
+        }
+        & span {
+            text-align: center;
+            justify-self: center;
+            font-family: "SF-Pro-Display-Regular";
+            font-size: 2rem;
+        }
+    }
+}

@@ -1,0 +1,125 @@
+.card-item-block {
+    position: relative;
+    & img{
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+    & h2[aria-image="2"] { //Macbook
+        position: absolute;
+        top: 10%;
+        left: 37%;
+        font-size: 3rem;
+        font-weight: 500;
+        font-family: 'SF-Pro-Display-Regular';
+        opacity: 0;
+    }
+    & span[aria-image="2"] {
+        position: absolute;
+        top: 23%;
+        left: 17%;
+        font-size: 2.5rem;
+        font-weight: 500;
+        font-family: "SF-Pro-Display-Regular_light";
+        opacity: 0;
+    }
+
+    & h2[aria-image="1"] { //Watches
+        position: absolute;
+        top: 10%;
+        left: 35%;
+        font-size: 3rem;
+        font-weight: 500;
+        font-family: 'SF-Pro-Display-Regular';
+        color: white;
+        opacity: 0;
+    }
+    & span[aria-image="1"] {
+        position: absolute;
+        top: 23%;
+        left: 21%;
+        font-size: 2.5rem;
+        font-weight: 500;
+        font-family: "SF-Pro-Display-Regular_light";
+        color: white;
+        opacity: 0;
+    }
+
+    & h2[aria-image="3"] { //Ipad
+        position: absolute;
+        top: 10%;
+        left: 44%;
+        font-size: 3rem;
+        font-weight: 500;
+        font-family: 'SF-Pro-Display-Regular';
+        opacity: 0;
+    }
+    & span[aria-image="3"] {
+        position: absolute;
+        top: 23%;
+        left: 7%;
+        font-size: 2.5rem;
+        font-weight: 500;
+        font-family: "SF-Pro-Display-Regular_light";
+        text-wrap: nowrap;
+        opacity: 0;
+    }
+
+    & h2[aria-image="4"] { //AirPods
+        position: absolute;
+        top: 10%;
+        left: 38%;
+        font-size: 3rem;
+        font-weight: 500;
+        font-family: 'SF-Pro-Display-Regular';
+        color: white;
+        opacity: 0;
+    }
+
+    & span[aria-image="4"] {
+        position: absolute;
+        top: 23%;
+        left: 15%;
+        font-size: 2.5rem;
+        font-weight: 500;
+        font-family: "SF-Pro-Display-Regular_light";
+        text-wrap: nowrap;
+        color: white;
+        opacity: 0;
+    }
+    &-button-block {
+        position: absolute;
+        top: 35%;
+        left: 33%;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 20px;
+        opacity: 0;
+        & button {
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            font-family: 'SF-Pro-Display-Regular';
+            border-radius: 10px;
+            height: 45px;
+            &[aria-button="подробнее"] {
+                width: 175px;
+                background-color: #f5f5f7;
+                color: #87a08b;
+            }
+            &[aria-button="купить"] {
+                width: 140px;
+                background-color: #87a08b;
+                color: #f5f5f7;
+            }
+        }
+        & .more {
+            font-size: 2.4rem;
+        }
+        & .buy {
+
+        }
+    }
+}

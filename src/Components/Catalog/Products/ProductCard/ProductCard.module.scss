@@ -1,0 +1,45 @@
+.product-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: 13fr 1fr 1fr;
+  padding: 0px 10px;
+  height: fit-content;
+  width: 255px;
+  height: 450px;
+  cursor: pointer;
+  & img {
+    align-self: center;
+    justify-self: center;
+  }
+  &-text-block {
+    display: flex;
+    flex-flow: column nowrap;
+    &-tag {
+      font-family: "SF-Pro-Display-Regular";
+      text-align: center;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    &-price {
+      text-align: center;
+      font-family: "SF-Pro-Display-Regular";
+      padding-top: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    &-tile {
+      position:absolute;
+      top:0px;
+      left:0px;
+      width:80px;
+      height:30px;
+      text-align:center;
+      line-height: 30px;
+      font-family: "SF-Pro-Display-Regular_light";
+      font-weight: 100;
+      border-radius: 5px;
+      background-color:rgb(183,167,245);
+      color:white
+    }
+  }
+}

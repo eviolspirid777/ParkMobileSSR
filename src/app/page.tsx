@@ -1,95 +1,104 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import { useEffect, useReducer, useState } from "react";
+import { ContentType } from "@/Types/SliderContentType";
+import { useAtom } from "jotai";
+import { selectedRouteAtom } from "@/Store/RouteStore";
+import { useRouter } from "next/navigation";
+import { InputFileComponent } from "@/Components/InputFileComponent/InputFileComponent";
+import { Footer } from "@/Components/Footer/Footer";
+import { Catalog } from "@/Components/Catalog/Catalog";
+import { UnderTilesLogos } from "@/Components/UnderTilesLogos/UnderTilesLogos";
+import { Tiles } from "@/Components/Tiles/Tiles";
+import { PopularItems } from "@/Components/PopularItems/PopularItems";
+import { Header } from "@/Components/Header/Header";
+import { HeaderSlider } from "@/Components/HeaderSlider/HeaderSlider";
+import { SwiperList } from "@/Components/Swiper/Swiper";
+import { UnderSwiperCards } from "@/Components/UnderSwiperCards/UnderSwiperCards";
 
-export default function Home() {
+export type ReducerAction = {
+  type?: ContentType;
+  titles?: string[];
+  subTitles?: string[];
+  items?: { image: string; tag: string; price: string }[];
+};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const reducer = (
+  state: unknown,
+  { type, items, subTitles, titles }: ReducerAction
+): ReducerAction => {
+  return { type, items, subTitles, titles };
+};
+
+const Home = () => {
+  const navigate = useRouter();
+  const [selectedRoute, setSelectedRoute] = useAtom(selectedRouteAtom);
+
+  const [isHeaderMenuVisible, setIsHeaderMenuVisible] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
+  const [sliderData, dispatch] = useReducer(reducer, {});
+
+  const handleMouseEnter = (
+    type: ContentType,
+    titles: string[] | undefined,
+    subTitles: string[] | undefined
+  ) => {
+    setTimeout(() => {
+      setIsHeaderMenuVisible(true);
+      setIsContentVisible(true);
+    }, 100);
+    dispatch({ type, titles, subTitles });
+  };
+
+  const handleMouseLeave = () => {
+    setIsContentVisible(false);
+    setTimeout(() => {
+      setIsHeaderMenuVisible(false);
+    }, 800);
+  };
+
+  const handleRouteCategory = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    const category = event.currentTarget.text;
+    setSelectedRoute(category);
+    navigate.push(`/category/${category}`);
+  };
+
+  const handleMainMenu = () => {
+    navigate.push("/");
+  };
+
+  useEffect(() => {
+    if (selectedRoute) {
+      navigate.push(selectedRoute);
+    }
+  }, [selectedRoute]);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <>
+      <Header
+        mouseEnter={handleMouseEnter}
+        handleMouseClick={(event) => handleRouteCategory(event)}
+        handleMainMenuRoute={handleMainMenu}
+      />
+      {isHeaderMenuVisible && (
+        <HeaderSlider
+          contentType={sliderData}
+          handleMouseLeave={handleMouseLeave}
+          isContentVisible={isContentVisible}
+          handleIsContentVisible={handleMouseLeave}
         />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+      <SwiperList />
+      <UnderSwiperCards />
+      <PopularItems />
+      <Tiles />
+      <UnderTilesLogos />
+      <Catalog />
+      <InputFileComponent />
+      <Footer />
+    </>
   );
-}
+};
+
+export default Home;
