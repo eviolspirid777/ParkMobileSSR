@@ -14,7 +14,7 @@ export const UnderTilesLogos = () => {
   return (
     <div className={styles["under-tiles-logos-block"]}>
       {images.map((image, key) => (
-        <Image src={image} key={key} alt="" />
+        <Image src={image} key={key} alt="" height="300" width="300" />
       ))}
     </div>
   );

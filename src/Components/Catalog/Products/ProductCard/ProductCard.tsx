@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "./ProductCard.module.scss";
 import { CardType } from "@/Types/CardType";
-import Image from "next/image"
-
+import Image from "next/image";
 
 type ProductCardProps = {
   card: CardType;
@@ -28,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ card }) => {
 
   return (
     <div className={styles["product-card"]}>
-      <Image src={image ?? ""} alt=""/>
+      {image && <Image src={image} alt="" width="300" height="300" />}
       <div className={styles["product-card-text-block"]}>
         <label className={styles["product-card-text-block-tag"]}>
           {card.name}
