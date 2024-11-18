@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import styles from "./Footer.module.scss";
 import { TelegramIcon } from "./Telegram";
 import reqesits from "@/assets/Reqesits/reqesits.png";
-import Image from "next/image"
+import Image from "next/image";
 
 export const Footer = () => {
   const navigate = useRouter();
@@ -13,27 +13,23 @@ export const Footer = () => {
       <div className={styles["footer-block-help"]}>
         <div className={styles["footer-block-help-items"]}>
           <h2>О компании</h2>
-          <span onClick={() => navigate.push("/about-contacts")}>
+          <span onClick={() => navigate.push("/about/contacts")}>
             Адреса магазинов
           </span>
-          <span onClick={() => navigate.push("/about-contacts")}>
-            Контакты
-          </span>
-          <span onClick={() => navigate.push("/about-contacts")}>
+          <span onClick={() => navigate.push("/about/contacts")}>Контакты</span>
+          <span onClick={() => navigate.push("/about/contacts")}>
             Обратная связь
           </span>
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Помощь</h2>
-          <span onClick={() => navigate.push("/delivery")}>
+          <span onClick={() => navigate.push("/help/delivery")}>
             Доставка и оплата
           </span>
-          <span onClick={() => navigate.push("/gurantee")}>
+          <span onClick={() => navigate.push("/help/gurantee")}>
             Гарантии и возврат
           </span>
-          <span onClick={() => navigate.push("/trade-in")}>
-            Trade-in
-          </span>
+          <span onClick={() => navigate.push("/help/trade-in")}>Trade-in</span>
           <span>Рассрочка и кредит</span>
         </div>
         <div className={styles["footer-block-help-items"]}>
@@ -82,7 +78,7 @@ export const Footer = () => {
             наших лучших предложениях
           </span>
           <div className={styles["reqesits"]}>
-            <Image src={reqesits} alt=""/>
+            <Image src={reqesits} alt="" />
           </div>
         </div>
       </div>

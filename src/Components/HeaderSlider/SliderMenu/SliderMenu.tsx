@@ -1,4 +1,3 @@
-"use client"
 import { FC } from "react";
 import styles from "./SliderMenu.module.scss";
 import { CardType } from "@/Types/CardType";
@@ -37,7 +36,7 @@ export const SliderMenu: FC<SliderMenuProps> = ({
               key={index}
               className={`${styles["blur-block-content-visible-items-item-block"]}`}
             >
-              <Image 
+              <Image
                 src={item.image}
                 alt=""
                 className={

@@ -1,6 +1,13 @@
-"use client"
+import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 import styles from "./DeliveryComponent.module.scss";
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
+import { Footer } from "@/Components/Footer/Footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Доставка ParkMobile",
+  description: "Park Mobile Краснодар",
+};
 
 export const DeliveryComponent = () => {
   const accordionData = [
@@ -17,48 +24,52 @@ export const DeliveryComponent = () => {
   ];
 
   return (
-    <div className={styles["delivery-block"]}>
-      <div className={styles["delivery-block-payment-info"]}>
-        <h3>Доставка и оплата</h3>
-        <span>
-          Для нас доставка - это не просто процесс, это важнейшая часть нашей
-          работы. Мы понимаем, что наши клиенты ищут лучшее соотношение
-          &quot;Цена-Качество&quot; и находятся по всей России, от Краснодара, где
-          находится наш магазин, до Петропавловска-на-Камчатке.
-        </span>
-        <span>
-          Мы гарантируем надежную и оперативную доставку, чтобы каждый клиент
-          получил заказ в срок и в отличном состоянии.
-        </span>
+    <>
+      <HeaderComponentPack />
+      <div className={styles["delivery-block"]}>
+        <div className={styles["delivery-block-payment-info"]}>
+          <h3>Доставка и оплата</h3>
+          <span>
+            Для нас доставка - это не просто процесс, это важнейшая часть нашей
+            работы. Мы понимаем, что наши клиенты ищут лучшее соотношение
+            &quot;Цена-Качество&quot; и находятся по всей России, от Краснодара,
+            где находится наш магазин, до Петропавловска-на-Камчатке.
+          </span>
+          <span>
+            Мы гарантируем надежную и оперативную доставку, чтобы каждый клиент
+            получил заказ в срок и в отличном состоянии.
+          </span>
+        </div>
+        <div className={styles["delivery-block-krasnodar-delivery"]}>
+          <h4>Доставка по городу Краснодару</h4>
+          <ul>
+            <li>Стоимость доставки: 500 рублей</li>
+            <li>Срок доставки: 1 день</li>
+          </ul>
+          <h5>Варианты оплаты</h5>
+          <span>
+            наличными при получении, на сайте через онлайн-кассу, переводом
+            (+5%), по QR-коду (+5%) или на карту (+5%).
+          </span>
+        </div>
+        <div className={styles["delivery-block-russia-delivery"]}>
+          <h4>Доставка по России</h4>
+          <ul>
+            <li>Стоимость доставки: по тарифам компании</li>
+            <li>Срок доставки: 1-7 дней</li>
+          </ul>
+          <h5>Варианты оплаты</h5>
+          <span>
+            на сайте через онлайн-кассу, переводом (+5%), по QR-коду (+5%) или
+            на карту (+5%).
+          </span>
+        </div>
+        <div className={styles["delivery-block-faq"]}>
+          <h3>Часто задаваемые вопросы</h3>
+          <AccordionComponent data={accordionData} />
+        </div>
       </div>
-      <div className={styles["delivery-block-krasnodar-delivery"]}>
-        <h4>Доставка по городу Краснодару</h4>
-        <ul>
-          <li>Стоимость доставки: 500 рублей</li>
-          <li>Срок доставки: 1 день</li>
-        </ul>
-        <h5>Варианты оплаты</h5>
-        <span>
-          наличными при получении, на сайте через онлайн-кассу, переводом (+5%),
-          по QR-коду (+5%) или на карту (+5%).
-        </span>
-      </div>
-      <div className={styles["delivery-block-russia-delivery"]}>
-        <h4>Доставка по России</h4>
-        <ul>
-          <li>Стоимость доставки: по тарифам компании</li>
-          <li>Срок доставки: 1-7 дней</li>
-        </ul>
-        <h5>Варианты оплаты</h5>
-        <span>
-          на сайте через онлайн-кассу, переводом (+5%), по QR-коду (+5%) или на
-          карту (+5%).
-        </span>
-      </div>
-      <div className={styles["delivery-block-faq"]}>
-        <h3>Часто задаваемые вопросы</h3>
-        <AccordionComponent data={accordionData} />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };

@@ -1,6 +1,7 @@
-"use client"
+import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 import styles from "./GuranteeComponent.module.scss";
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
+import { Footer } from "@/Components/Footer/Footer";
 
 export const GuranteeComponent = () => {
   const liItems = [
@@ -31,35 +32,39 @@ export const GuranteeComponent = () => {
   ];
 
   return (
-    <div className={styles["gurantee-block"]}>
-      <div className={styles["gurantee-block-gurantee"]}>
-        <h3>Гарантии</h3>
-        <span>
-          Приобретая технику у нас, Вы можете быть абсолютно уверены в том, что
-          получите совершенно новый, оригинальный продукт, на который
-          распространяется гарантия. Срок гарантийного обслуживания, в течение
-          которого осуществляется бесплатный ремонт, устанавливается
-          фирмой-производителем
-        </span>
-        <div className={styles["gurantee-block-gurantee-telephone"]}>
-          <span>Подробную информацию уточняйте у менеджера по телефону:</span>
-          <a href="tel:79288173475">+7 928 817-34-75</a>
+    <>
+      <HeaderComponentPack />
+      <div className={styles["gurantee-block"]}>
+        <div className={styles["gurantee-block-gurantee"]}>
+          <h3>Гарантии</h3>
+          <span>
+            Приобретая технику у нас, Вы можете быть абсолютно уверены в том,
+            что получите совершенно новый, оригинальный продукт, на который
+            распространяется гарантия. Срок гарантийного обслуживания, в течение
+            которого осуществляется бесплатный ремонт, устанавливается
+            фирмой-производителем
+          </span>
+          <div className={styles["gurantee-block-gurantee-telephone"]}>
+            <span>Подробную информацию уточняйте у менеджера по телефону:</span>
+            <a href="tel:79288173475">+7 928 817-34-75</a>
+          </div>
+          <hr />
         </div>
-        <hr />
+        <div className={styles["gurantee-block-requirments"]}>
+          <h3>Условия гарантии</h3>
+          <ul>
+            {liItems.map((el) => (
+              <li key={el}>{el}</li>
+            ))}
+          </ul>
+          <hr />
+        </div>
+        <div className={styles["gurantee-block-faq"]}>
+          <h3>Часто задаваемые вопросы</h3>
+          <AccordionComponent data={accordionItems} />
+        </div>
       </div>
-      <div className={styles["gurantee-block-requirments"]}>
-        <h3>Условия гарантии</h3>
-        <ul>
-          {liItems.map((el) => (
-            <li key={el}>{el}</li>
-          ))}
-        </ul>
-        <hr />
-      </div>
-      <div className={styles["gurantee-block-faq"]}>
-        <h3>Часто задаваемые вопросы</h3>
-        <AccordionComponent data={accordionItems} />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };

@@ -1,4 +1,3 @@
-"use client"
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
 import Image from "next/image";
 import styles from "./TradeInComponent.module.scss";
@@ -9,6 +8,8 @@ import ipad from "./Images/Ipad.png";
 import watch from "./Images/watch.png";
 import airpods from "./Images/w9g8rgeuhicg1q7fa2qh.png";
 import { ReactNode } from "react";
+import { Footer } from "@/Components/Footer/Footer";
+import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 
 export const TradeInComponent = () => {
   const imagesBlock = [
@@ -43,34 +44,34 @@ export const TradeInComponent = () => {
   ];
 
   return (
-    <div className={styles["trade-in-block"]}>
-      <h2>
-        Сдайте свою старую технику и получите скидку на покупку новой по
-        программе Трейд-ин
-      </h2>
-      <span>
-        Trade-in — это умный, удобный и экологичный способ покупки новых
-        устройств. Теперь вам есть куда принести свои устройства, которые вы
-        решили обновить, получить при этом выгоду себе и принести пользу
-        окружающей среде.
-      </span>
-      <h4>Выберите технику, которую вы хотите сдать</h4>
-      <div className={styles["images-block"]}>
-        {imagesBlock.map(([name, photo], key) => (
-          <div
-            key={key}
-            className={styles["images-block-card"]}
-            onClick={() => console.log(name)}
-          >
-            <Image src={photo} alt=""/>
-            <span>{name as ReactNode}</span>
-          </div>
-        ))}
+    <>
+      <HeaderComponentPack />
+      <div className={styles["trade-in-block"]}>
+        <h2>
+          Сдайте свою старую технику и получите скидку на покупку новой по
+          программе Трейд-ин
+        </h2>
+        <span>
+          Trade-in — это умный, удобный и экологичный способ покупки новых
+          устройств. Теперь вам есть куда принести свои устройства, которые вы
+          решили обновить, получить при этом выгоду себе и принести пользу
+          окружающей среде.
+        </span>
+        <h4>Выберите технику, которую вы хотите сдать</h4>
+        <div className={styles["images-block"]}>
+          {imagesBlock.map(([name, photo], key) => (
+            <div key={key} className={styles["images-block-card"]}>
+              <Image src={photo} alt="" />
+              <span>{name as ReactNode}</span>
+            </div>
+          ))}
+        </div>
+        <div className={styles["faq-block"]}>
+          <h3>Часто задаваемые вопросы</h3>
+          <AccordionComponent data={accordionData} />
+        </div>
       </div>
-      <div className={styles["faq-block"]}>
-        <h3>Часто задаваемые вопросы</h3>
-        <AccordionComponent data={accordionData} />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };

@@ -1,19 +1,12 @@
-'use client'
+"use client";
 import { useEffect, useReducer, useState } from "react";
+import { Header } from "../Header/Header";
+import { HeaderSlider } from "../HeaderSlider/HeaderSlider";
 import { ContentType } from "@/Types/SliderContentType";
 import { useAtom } from "jotai";
-import { selectedRouteAtom } from "@/Store/RouteStore";
 import { useRouter } from "next/navigation";
-import { InputFileComponent } from "@/Components/InputFileComponent/InputFileComponent";
-import { Footer } from "@/Components/Footer/Footer";
-import { Catalog } from "@/Components/Catalog/Catalog";
-import { UnderTilesLogos } from "@/Components/UnderTilesLogos/UnderTilesLogos";
-import { Tiles } from "@/Components/Tiles/Tiles";
-import { PopularItems } from "@/Components/PopularItems/PopularItems";
-import { Header } from "@/Components/Header/Header";
-import { HeaderSlider } from "@/Components/HeaderSlider/HeaderSlider";
-import { SwiperList } from "@/Components/Swiper/Swiper";
-import { UnderSwiperCards } from "@/Components/UnderSwiperCards/UnderSwiperCards";
+import { selectedRouteAtom } from "@/Store/RouteStore";
+import { animateScroll as scroll } from "react-scroll";
 
 export type ReducerAction = {
   type?: ContentType;
@@ -29,7 +22,7 @@ const reducer = (
   return { type, items, subTitles, titles };
 };
 
-const Home = () => {
+export const HeaderComponentPack = () => {
   const navigate = useRouter();
   const [selectedRoute, setSelectedRoute] = useAtom(selectedRouteAtom);
 
@@ -74,6 +67,10 @@ const Home = () => {
     }
   }, [selectedRoute]);
 
+  useEffect(() => {
+    scroll.scrollTo(0);
+  }, []);
+
   return (
     <>
       <Header
@@ -89,16 +86,6 @@ const Home = () => {
           handleIsContentVisible={handleMouseLeave}
         />
       )}
-      <SwiperList />
-      <UnderSwiperCards />
-      <PopularItems />
-      <Tiles />
-      <UnderTilesLogos />
-      <Catalog />
-      <InputFileComponent />
-      <Footer />
     </>
   );
 };
-
-export default Home;

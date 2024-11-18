@@ -1,11 +1,10 @@
-"use client"
 import styles from "./UnderSwiperCards.module.scss";
 import iphone from "./UnderSwipeCards/Снимок экрана 2024-11-09 в 22.09.33.png";
 import watch from "./UnderSwipeCards/Снимок экрана 2024-11-09 в 22.09.52.png";
 import ipad from "./UnderSwipeCards/Снимок экрана 2024-11-09 в 22.09.43.png";
 import macbook from "./UnderSwipeCards/Снимок экрана 2024-11-09 в 22.10.01.png";
 
-import Image from "next/image"
+import Image from "next/image";
 
 export const UnderSwiperCards = () => {
   const items = [
@@ -35,7 +34,7 @@ export const UnderSwiperCards = () => {
     <div className={styles["cards-block"]}>
       {items.map((item, i) => (
         <div key={i} className={styles["cards-block-item"]}>
-          <Image src={item.image} alt=""/>
+          <Image src={item.image} alt="" />
           <div className={styles["cards-block-price-block"]}>
             <span className={styles["cards-block-item-tag"]}>{item.tag}</span>
             <span className={styles["cards-block-item-price"]}>

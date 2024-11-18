@@ -1,0 +1,131 @@
+.about-contacts-block {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 50px;
+    align-items: flex-start;
+    padding-left: 15%;
+    padding-top: 5%;
+    width: 90%;
+    & h3{
+        font-family: "SF-Pro-Display-Regular";
+        color: #505050;
+        font-size: 2.4rem;
+    }
+    &-info-block {
+        & h3 {
+            font-family: "SF-Pro-Display-Regular";
+            letter-spacing: 2px;
+            color: #505050;
+            font-size: 2.4rem;
+            &:last-child {
+                color: #87a08b;
+            }
+        }
+        &-text {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            font-family: "SF-Pro-Display-Regular_light";
+            color: #7a7a7a;
+            letter-spacing: 1px;
+            & span {
+                text-wrap: balance;
+            }
+        }
+    }
+    &-data-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        &-1 {
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 30px;
+            & h3 {
+                color: #6d6d6d;
+                font-family: "SF-Pro-Display-Regular";
+                font-size: 1rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
+            &-reqesits,
+            &-contacts {
+                display: flex;
+                flex-flow: column nowrap;
+                font-family: "SF-Pro-Display-Regular_light";
+                color: #7a7a7a;
+            }
+            &-reqesits {
+                gap: 5px;
+                word-spacing: 4px;
+            }
+            &-contacts {
+                letter-spacing: 1px;
+            }
+        }
+        &-2 {
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 30px;
+            & span {
+                color: #6d6d6d;
+                font-family: "SF-Pro-Display-Regular_light";
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+        }
+    }
+    &-questions {
+        margin-top: 190px;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        &-data {
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 50px;
+            & h3 {
+                font-family: "SF-Pro-Display-Regular";
+                color: black;
+                font-size: 2rem;
+            }
+            & span {
+                color: #6d6d6d;
+                font-family: "SF-Pro-Display-Regular_light";
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+                width: 60%;
+            }
+            & button{
+                font-family: "SF-Pro-Display-Regular";
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+                color: white;
+                background-color: #87a08b;
+                padding: 20px 10px;
+                width: 30%;
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+.contacts {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 20px;
+
+    & a {
+        text-decoration: none;
+        color: #6d6d6d;
+        font-family: "SF-Pro-Display-Regular_light";
+    }
+    & a[href="https://wa.me/79288173475"] {
+        border-radius: 10px;
+        width: 45px;
+        & img {
+            border-radius: 10px;
+        }
+    }
+}

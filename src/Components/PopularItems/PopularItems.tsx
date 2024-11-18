@@ -1,4 +1,3 @@
-"use client"
 import styles from "./PopularItems.module.scss";
 import Image from "next/image";
 
@@ -27,7 +26,7 @@ export const PopularItems = () => {
             <div className={styles["popular-items-block-item-gurantee"]}>
               Гарантия
             </div>
-            <Image src={item.image} alt=""/>
+            <Image src={item.image} alt="" />
             <div className={styles["popular-items-block-price-block"]}>
               <span className={styles["popular-items-block-item-tag"]}>
                 {item.title}

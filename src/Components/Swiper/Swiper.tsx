@@ -1,4 +1,3 @@
-"use client"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -14,7 +13,7 @@ import img4 from "../../Slides/Без названия (1).jpeg";
 import img5 from "../../Slides/Без названия (3).jpeg";
 import img6 from "../../Slides/Без названия (2).jpeg";
 
-import Image from "next/image"
+import Image from "next/image";
 
 export const SwiperList = () => {
   const images = [img0, img1, img2, img3, img4, img5, img6];
@@ -28,7 +27,7 @@ export const SwiperList = () => {
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <Image src={image} alt=""/>
+            <Image src={image} alt="" />
           </SwiperSlide>
         ))}
         <SwiperSlide>Slide 7</SwiperSlide>

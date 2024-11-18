@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { FC, useEffect } from "react";
 import styles from "./HeaderSlider.module.scss";
 import { SliderMenu } from "./SliderMenu/SliderMenu";
 import { SliderSearch } from "./SliderSearch/SliderSearch";
-import { ReducerAction } from "@/app/page";
+import { ReducerAction } from "@/app/(main_app)/page";
 import { CardType } from "@/Types/CardType";
 
 type HeaderSliderProps = {
