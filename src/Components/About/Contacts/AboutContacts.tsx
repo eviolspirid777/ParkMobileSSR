@@ -7,9 +7,7 @@ import WhatssAppImg from "../../../assets/Reqesits/WhatssApp.png";
 import PhoneDemo from "../../../assets/Reqesits/Phone_demo.png";
 
 import Image from "next/image";
-import { Footer } from "@/Components/Footer/Footer";
 import { animateScroll as scroll } from "react-scroll";
-import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 
 export const AboutContacts = () => {
   scroll.scrollTo(0);
@@ -17,7 +15,6 @@ export const AboutContacts = () => {
   return (
     <>
       <YMaps>
-        <HeaderComponentPack />
         <div className={styles["about-contacts-block"]}>
           <div className={styles["about-contacts-block-info-block"]}>
             <h3>О компании</h3>
@@ -101,7 +98,6 @@ export const AboutContacts = () => {
             <Image src={PhoneDemo} alt="" />
           </div>
         </div>
-        <Footer />
       </YMaps>
     </>
   );

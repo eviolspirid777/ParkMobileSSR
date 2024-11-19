@@ -1,35 +1,45 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./Footer.module.scss";
 import { TelegramIcon } from "./Telegram";
 import reqesits from "@/assets/Reqesits/reqesits.png";
 import Image from "next/image";
+import { animateScroll as scroll } from "react-scroll";
 
+//TODO: Можно добавить проверку на текущий маршрут и не перебрасывать на этот же сайт, если пользователь находится на нем в текущий момент
 export const Footer = () => {
-  const navigate = useRouter();
+  const pathName = usePathname();
+  const naviagate = useRouter()
+
+  const handlePath = (path: string) => {
+    if(pathName === path) {
+      return (() => scroll.scrollTo(0))()
+    }
+    naviagate.push(path);
+  }
 
   return (
     <div className={styles["footer-block"]}>
       <div className={styles["footer-block-help"]}>
         <div className={styles["footer-block-help-items"]}>
           <h2>О компании</h2>
-          <span onClick={() => navigate.push("/about/contacts")}>
+          <span onClick={handlePath.bind(this,"/about/contacts")}>
             Адреса магазинов
           </span>
-          <span onClick={() => navigate.push("/about/contacts")}>Контакты</span>
-          <span onClick={() => navigate.push("/about/contacts")}>
+          <span onClick={handlePath.bind(this,"/about/contacts")}>Контакты</span>
+          <span onClick={handlePath.bind(this,"/about/contacts")}>
             Обратная связь
           </span>
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Помощь</h2>
-          <span onClick={() => navigate.push("/help/delivery")}>
+          <span onClick={handlePath.bind(this, "/help/delivery")}>
             Доставка и оплата
           </span>
-          <span onClick={() => navigate.push("/help/gurantee")}>
+          <span onClick={handlePath.bind(this, "/help/gurantee")}>
             Гарантии и возврат
           </span>
-          <span onClick={() => navigate.push("/help/trade-in")}>Trade-in</span>
+          <span onClick={handlePath.bind(this, "/help/trade-in")}>Trade-in</span>
           <span>Рассрочка и кредит</span>
         </div>
         <div className={styles["footer-block-help-items"]}>

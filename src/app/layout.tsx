@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./App.scss";
+import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
+import { Footer } from "@/Components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Park Mobile",
@@ -13,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <HeaderComponentPack />
+          {children}
+        <Footer />
+      </body>
     </html>
   );
 }

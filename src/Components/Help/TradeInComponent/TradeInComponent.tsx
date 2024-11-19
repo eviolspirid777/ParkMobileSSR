@@ -8,8 +8,6 @@ import ipad from "./Images/Ipad.png";
 import watch from "./Images/watch.png";
 import airpods from "./Images/w9g8rgeuhicg1q7fa2qh.png";
 import { ReactNode } from "react";
-import { Footer } from "@/Components/Footer/Footer";
-import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 
 export const TradeInComponent = () => {
   const imagesBlock = [
@@ -45,7 +43,6 @@ export const TradeInComponent = () => {
 
   return (
     <>
-      <HeaderComponentPack />
       <div className={styles["trade-in-block"]}>
         <h2>
           Сдайте свою старую технику и получите скидку на покупку новой по
@@ -71,7 +68,6 @@ export const TradeInComponent = () => {
           <AccordionComponent data={accordionData} />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

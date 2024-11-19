@@ -1,7 +1,5 @@
-import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 import styles from "./DeliveryComponent.module.scss";
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
-import { Footer } from "@/Components/Footer/Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,7 +23,6 @@ export const DeliveryComponent = () => {
 
   return (
     <>
-      <HeaderComponentPack />
       <div className={styles["delivery-block"]}>
         <div className={styles["delivery-block-payment-info"]}>
           <h3>Доставка и оплата</h3>
@@ -46,11 +43,13 @@ export const DeliveryComponent = () => {
             <li>Стоимость доставки: 500 рублей</li>
             <li>Срок доставки: 1 день</li>
           </ul>
-          <h5>Варианты оплаты</h5>
-          <span>
-            наличными при получении, на сайте через онлайн-кассу, переводом
-            (+5%), по QR-коду (+5%) или на карту (+5%).
-          </span>
+          <div>
+            <h5>Варианты оплаты:</h5>
+            <span>
+              наличными при получении, на сайте через онлайн-кассу, переводом
+              (+5%), по QR-коду (+5%) или на карту (+5%).
+            </span>
+          </div>
         </div>
         <div className={styles["delivery-block-russia-delivery"]}>
           <h4>Доставка по России</h4>
@@ -69,7 +68,6 @@ export const DeliveryComponent = () => {
           <AccordionComponent data={accordionData} />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

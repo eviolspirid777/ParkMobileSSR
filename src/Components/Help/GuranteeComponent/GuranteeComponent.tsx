@@ -1,7 +1,5 @@
-import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 import styles from "./GuranteeComponent.module.scss";
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
-import { Footer } from "@/Components/Footer/Footer";
 
 export const GuranteeComponent = () => {
   const liItems = [
@@ -33,7 +31,6 @@ export const GuranteeComponent = () => {
 
   return (
     <>
-      <HeaderComponentPack />
       <div className={styles["gurantee-block"]}>
         <div className={styles["gurantee-block-gurantee"]}>
           <h3>Гарантии</h3>
@@ -64,7 +61,6 @@ export const GuranteeComponent = () => {
           <AccordionComponent data={accordionItems} />
         </div>
       </div>
-      <Footer />
     </>
   );
 };
