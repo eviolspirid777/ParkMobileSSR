@@ -1,17 +1,12 @@
 "use client";
-import watchesImg from "./TilesImages/AppleWatchTile/appleWatchTileReviewed.png";
-import macbookImg from "./TilesImages/MacBookTile/macBookReviewed.png";
-import ipadImg from "./TilesImages/IpadTile/ipadTileReviewed.png";
-import airpodsImg from "./TilesImages/AirpodsTile/PodsTileReviewed.png";
 import gsap from "gsap";
 import styles from "./Tiles.module.scss";
 import { useEffect, useRef } from "react";
-import Image, { StaticImageData } from "next/image";
 
 type TileItem = {
   title: string;
   description: string;
-  img: StaticImageData;
+  img: string;
   key: string;
   href: string;
 };
@@ -21,28 +16,28 @@ export const Tiles = () => {
     {
       title: "Apple Watch",
       description: "Умнее. Ярче. Могущественнее",
-      img: watchesImg,
+      img: "/images/TilesImages/AppleWatchTile/appleWatchTileReviewed.png",
       href: "vk.com",
       key: "1",
     },
     {
       title: "MacBook Pro",
       description: "Сногсшибательный. Вскружит голову.",
-      img: macbookImg,
+      img: "/images/TilesImages/MacBookTile/macBookReviewed.png",
       href: "vk.com",
       key: "2",
     },
     {
       title: "iPad",
       description: "Твой следующий компьютер - это не компьютер",
-      img: ipadImg,
+      img: "/images/TilesImages/IpadTile/ipadTileReviewed.png",
       href: "vk.com",
       key: "3",
     },
     {
       title: "AirPods Pro",
       description: "Никаких проводов. Только магия звука.",
-      img: airpodsImg,
+      img: "/images/TilesImages/AirpodsTile/PodsTileReviewed.png",
       href: "vk.com",
       key: "4",
     },
@@ -147,7 +142,7 @@ export const Tiles = () => {
           >
             {el.description}
           </span>
-          <Image src={el.img} alt="" />
+          <img src={el.img} alt="" />
           <div
             className={styles["card-item-block-button-block"]}
             ref={(el) => {

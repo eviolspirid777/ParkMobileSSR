@@ -1,18 +1,16 @@
 import styles from "./PopularItems.module.scss";
-import Image from "next/image";
-
-import img1 from "./PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png";
-import img2 from "./PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png";
 
 export const PopularItems = () => {
   const items = [
     {
-      image: img1,
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
       title: "AirPods Pro 2 USB-C",
       price: "21 190",
     },
     {
-      image: img2,
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
       title: "Apple Power Adapter 20W",
       price: "2 490",
     },
@@ -26,7 +24,7 @@ export const PopularItems = () => {
             <div className={styles["popular-items-block-item-gurantee"]}>
               Гарантия
             </div>
-            <Image src={item.image} alt="" />
+            <img src={item.image} alt="" />
             <div className={styles["popular-items-block-price-block"]}>
               <span className={styles["popular-items-block-item-tag"]}>
                 {item.title}

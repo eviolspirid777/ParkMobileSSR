@@ -1,21 +1,15 @@
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
-import Image from "next/image";
 import styles from "./TradeInComponent.module.scss";
 
-import iphone from "./Images/iphone.png";
-import macBook from "./Images/MacBook.png";
-import ipad from "./Images/Ipad.png";
-import watch from "./Images/watch.png";
-import airpods from "./Images/w9g8rgeuhicg1q7fa2qh.png";
 import { ReactNode } from "react";
 
 export const TradeInComponent = () => {
   const imagesBlock = [
-    ["iPhone", iphone],
-    ["iPad", ipad],
-    ["Mac", macBook],
-    ["AirPods", airpods],
-    ["Watch", watch],
+    ["iPhone", "/images/Devices/iphone.png"],
+    ["iPad", "/images/Devices/Ipad.png"],
+    ["Mac", "/images/Devices/MacBook.png"],
+    ["AirPods", "/images/Devices/w9g8rgeuhicg1q7fa2qh.png"],
+    ["Watch", "/images/Devices/watch.png"],
   ];
 
   const accordionData = [
@@ -58,7 +52,7 @@ export const TradeInComponent = () => {
         <div className={styles["images-block"]}>
           {imagesBlock.map(([name, photo], key) => (
             <div key={key} className={styles["images-block-card"]}>
-              <Image src={photo} alt="" />
+              <img src={photo} alt="" />
               <span>{name as ReactNode}</span>
             </div>
           ))}

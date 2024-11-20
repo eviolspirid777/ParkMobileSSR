@@ -3,10 +3,7 @@ import styles from "./AboutContacts.module.scss";
 import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
 import { TelegramIcon } from "../../Footer/Telegram";
 
-import WhatssAppImg from "../../../assets/Reqesits/WhatssApp.png";
-import PhoneDemo from "../../../assets/Reqesits/Phone_demo.png";
-
-import Image from "next/image";
+// import img from "next/img";
 import { useEffect } from "react";
 
 export const AboutContacts = () => {
@@ -72,7 +69,7 @@ export const AboutContacts = () => {
                   <TelegramIcon />
                 </a>
                 <a href="https://wa.me/79288173475">
-                  <Image src={WhatssAppImg} alt="" />
+                  <img src={"/imgs/AboutContacts/WhatssApp.png"} alt="" />
                 </a>
               </div>
             </div>
@@ -102,7 +99,7 @@ export const AboutContacts = () => {
               <h3>+7 928 817-34-75</h3>
               <button>Заказать звонок</button>
             </div>
-            <Image src={PhoneDemo} alt="" />
+            <img src={"/imgs/AboutContacts/Phone_demo.png"} alt="" />
           </div>
         </div>
       </YMaps>

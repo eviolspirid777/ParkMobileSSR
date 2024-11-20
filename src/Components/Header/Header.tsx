@@ -1,12 +1,9 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
-import img from "@/assets/Logo.png";
 import styles from "./Header.module.scss";
 import { FC } from "react";
 import React from "react";
 import { ContentType } from "@/Types/SliderContentType";
-
-import Image from "next/image"
 
 type HeaderProps = {
   mouseEnter: (
@@ -74,7 +71,7 @@ export const Header: FC<HeaderProps> = ({
     },
   ];
 
-  const [itemInBucket,] = useState<number>(1);
+  const [itemInBucket] = useState<number>(1);
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
 
   const handleMouseEnter = (
@@ -114,7 +111,12 @@ export const Header: FC<HeaderProps> = ({
         isHeaderHidden ? styles["header-hidden"] : ""
       }`}
     >
-      <Image src={img} alt="" className={styles["logo"]} onClick={handleMainMenuRoute}/>
+      <img
+        src={"/images/Logo/Logo.png"}
+        alt=""
+        className={styles["logo"]}
+        onClick={handleMainMenuRoute}
+      />
       <nav className={styles["nav-bar"]}>
         {linkedItems.map((el) => (
           <a

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import styles from "./SliderMenu.module.scss";
 import { CardType } from "@/Types/CardType";
-import Image from "next/image";
 
 type SliderMenuProps = {
   titles?: string[];
@@ -36,7 +35,7 @@ export const SliderMenu: FC<SliderMenuProps> = ({
               key={index}
               className={`${styles["blur-block-content-visible-items-item-block"]}`}
             >
-              <Image
+              <img
                 src={item.image}
                 alt=""
                 className={

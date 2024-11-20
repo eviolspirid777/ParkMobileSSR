@@ -2,31 +2,31 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./Footer.module.scss";
 import { TelegramIcon } from "./Telegram";
-import reqesits from "@/assets/Reqesits/reqesits.png";
-import Image from "next/image";
 import { animateScroll as scroll } from "react-scroll";
 
 export const Footer = () => {
   const pathName = usePathname();
-  const naviagate = useRouter()
+  const naviagate = useRouter();
 
   const handlePath = (path: string) => {
-    if(pathName === path) {
-      return (() => scroll.scrollTo(0))()
+    if (pathName === path) {
+      return (() => scroll.scrollTo(0))();
     }
     naviagate.push(path);
-  }
+  };
 
   return (
     <div className={styles["footer-block"]}>
       <div className={styles["footer-block-help"]}>
         <div className={styles["footer-block-help-items"]}>
           <h2>О компании</h2>
-          <span onClick={handlePath.bind(this,"/about/contacts")}>
+          <span onClick={handlePath.bind(this, "/about/contacts")}>
             Адреса магазинов
           </span>
-          <span onClick={handlePath.bind(this,"/about/contacts")}>Контакты</span>
-          <span onClick={handlePath.bind(this,"/about/contacts")}>
+          <span onClick={handlePath.bind(this, "/about/contacts")}>
+            Контакты
+          </span>
+          <span onClick={handlePath.bind(this, "/about/contacts")}>
             Обратная связь
           </span>
         </div>
@@ -38,8 +38,12 @@ export const Footer = () => {
           <span onClick={handlePath.bind(this, "/help/gurantee")}>
             Гарантии и возврат
           </span>
-          <span onClick={handlePath.bind(this, "/help/trade-in")}>Trade-in</span>
-          <span onClick={handlePath.bind(this, "/help/credit")}>Рассрочка и кредит</span>
+          <span onClick={handlePath.bind(this, "/help/trade-in")}>
+            Trade-in
+          </span>
+          <span onClick={handlePath.bind(this, "/help/credit")}>
+            Рассрочка и кредит
+          </span>
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Каталог</h2>
@@ -87,7 +91,7 @@ export const Footer = () => {
             наших лучших предложениях
           </span>
           <div className={styles["reqesits"]}>
-            <Image src={reqesits} alt="" />
+            <img src={"/images/requisits/reqesits.png"} alt="" />
           </div>
         </div>
       </div>
@@ -97,7 +101,9 @@ export const Footer = () => {
           ИП Безганс Эмиль Владимирович | ОГРНИП: 323237500114924 | ИНН:
           090108428776
         </span>
-        <span onClick={handlePath.bind(this, "/policy")}>Политика конфиденциальности</span>
+        <span onClick={handlePath.bind(this, "/policy")}>
+          Политика конфиденциальности
+        </span>
         <span>Оферта</span>
       </div>
     </div>

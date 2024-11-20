@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
-import Image from "next/image"
 
 export const InputFileComponent = () => {
   const [, setSelectedImage] = useState<File>();
@@ -73,7 +72,7 @@ export const InputFileComponent = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {itemsData && <Image src={itemsData} alt="Product Image"/>}
+      {itemsData && <img src={itemsData} alt="Product Image" />}
       <button type="button" onClick={triggerData}>
         HELLO
       </button>
