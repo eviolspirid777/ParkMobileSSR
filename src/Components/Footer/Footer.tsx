@@ -97,7 +97,7 @@ export const Footer = () => {
           ИП Безганс Эмиль Владимирович | ОГРНИП: 323237500114924 | ИНН:
           090108428776
         </span>
-        <span>Политика конфиденциальности</span>
+        <span onClick={handlePath.bind(this, "/policy")}>Политика конфиденциальности</span>
         <span>Оферта</span>
       </div>
     </div>

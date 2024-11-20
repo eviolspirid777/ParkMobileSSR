@@ -39,6 +39,9 @@ export const AboutContacts = () => {
             defaultState={{ center: [45.018244, 38.965192], zoom: 17 }}
             width="100%"
             height="360px"
+            onLoad={(ymaps) => {
+              console.log(ymaps)
+            }}
           >
             <Placemark geometry={[45.018244, 38.965192]} />
           </Map>

@@ -36,15 +36,15 @@ export const CreditComponent = () => {
       </div>
       <div className={styles["credit-component-block-submit"]}>
         <h4>Процесс оформления</h4>
-        {/* Тут степы нужно описать */}
+        {/* TODO: Тут степы нужно описать */}
       </div>
       <div className={styles["credit-component-block-partners"]}>
         <h4>Наши партнёры</h4>
         <div className={styles["credit-component-block-partners-grid-images"]}>
           {
             imagesLogos.map((el, key) => (
-              <div key={key}>
-                <Image src={el} alt="" width={190}/>
+              <div key={key} data-number={key} className={styles["image-container"]}>
+                <Image src={el} alt="" width={250}/>
               </div>
             ))
           }

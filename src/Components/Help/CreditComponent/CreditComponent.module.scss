@@ -62,6 +62,9 @@
     }
   }
   &-partners {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 100px;
     & h4 {
       font-family: "SF-Pro-Display-Regular";
       font-size: 2rem;
@@ -69,9 +72,45 @@
     }
     &-grid-images {
       display: grid;
-      gap: 10px 20px;
       grid-template-columns: repeat(4,1fr);
       grid-template-rows: repeat(2,1fr);
+      margin-bottom: 180px;
     }
+  }
+}
+
+.image-container {
+  border: 1px solid #e8e8ed;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &[data-number="0"] {
+    border-left: none;
+    border-top: none;
+  }
+  &[data-number="1"] {
+    border-top: none;
+  }
+  &[data-number="2"] {
+    border-top: none;
+  }
+  &[data-number="3"] {
+    border-right: none;
+    border-top: none;
+  }
+  &[data-number="4"] {
+    border-left: none;
+    border-bottom: none;
+  }
+  &[data-number="5"] {
+    border-bottom: none;
+  }
+  &[data-number="6"] {
+    border-bottom: none;
+  }
+  &[data-number="7"] {
+    border-right: none;
+    border-bottom: none;
   }
 }
