@@ -99,7 +99,7 @@ export const AboutContacts = () => {
               <h3>+7 928 817-34-75</h3>
               <button>Заказать звонок</button>
             </div>
-            <img src={"/imgs/AboutContacts/Phone_demo.png"} alt="" />
+            <img src={"/images/AboutContacts/Phone_demo.png"} alt="" />
           </div>
         </div>
       </YMaps>
