@@ -2,6 +2,9 @@ import styles from "./DeliveryComponent.module.scss";
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
 import { Metadata } from "next";
 
+import Img from "next/image";
+import sdek from "./Images/SDEK.png"
+
 export const metadata: Metadata = {
   title: "Доставка ParkMobile",
   description: "Park Mobile Краснодар",
@@ -43,7 +46,7 @@ export const DeliveryComponent = () => {
             <li>Стоимость доставки: 500 рублей</li>
             <li>Срок доставки: 1 день</li>
           </ul>
-          <div>
+          <div className={styles["delivery-block-krasnodar-delivery-payment"]}>
             <h5>Варианты оплаты:</h5>
             <span>
               наличными при получении, на сайте через онлайн-кассу, переводом
@@ -52,16 +55,23 @@ export const DeliveryComponent = () => {
           </div>
         </div>
         <div className={styles["delivery-block-russia-delivery"]}>
-          <h4>Доставка по России</h4>
-          <ul>
-            <li>Стоимость доставки: по тарифам компании</li>
-            <li>Срок доставки: 1-7 дней</li>
-          </ul>
-          <h5>Варианты оплаты</h5>
-          <span>
-            на сайте через онлайн-кассу, переводом (+5%), по QR-коду (+5%) или
-            на карту (+5%).
-          </span>
+          <div className={styles["delivery-block-russia-delivery-text-grid"]}>
+            <h4>Доставка по России</h4>
+            <ul>
+              <li>Стоимость доставки: по тарифам компании</li>
+              <li>Срок доставки: 1-7 дней</li>
+            </ul>
+            <div className={styles["delivery-block-russia-delivery-payment"]}>
+              <h5>Варианты оплаты</h5>
+              <span>
+                на сайте через онлайн-кассу, переводом (+5%), по QR-коду (+5%) или
+                на карту (+5%).
+              </span>
+            </div>
+          </div>
+          <div className={styles["delivery-block-russia-delivery-image-grid"]}>
+            <Img src={sdek} alt="" width="170"/>
+          </div>
         </div>
         <div className={styles["delivery-block-faq"]}>
           <h3>Часто задаваемые вопросы</h3>

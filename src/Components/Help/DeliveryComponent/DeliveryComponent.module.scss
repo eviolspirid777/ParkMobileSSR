@@ -9,29 +9,78 @@
         background-image: linear-gradient(0.25turn, rgba(105, 136, 154, 1) 0%, rgba(35, 46, 52, 1) 100%);
         border-radius: 16px;
         width: 50%;
-        height: 250px;
+        height: 240px;
         padding: 2%;
         display: flex;
         flex-flow: column wrap;
-        gap: 20px;
+        gap: 25px;
         color: white;
         font-family: "SF-Pro-Display-Regular_light";
-        & h4 {
-            font-family: "SF-Pro-Display-Regular";
-            font-size: 1.5rem;
-            letter-spacing: 2px;
+        &-payment {
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 5px;
         }
+        & h4,
         & h5 {
             font-family: "SF-Pro-Display-Regular";
-            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        & h4 {
+            font-size: 1.5rem;
+        }
+        & h5 {
+            font-size: 1.2rem;
             letter-spacing: 1px;
+        }
+        & ul {
+            padding-left: 2%;
+            & li {
+                list-style-type: disc;
+            }
         }
     }
     &-russia-delivery {
         background-image: linear-gradient(0.25turn, rgba(243, 243, 243, 1) 0%, rgba(141, 141, 141, 1) 100%);
         border-radius: 16px;
         width: 50%;
-        height: 200px;
+        height: 240px;
+        padding: 2%;
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        gap: 5px;
+        &-text-grid {
+            display: flex;
+            flex-flow: column wrap;
+            gap: 25px;
+            color: black;
+            font-family: "SF-Pro-Display-Regular_light";
+            &-payment {
+                display: flex;
+                flex-flow: column nowrap;
+                gap: 5px;
+            }
+            & h4,
+            & h5 {
+                font-family: "SF-Pro-Display-Regular";
+                font-weight: 700;
+                letter-spacing: 2px;
+            }
+            & h4 {
+                font-size: 1.5rem;
+            }
+            & h5 {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+            & ul {
+                padding-left: 2%;
+                & li {
+                    list-style-type: disc;
+                }
+            }
+        }
     }
     &-payment-info {
         width: 60%;

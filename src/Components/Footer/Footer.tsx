@@ -6,7 +6,6 @@ import reqesits from "@/assets/Reqesits/reqesits.png";
 import Image from "next/image";
 import { animateScroll as scroll } from "react-scroll";
 
-//TODO: Можно добавить проверку на текущий маршрут и не перебрасывать на этот же сайт, если пользователь находится на нем в текущий момент
 export const Footer = () => {
   const pathName = usePathname();
   const naviagate = useRouter()
@@ -40,7 +39,7 @@ export const Footer = () => {
             Гарантии и возврат
           </span>
           <span onClick={handlePath.bind(this, "/help/trade-in")}>Trade-in</span>
-          <span>Рассрочка и кредит</span>
+          <span onClick={handlePath.bind(this, "/help/credit")}>Рассрочка и кредит</span>
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Каталог</h2>

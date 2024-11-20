@@ -13,6 +13,7 @@
         font-weight: 1000;
         width: 55%;
         text-wrap: balance;
+        text-align: center;
     }
     
     & h4 {
@@ -21,15 +22,17 @@
         font-weight: 1000;
         width: 40%;
         text-wrap: balance;
+        text-align: center;
     }
+}
 
-    & span {
-        font-family: "SF-Pro-Display-Regular_light";
-        font-size: 1.6rem;
-        color: #474242;
-        width: 50%;
-        text-wrap: balance;
-    }
+.header-text {
+    font-family: "SF-Pro-Display-Regular_light";
+    font-size: 1.6rem;
+    color: #474242;
+    width: 50%;
+    text-wrap: balance;
+    text-align: center;
 }
 
 .faq-block {
