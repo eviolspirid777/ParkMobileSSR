@@ -96,8 +96,12 @@ export const AboutContacts = () => {
                 Позвоните или оставьте номер для связи, и мы грамотно, четко и
                 ясно ответим на все вопросы.
               </span>
-              <h3>+7 928 817-34-75</h3>
-              <button>Заказать звонок</button>
+              <div
+                className={styles["about-contacts-block-questions-data-call"]}
+              >
+                <h3>+7 928 817-34-75</h3>
+                <button>Заказать звонок</button>
+              </div>
             </div>
             <img src={"/images/AboutContacts/Phone_demo.png"} alt="" />
           </div>
