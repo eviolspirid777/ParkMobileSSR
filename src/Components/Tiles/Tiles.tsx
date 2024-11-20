@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import watchesImg from "./TilesImages/AppleWatchTile/appleWatchTileReviewed.png";
 import macbookImg from "./TilesImages/MacBookTile/macBookReviewed.png";
 import ipadImg from "./TilesImages/IpadTile/ipadTileReviewed.png";
@@ -6,12 +6,12 @@ import airpodsImg from "./TilesImages/AirpodsTile/PodsTileReviewed.png";
 import gsap from "gsap";
 import styles from "./Tiles.module.scss";
 import { useEffect, useRef } from "react";
-import Image from "next/image"
+import Image, { StaticImageData } from "next/image";
 
 type TileItem = {
   title: string;
   description: string;
-  img: string;
+  img: StaticImageData;
   key: string;
   href: string;
 };
@@ -131,19 +131,28 @@ export const Tiles = () => {
     >
       {tilesItems.map((el, index) => (
         <div key={index} className={styles["card-item-block"]}>
-          <h2 ref={(el) => (h2Refs.current[index] = el!)} data-image={el.key}>
+          <h2
+            ref={(el) => {
+              h2Refs.current[index] = el!;
+            }}
+            data-image={el.key}
+          >
             {el.title}
           </h2>
           <span
-            ref={(el) => (spanRefs.current[index] = el!)}
+            ref={(el) => {
+              spanRefs.current[index] = el!;
+            }}
             data-image={el.key}
           >
             {el.description}
           </span>
-          <Image src={el.img} alt=""/>
+          <Image src={el.img} alt="" />
           <div
             className={styles["card-item-block-button-block"]}
-            ref={(el) => (buttonRefs.current[index] = el!)}
+            ref={(el) => {
+              buttonRefs.current[index] = el!;
+            }}
             data-buttons={el.key}
           >
             <button data-button="подробнее">Подробнее</button>

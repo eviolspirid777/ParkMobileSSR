@@ -32,7 +32,7 @@ export const Categories = () => {
     }
   }, [categories]);
 
-  const spanRefs = useRef<HTMLSpanElement[]>([]);
+  const spanRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +43,7 @@ export const Categories = () => {
             const spanElement = spanRefs.current[index];
 
             if (spanElement) {
+              // Проверяем, не null ли элемент
               gsap.fromTo(
                 spanElement,
                 {
@@ -81,7 +82,9 @@ export const Categories = () => {
       {categoriesItems.map((el, index) => (
         <span
           key={index}
-          ref={(el) => (spanRefs.current[index] = el!)}
+          ref={(el) => {
+            spanRefs.current[index] = el;
+          }}
           style={
             el === selectedValue
               ? {

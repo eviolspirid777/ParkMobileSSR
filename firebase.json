@@ -1,6 +1,10 @@
 {
   "hosting": {
-    "public": "dist",
-    "ignore": []
+    "public": ".next",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
 }

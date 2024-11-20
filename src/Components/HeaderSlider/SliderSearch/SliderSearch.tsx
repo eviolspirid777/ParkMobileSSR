@@ -1,14 +1,8 @@
-"use client"
-import { FC, useEffect, useRef } from "react";
+"use client";
+import { useEffect, useRef } from "react";
 import styles from "./SliderSearch.module.scss";
 
-type SliderSearchType = {
-  searchWord?: string;
-};
-
-export const SliderSearch: FC<SliderSearchType> = ({
-  searchWord = "HEllo",
-}) => {
+export const SliderSearch = () => {
   const items = [
     "iPhone 16 PRO MAX 256 Гб",
     "Apple Vision Pro 512 Гб",

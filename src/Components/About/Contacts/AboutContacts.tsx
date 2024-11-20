@@ -7,10 +7,14 @@ import WhatssAppImg from "../../../assets/Reqesits/WhatssApp.png";
 import PhoneDemo from "../../../assets/Reqesits/Phone_demo.png";
 
 import Image from "next/image";
-import { animateScroll as scroll } from "react-scroll";
+import { useEffect } from "react";
 
 export const AboutContacts = () => {
-  scroll.scrollTo(0);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   return (
     <>
@@ -40,7 +44,7 @@ export const AboutContacts = () => {
             width="100%"
             height="360px"
             onLoad={(ymaps) => {
-              console.log(ymaps)
+              console.log(ymaps);
             }}
           >
             <Placemark geometry={[45.018244, 38.965192]} />

@@ -1,11 +1,5 @@
 {
   "projects": {
-    "parkmobile": "parkmobiletest-95120"
-  },
-  "targets": {},
-  "etags": {},
-  "hosting": {
-    "site": "parkmobiletest-95120-23876",
-    "public": "public"
+    "default": "parkmobiletest-95120"
   }
 }
