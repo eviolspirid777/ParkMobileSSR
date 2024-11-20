@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "firebaseDeploy": "firebase deploy"
   },
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.5",
