@@ -131,12 +131,12 @@ export const Tiles = () => {
     >
       {tilesItems.map((el, index) => (
         <div key={index} className={styles["card-item-block"]}>
-          <h2 ref={(el) => (h2Refs.current[index] = el!)} aria-image={el.key}>
+          <h2 ref={(el) => (h2Refs.current[index] = el!)} data-image={el.key}>
             {el.title}
           </h2>
           <span
             ref={(el) => (spanRefs.current[index] = el!)}
-            aria-image={el.key}
+            data-image={el.key}
           >
             {el.description}
           </span>
@@ -144,10 +144,10 @@ export const Tiles = () => {
           <div
             className={styles["card-item-block-button-block"]}
             ref={(el) => (buttonRefs.current[index] = el!)}
-            aria-buttons={el.key}
+            data-buttons={el.key}
           >
-            <button aria-button="подробнее">Подробнее</button>
-            <button aria-button="купить">Купить</button>
+            <button data-button="подробнее">Подробнее</button>
+            <button data-button="купить">Купить</button>
           </div>
         </div>
       ))}

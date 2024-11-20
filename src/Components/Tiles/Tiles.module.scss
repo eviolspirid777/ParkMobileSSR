@@ -8,7 +8,7 @@
         width: auto;
         height: auto;
     }
-    & h2[aria-image="2"] { //Macbook
+    & h2[data-image="2"] { //Macbook
         position: absolute;
         top: 10%;
         left: 37%;
@@ -17,7 +17,7 @@
         font-family: 'SF-Pro-Display-Regular';
         opacity: 0;
     }
-    & span[aria-image="2"] {
+    & span[data-image="2"] {
         position: absolute;
         top: 23%;
         left: 17%;
@@ -27,7 +27,7 @@
         opacity: 0;
     }
 
-    & h2[aria-image="1"] { //Watches
+    & h2[data-image="1"] { //Watches
         position: absolute;
         top: 10%;
         left: 35%;
@@ -37,7 +37,7 @@
         color: white;
         opacity: 0;
     }
-    & span[aria-image="1"] {
+    & span[data-image="1"] {
         position: absolute;
         top: 23%;
         left: 21%;
@@ -48,7 +48,7 @@
         opacity: 0;
     }
 
-    & h2[aria-image="3"] { //Ipad
+    & h2[data-image="3"] { //Ipad
         position: absolute;
         top: 10%;
         left: 44%;
@@ -57,7 +57,7 @@
         font-family: 'SF-Pro-Display-Regular';
         opacity: 0;
     }
-    & span[aria-image="3"] {
+    & span[data-image="3"] {
         position: absolute;
         top: 23%;
         left: 7%;
@@ -68,7 +68,7 @@
         opacity: 0;
     }
 
-    & h2[aria-image="4"] { //AirPods
+    & h2[data-image="4"] { //AirPods
         position: absolute;
         top: 10%;
         left: 38%;
@@ -79,7 +79,7 @@
         opacity: 0;
     }
 
-    & span[aria-image="4"] {
+    & span[data-image="4"] {
         position: absolute;
         top: 23%;
         left: 15%;
@@ -104,12 +104,12 @@
             font-family: 'SF-Pro-Display-Regular';
             border-radius: 10px;
             height: 45px;
-            &[aria-button="подробнее"] {
+            &[data-button="подробнее"] {
                 width: 175px;
                 background-color: #f5f5f7;
                 color: #87a08b;
             }
-            &[aria-button="купить"] {
+            &[data-button="купить"] {
                 width: 140px;
                 background-color: #87a08b;
                 color: #f5f5f7;
