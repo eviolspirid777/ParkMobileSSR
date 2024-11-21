@@ -15,12 +15,14 @@ type HeaderProps = {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => void;
   handleMainMenuRoute: () => void;
+  handleShopBag: () => void;
 };
 
 export const Header: FC<HeaderProps> = ({
   mouseEnter,
   handleMouseClick,
   handleMainMenuRoute,
+  handleShopBag,
 }) => {
   const linkedItems = [
     {
@@ -139,7 +141,10 @@ export const Header: FC<HeaderProps> = ({
         />
         <div className={styles["nav-bucket-search-shop-block"]}>
           <span>{itemInBucket}</span>
-          <i className="fa-sharp fa-thin fa-bag-shopping fa-lg" />
+          <i
+            className="fa-sharp fa-thin fa-bag-shopping fa-lg"
+            onClick={handleShopBag}
+          />
         </div>
       </nav>
     </header>

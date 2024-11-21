@@ -1,0 +1,130 @@
+.drawer-items-block {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+    font-family: "SF-Pro-Display-Regular_light";
+
+    & header {
+        flex-grow: .2;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        & h3 {
+            font-family: "SF-Pro-Display-Regular";
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            align-self: center;
+            user-select: none;
+        }
+        & i {
+            align-self: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+    }
+
+    & main {
+        flex-grow: 1;
+        height: 73vh;
+        min-height: 73vh;
+        max-height: 73vh;
+        overflow: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
+
+        & strong {
+            font-size: 1rem;
+            font-family: "SF-Pro-Display-Regular";
+            font-weight: 1000;
+            align-self: flex-end;
+            margin-right: 8%;
+        }
+    }
+
+    & footer {
+        flex-grow: .2;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 15px;
+        & strong {
+            color: #989898;
+            align-self: flex-end;
+            font-size: 1.1rem;
+        }
+        
+        & button {
+            width: 100%;
+            height: 70px;
+            background-color: #87a08b;
+            color: white;
+            border-radius: 5px;
+            align-self: center;
+            justify-self: center;
+            font-family: "SF-Pro-Display-Regular";
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+    }
+
+    & hr {
+        flex-grow: .1;
+        background-color: #cccccc;
+    }
+}
+
+.item-block {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    grid-template-rows: none;
+    &-info {
+        color: #989898;
+        & strong {
+            font-size: 1rem;
+            font-weight: 900;
+            color: black;
+        }
+    }
+    &-count {
+        justify-self: center;
+        align-self: center;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
+        & i {
+            color: black;
+            align-self: center;
+            cursor: pointer;
+        }
+        & span {
+            align-self: center;
+            font-size: 1.1rem;
+            color: black;
+        }
+    }
+
+    &-price {
+        align-self: center;
+        justify-self: center;
+        font-size: 1rem;
+    }
+
+    &-decline {
+        color: black;
+        border-radius: 100%;
+        align-self: center;
+        justify-self: center;
+        cursor: pointer;
+    }
+}
+
+.submit-shopping-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-left: 4%;
+    margin-right: 4%;
+}

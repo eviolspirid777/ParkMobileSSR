@@ -69,7 +69,7 @@ export const AboutContacts = () => {
                   <TelegramIcon />
                 </a>
                 <a href="https://wa.me/79288173475">
-                  <img src={"/imgs/AboutContacts/WhatssApp.png"} alt="" />
+                  <img src={"/images/AboutContacts/WhatssApp.png"} alt="" />
                 </a>
               </div>
             </div>

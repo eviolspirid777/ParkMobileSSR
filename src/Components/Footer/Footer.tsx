@@ -97,14 +97,19 @@ export const Footer = () => {
       </div>
       <hr />
       <div className={styles["footer-block-info"]}>
-        <span>
-          ИП Безганс Эмиль Владимирович | ОГРНИП: 323237500114924 | ИНН:
-          090108428776
-        </span>
+        <div className={styles["footer-data"]}>
+          <span>
+            ИП Безганс Эмиль Владимирович | ОГРНИП: 323237500114924 | ИНН:
+            090108428776
+          </span>
+          <strong>
+            Сеть магазинов электроники «Park Mobile». Указанные на сайте цены не
+            являются публичной офертой (ст.435 ГК РФ)., 2012-2024
+          </strong>
+        </div>
         <span onClick={handlePath.bind(this, "/policy")}>
           Политика конфиденциальности
         </span>
-        <span>Оферта</span>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./App.scss";
 import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 import { Footer } from "@/Components/Footer/Footer";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata: Metadata = {
   title: "Park Mobile",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <HeaderComponentPack />
+        <AntdRegistry>
+          <HeaderComponentPack />
           {children}
-        <Footer />
+          <Footer />
+        </AntdRegistry>
       </body>
     </html>
   );
