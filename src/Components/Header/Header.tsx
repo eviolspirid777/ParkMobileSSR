@@ -118,6 +118,7 @@ export const Header: FC<HeaderProps> = ({
         alt=""
         className={styles["logo"]}
         onClick={handleMainMenuRoute}
+        draggable="false"
       />
       <nav className={styles["nav-bar"]}>
         {linkedItems.map((el) => (
