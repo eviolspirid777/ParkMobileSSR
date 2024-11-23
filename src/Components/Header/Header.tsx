@@ -4,6 +4,8 @@ import styles from "./Header.module.scss";
 import { FC } from "react";
 import React from "react";
 import { ContentType } from "@/Types/SliderContentType";
+import { useAtom } from "jotai";
+import { shopBucketAtom } from "@/Store/ShopBucket";
 
 type HeaderProps = {
   mouseEnter: (
@@ -73,7 +75,7 @@ export const Header: FC<HeaderProps> = ({
     },
   ];
 
-  const [itemInBucket] = useState<number>(1);
+  const [shopBucket] = useAtom(shopBucketAtom);
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
 
   const handleMouseEnter = (
@@ -141,7 +143,7 @@ export const Header: FC<HeaderProps> = ({
           onMouseEnter={() => handleMouseEnter("search", undefined, undefined)}
         />
         <div className={styles["nav-bucket-search-shop-block"]}>
-          <span>{itemInBucket}</span>
+          <span>{shopBucket.length}</span>
           <i
             className="fa-sharp fa-thin fa-bag-shopping fa-lg"
             onClick={handleShopBag}

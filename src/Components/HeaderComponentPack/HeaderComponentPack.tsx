@@ -95,7 +95,7 @@ export const HeaderComponentPack = () => {
           handleIsContentVisible={handleMouseLeave}
         />
       )}
-      <ShopBucket open={open} handleShopBag={handleShopBag}/>
+      <ShopBucket open={open} handleShopBag={handleShopBag} />
     </>
   );
 };
