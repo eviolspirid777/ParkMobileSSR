@@ -1,6 +1,6 @@
 .blur-block {
     &-visible {
-        position: absolute;
+        position: fixed;
         top: 55px;
         left: 0px;
         background-color: rgba(255, 255, 255, 0.1);
@@ -27,7 +27,7 @@
 
     &-content {
         &-visible {
-            position: absolute;
+            position: fixed;
             opacity: 1;
             z-index: 3;
             width: 100%;

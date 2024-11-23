@@ -406,19 +406,28 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                         })}
                       </div>
                       <div className={styles["item-block-count"]}>
-                        <i className="fa-solid fa-minus" />
+                        <i
+                          className="fa-solid fa-minus"
+                          onClick={handleItemCount.bind(this, el, "minus")}
+                        />
                         <span>{el.count}</span>
-                        <i className="fa-solid fa-plus" />
+                        <i
+                          className="fa-solid fa-plus"
+                          onClick={handleItemCount.bind(this, el, "plus")}
+                        />
                       </div>
                       <span className={styles["item-block-price"]}>
                         {el.price} ₽
                       </span>
                       <div className={styles["item-block-decline"]}>
-                        <i className="fa-regular fa-trash fa-lg" />
+                        <i
+                          className="fa-regular fa-trash fa-lg"
+                          onClick={handleDeleteItem.bind(this, index)}
+                        />
                       </div>
                     </div>
                   ))}
-                  <strong>Сумма: 18 480 ₽</strong>
+                  <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
                 </main>
               </div>
             </div>
