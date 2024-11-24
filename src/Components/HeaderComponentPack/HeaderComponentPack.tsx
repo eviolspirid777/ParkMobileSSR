@@ -3,9 +3,7 @@ import { useEffect, useReducer, useState } from "react";
 import { Header } from "../Header/Header";
 import { HeaderSlider } from "../HeaderSlider/HeaderSlider";
 import { ContentType } from "@/Types/SliderContentType";
-import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { selectedRouteAtom } from "@/Store/RouteStore";
 import { animateScroll as scroll } from "react-scroll";
 
 import { ShopBucket } from "../ShopBucket/ShopBucket";
@@ -24,9 +22,17 @@ const reducer = (
   return { type, items, subTitles, titles };
 };
 
+const navTitleDictionary = new Map([
+  ["Apple", "Apple"],
+  ["Samsung", "Samsung"],
+  ["Xiaomi", "Xiaomi"],
+  ["Dyson", "Dyson"],
+  ["Акустика и гарнитура", "Headphones"],
+  ["Гейминг", "Gaming"],
+]);
+
 export const HeaderComponentPack = () => {
   const navigate = useRouter();
-  const [selectedRoute, setSelectedRoute] = useAtom(selectedRouteAtom);
 
   const [isHeaderMenuVisible, setIsHeaderMenuVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
@@ -57,8 +63,8 @@ export const HeaderComponentPack = () => {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     const category = event.currentTarget.text;
-    setSelectedRoute(category);
-    navigate.push(`/category/${category}`);
+    const selectedCategory = navTitleDictionary.get(category);
+    navigate.push(`/categories/${selectedCategory}`);
   };
 
   const handleMainMenu = () => {
@@ -68,12 +74,6 @@ export const HeaderComponentPack = () => {
   const handleShopBag = () => {
     setOpen((previousState) => !previousState);
   };
-
-  useEffect(() => {
-    if (selectedRoute) {
-      navigate.push(selectedRoute);
-    }
-  }, [selectedRoute]);
 
   useEffect(() => {
     scroll.scrollTo(0);

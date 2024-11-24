@@ -13,7 +13,10 @@ const nextConfig: NextConfig = {
   webpack(config) {
     return config;
   },
-  output: "export"
+  output: "export",
+  images: {
+    unoptimized: true,
+  }
 };
 
 export default nextConfig;
