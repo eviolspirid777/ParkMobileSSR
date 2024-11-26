@@ -20,6 +20,7 @@ const Home = () => {
         <Tiles />
         <UnderTilesLogos />
         <Catalog />
+        {/* TODO:Удали меня! Не ЗАБУДЬ! */}
         <InputFileComponent />
       </QueryClientProvider>
     </>
