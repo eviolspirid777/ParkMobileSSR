@@ -16,6 +16,9 @@
         letter-spacing: 1px;
         font-weight: 400;
         opacity: 0;
+        &[data-no-animation=true] {
+            opacity: 1;
+        }
         cursor: pointer;
         &:hover {
             transition: background-color .3s;

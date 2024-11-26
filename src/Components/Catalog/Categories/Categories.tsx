@@ -1,11 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 import styles from "./Categories.module.scss";
 import { useAtom } from "jotai";
 import { categoryAtom } from "../../../Store/FiltersStore";
 
-export const Categories = () => {
+type CategoriesProps = {
+  noAnimationHeight?: boolean;
+};
+
+export const Categories: FC<CategoriesProps> = ({
+  noAnimationHeight = false,
+}) => {
   const categoriesItems = [
     "Все",
     "iPhone",
@@ -85,6 +91,7 @@ export const Categories = () => {
           ref={(el) => {
             spanRefs.current[index] = el;
           }}
+          data-no-animation={noAnimationHeight}
           style={
             el === selectedValue
               ? {
