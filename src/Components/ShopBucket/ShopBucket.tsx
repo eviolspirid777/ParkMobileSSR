@@ -150,7 +150,7 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
       <div className={styles["drawer-items-block"]}>
         <header>
           <h3>Ваш заказ</h3>
-          <i className="fa-regular fa-xmark fa-2xl" />
+          <i className="fa-regular fa-xmark fa-2xl" onClick={handleShopBag} />
         </header>
         <hr />
         <main>
