@@ -693,3 +693,9 @@ body {
 .ant-drawer-mask {
     backdrop-filter: blur(10px);
 }
+
+.shop-bucket {
+    & .ant-drawer-body {
+        padding: 24px 24px 0px 24px !important;
+    }
+}

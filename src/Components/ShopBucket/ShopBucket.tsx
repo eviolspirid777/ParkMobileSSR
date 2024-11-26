@@ -130,7 +130,7 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
     }));
 
     values = { ...values, items: [...itemsToProceed] };
-    
+
     console.log(values);
 
     await axios.post("api/ItemsPostgre/orderData", values);
@@ -140,7 +140,13 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
   };
 
   return (
-    <Drawer onClose={handleShopBag} open={open} closable={false} width={700}>
+    <Drawer
+      onClose={handleShopBag}
+      open={open}
+      closable={false}
+      width={700}
+      className="shop-bucket"
+    >
       <div className={styles["drawer-items-block"]}>
         <header>
           <h3>Ваш заказ</h3>
