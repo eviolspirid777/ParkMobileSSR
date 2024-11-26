@@ -8,29 +8,29 @@ const httpsAgent = new https.Agent({
 });
 
 export const Page = async ({ params }: { params: { category: string } }) => {
-  // // Извлекаем текущую категорию из параметров маршрута
+  // Извлекаем текущую категорию из параметров маршрута
   // const selectedCategory = (await params).category;
 
   // const [skip, setSkip] = useState(0);
   // const [take] = useState(16);
 
   // const [currentPage, setCurrentPage] = useState(1);
-  // // Отправляем запрос на сервер для получения товаров по категории
+  // Отправляем запрос на сервер для получения товаров по категории
   try {
-    // const { data: categoryItems } = await axios.post(
-    //   `api/ItemsPostgre?skip=${skip}&take=${take}&filter=${selectedCategory}`,
-    //   {}, // Или "/api/ItemsPostgre/getCategoryItems" если настроен proxy
-    //   { httpsAgent }
-    // );
+    const { data: categoryItems } = await axios.post(
+      `api/ItemsPostgre?skip=10&take=5&filter=Apple`,
+      {}, // Или "/api/ItemsPostgre/getCategoryItems" если настроен proxy
+      { httpsAgent }
+    );
     // Рендерим данные
-    // return (
-    //   <Products
-    //     cards={categoryItems?.items}
-    //     itemsCount={categoryItems?.count}
-    //     currentPage={currentPage}
-    //     onPageChange={handleOnPageChange}
-    //   />
-    // );
+    return (
+      <Products
+        cards={categoryItems?.items}
+        itemsCount={categoryItems?.count}
+        currentPage={currentPage}
+        onPageChange={handleOnPageChange}
+      />
+    );
   } catch (error) {
     console.error("Ошибка при загрузке товаров:", error);
     return <p>Ошибка при загрузке товаров</p>;

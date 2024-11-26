@@ -5,7 +5,7 @@ import { CatalogHeader } from "./Header/CatalogHeader";
 import { Categories } from "./Categories/Categories";
 import { Products } from "./Products/Products";
 import { FilterTile } from "./Products/FilterTile/FilterTile";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { RecivedCardDataType } from "../../Types/CardType";
 import { useAtom } from "jotai";
@@ -28,26 +28,12 @@ export const Catalog = () => {
     queryKey: ["items", skip, take],
     queryFn: async () => {
       const response = await axios.get<RecivedCardDataType>(
-        `api/ItemsPostgre?skip=${skip}&take=${take}`
+        `api/ItemsPostgre/GetItems?skip=${skip}&take=${take}&category=${categoryDictionary.get(storeCategory ?? "")}`
       );
       const data = response.data;
       return data;
     },
     refetchOnWindowFocus: false,
-  });
-
-  const {
-    mutate: fetchFilteredItems,
-    data: categoryItems,
-    isPending: isPendingCategory,
-  } = useMutation({
-    mutationKey: ["filter"],
-    mutationFn: async (category: string) => {
-      const response = await axios.post<RecivedCardDataType>(
-        `api/ItemsPostgre/category?category=${categoryDictionary.get(category)}`
-      );
-      return response.data;
-    },
   });
 
   const handleOnPageChange = (newSkip: number, newPage: number) => {
@@ -62,22 +48,20 @@ export const Catalog = () => {
   };
 
   useEffect(() => {
-    if (storeCategory) {
-      fetchFilteredItems(storeCategory);
-    }
-  }, [storeCategory, fetchFilteredItems]);
+    refetch()
+  }, [storeCategory])
 
   return (
     <div className={styles["catalog-block"]}>
       <CatalogHeader />
       <Categories />
-      <FilterTile itemsCount={categoryItems?.count || items?.count} />
-      {isLoadingAll || isPendingCategory ? (
+      <FilterTile itemsCount={items?.count} />
+      {isLoadingAll ? (
         <div style={{ height: "2040px", width: "1239px" }}>Loading...</div>
       ) : (
         <Products
-          cards={categoryItems?.items || items?.items}
-          itemsCount={categoryItems?.count || items?.count}
+          cards={items?.items}
+          itemsCount={items?.count}
           currentPage={currentPage}
           onPageChange={handleOnPageChange}
         />

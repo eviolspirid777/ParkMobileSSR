@@ -125,12 +125,13 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
 
   const handleFinish = async (values: object) => {
     const itemsToProceed = shopBucket.map((el) => ({
-      name: el.name,
-      article: el.article,
-      count: el.count,
+      ProductId: 7,
+      Quantity: 2,
     }));
 
     values = { ...values, items: [...itemsToProceed] };
+    
+    console.log(values);
 
     await axios.post("api/ItemsPostgre/orderData", values);
 
