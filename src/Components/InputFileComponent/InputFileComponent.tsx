@@ -42,7 +42,7 @@ export const InputFileComponent = () => {
 
     const formData = new FormData();
     formData.append("image", imageBlob, "image.jpg");
-    formData.append("name", "Watch 6 40mm");
+    formData.append("name", "Игровая приставка Sony PlayStation 5 Slim");
 
     await fetch("/api/ItemsPostgre/updatePhoto", {
       method: "POST",

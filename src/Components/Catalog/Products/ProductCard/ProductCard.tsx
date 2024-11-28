@@ -4,10 +4,14 @@ import styles from "./ProductCard.module.scss";
 import { CardType } from "@/Types/CardType";
 
 type ProductCardProps = {
-  card: CardType;
+  card: CardType,
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ card }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ 
+  card,
+  onClick,
+}) => {
   const [image, setImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -25,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ card }) => {
   }, [card.image, card]);
 
   return (
-    <div className={styles["product-card"]}>
+    <div className={styles["product-card"]} onClick={onClick}>
       {image && <img src={image} alt="" width="300" height="300" />}
       <div className={styles["product-card-text-block"]}>
         <label className={styles["product-card-text-block-tag"]}>

@@ -1,4 +1,3 @@
-import { ItemCategoriesEnum } from '@/Types/ItemCategories';
 import { atom } from 'jotai'
 
 export const categoryDictionary = new Map([

@@ -8,6 +8,8 @@ import axios from "axios";
 
 import styles from "./ProductObertka.module.scss";
 import { Categories } from "../../Categories/Categories";
+import { createPortal } from "react-dom";
+import { Modal } from "antd";
 
 type ProductObertkaProps = {
   category: string;
@@ -25,6 +27,8 @@ const categoryDictionary = new Map([
 export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
   const [skip, setSkip] = useState(0);
   const [take] = useState(16);
+
+  const [open, setOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -64,7 +68,7 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
 
   return (
     <div className={styles["product-container"]}>
-      <h4>Каталог</h4>
+      <h4 onClick={setOpen.bind(this,true)}>Каталог</h4>
       <Categories noAnimationHeight />
       <Products
         cards={items?.items}
@@ -72,6 +76,21 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
         currentPage={currentPage}
         onPageChange={handleOnPageChange}
       />
+      {
+        createPortal(
+          <Modal
+            open={open}
+            onCancel={setOpen.bind(this,false)}
+            onClose={setOpen.bind(this,false)}
+            style={{
+              width:"100vw",
+              height: "100vh"
+            }}
+          >
+
+          </Modal>
+        , document.body)
+      }
     </div>
   );
 };
