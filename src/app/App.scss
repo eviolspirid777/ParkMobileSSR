@@ -592,7 +592,7 @@ template {
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
         display: none;
-    }
+    } 
 }
 
 body {
@@ -602,11 +602,6 @@ body {
     * {
         scrollbar-width: thin;
         &::selection {
-            background-color: #abbcae;
-            color: white;
-        }
-    
-        &::-moz-selection {
             background-color: #abbcae;
             color: white;
         }

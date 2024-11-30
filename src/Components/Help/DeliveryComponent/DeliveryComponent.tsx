@@ -3,7 +3,7 @@ import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionCompo
 import { Metadata } from "next";
 
 import Img from "next/image";
-import sdek from "./Images/SDEK.png"
+import sdek from "./Images/SDEK.png";
 
 export const metadata: Metadata = {
   title: "Доставка ParkMobile",
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 export const DeliveryComponent = () => {
   const accordionData = [
+    //TODO: Дописать пункты для соответсвующих значений
     ["Доставка и оплата по Краснодару", ""],
     ["Доставка и оплата по России", ""],
     [
@@ -64,13 +65,13 @@ export const DeliveryComponent = () => {
             <div className={styles["delivery-block-russia-delivery-payment"]}>
               <h5>Варианты оплаты</h5>
               <span>
-                на сайте через онлайн-кассу, переводом (+5%), по QR-коду (+5%) или
-                на карту (+5%).
+                на сайте через онлайн-кассу, переводом (+5%), по QR-коду (+5%)
+                или на карту (+5%).
               </span>
             </div>
           </div>
           <div className={styles["delivery-block-russia-delivery-image-grid"]}>
-            <Img src={sdek} alt="" width="170"/>
+            <Img src={sdek} alt="" width="170" />
           </div>
         </div>
         <div className={styles["delivery-block-faq"]}>

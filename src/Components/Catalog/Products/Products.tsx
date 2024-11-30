@@ -1,11 +1,15 @@
-"use client"
+"use client";
 import React, { FC, useEffect, useReducer, useState } from "react";
 import styles from "./Products.module.scss";
 import { ProductCard } from "./ProductCard/ProductCard";
-import { CardType } from "../../../Types/CardType";
+import { CardItemType, CardType } from "../../../Types/CardType";
 import { createPortal } from "react-dom";
 import { Modal } from "antd";
 import MarkdownRenderer from "@/Components/MarkDown/MarkDownRenderer";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+
+import Image from "next/image";
 
 type ProductsType = {
   cards?: CardType[];
@@ -47,7 +51,7 @@ const MarkdownContent = `
 6. **Длительное время работы:** Благодаря мощному аккумулятору вы можете наслаждаться музыкой в течение до 30 часов без перерыва.
 
 Не имеет значения, слушаете ли вы музыку, смотрите фильмы или занимаетесь спортом, наушники AirPods Pro 2 обеспечат вам непревзойденное качество звука и комфортное использование в любой ситуации.
-`
+`;
 
 export const Products: FC<ProductsType> = ({
   cards,
@@ -55,13 +59,36 @@ export const Products: FC<ProductsType> = ({
   currentPage,
   onPageChange,
 }) => {
-  const [openProductCard, setOpenProductCard] = useState(false);
   const [state, dispatch] = useReducer(reducer, {
     pages: [],
     currentPage: 1,
     skip: 0,
     take: 16,
   });
+
+  const [openProductCard, setOpenProductCard] = useState<{
+    state: boolean;
+    id: number | null;
+  }>({ state: false, id: null });
+
+  const { data: CardData, mutate } = useMutation({
+    mutationFn: async () => {
+      const response = await axios.post<CardItemType>(
+        `https://localhost:7280/api/ItemsPostgre/GetItem/${openProductCard.id}`
+      );
+      return response.data;
+    },
+  });
+
+  useEffect(() => {
+    console.log(CardData);
+  }, [CardData]);
+
+  useEffect(() => {
+    if (openProductCard.id !== null) {
+      mutate();
+    }
+  }, [openProductCard.id]);
 
   useEffect(() => {
     if (itemsCount !== undefined) {
@@ -84,7 +111,16 @@ export const Products: FC<ProductsType> = ({
       <div className={styles["product"]}>
         <div className={styles["product-cards-block"]}>
           {cards &&
-            cards.map((el, index) => <ProductCard key={index} card={el} onClick={setOpenProductCard.bind(this, true)}/>)}
+            cards.map((el, index) => (
+              <ProductCard
+                key={index}
+                card={el}
+                onClick={setOpenProductCard.bind(this, {
+                  state: true,
+                  id: el.id ?? null,
+                })}
+              />
+            ))}
         </div>
         <div className={styles["product-pagination-block"]}>
           {state.pages.map((el) => (
@@ -100,52 +136,51 @@ export const Products: FC<ProductsType> = ({
           ))}
         </div>
       </div>
-      {
-        createPortal(
-          <div>
-            <Modal
-              open={openProductCard}
-              onCancel={setOpenProductCard.bind(this, false)}
-              onClose={setOpenProductCard.bind(this, false)}
-              centered={true}
-              footer={null}
-              title={null}
-              closeIcon={null}
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                minWidth: "100%"
-              }}
-            >
-              <div className={styles["item-container"]}>
-                <div className={styles["item-container-image"]}>
-                  <img src="" />
+      {createPortal(
+        <div>
+          <Modal
+            open={openProductCard.state}
+            onCancel={setOpenProductCard.bind(this, { state: false, id: null })}
+            onClose={setOpenProductCard.bind(this, { state: false, id: null })}
+            centered={true}
+            footer={null}
+            title={null}
+            closeIcon={null}
+            className={styles["item-modal-window"]}
+          >
+            <div className={styles["item-container"]}>
+              <div className={styles["item-container-image"]}>
+                <img
+                  src={
+                    CardData && CardData.image
+                      ? `data:image/jpeg;base64,${CardData.image}`
+                      : ""
+                  }
+                  alt=""
+                />
+              </div>
+              <div className={styles["item-container-data"]}>
+                <header>
+                  <h3>{CardData?.name}</h3>
+                  <title>{CardData?.brandName}</title>
+                  <article>АРТИКУЛ</article>
+                </header>
+                <strong>{CardData?.price} ₽</strong>
+                <button>Купить</button>
+                <div className={styles["credit"]}>
+                  <span>Доступно</span>
+                  <a>в рассрочку</a>
+                  <span>от 3 800 ₽/мес.</span>
                 </div>
-                <div className={styles["item-container-data"]}>
-                  <header>
-                    <h3>AirPods Pro 2 USB-C</h3>
-                    <title>apple</title>
-                    <article></article>
-                  </header>
-                  <strong>21 190 ₽</strong>
-                  <button>Купить</button>
-                  <div className={styles["credit"]}>
-                    <span>Доступно</span>
-                    <a>
-                      в рассрочку
-                    </a>
-                    <span>от 3 800 ₽/мес.</span>
-                  </div>
-                  <div className={styles["MarkdownContent"]}>
-                    <MarkdownRenderer content={MarkdownContent} />
-                  </div>
+                <div className={styles["MarkdownContent"]}>
+                  <MarkdownRenderer content={CardData?.description ?? ""} />
                 </div>
               </div>
-            </Modal>
-          </div>,
-          document.body
-        )
-      }
+            </div>
+          </Modal>
+        </div>,
+        document.body
+      )}
     </>
   );
 };

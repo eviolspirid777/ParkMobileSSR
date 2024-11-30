@@ -41,23 +41,34 @@
   transition: color .15s;
 }
 
+.item-modal-window {
+  border: none;
+  background-color: transparent;
+  min-width: 70%;
+}
+
 .item-container {
   min-width: 100%;
+  min-height: 90vh;
+  max-height: 90vh;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   &-image {
-
+    align-self: center;
+    justify-self: center;
   }
   &-data {
     display: flex;
     flex-flow: column nowrap;
     gap: 20px;
+    padding: 20px;
     font-family: "SF-Pro-Display-Regular_light";
     & header {
       & h3 {
         font-size: 24px;
         font-weight: 400;
         line-height: 32.4px;
+        font-family: "SF-Pro-Display-Regular";
       }
       & title {
         font-size: 14px;
@@ -115,7 +126,7 @@
 
 .MarkdownContent {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   gap: 20px;
   font-family: "SF-Pro-Display-Regular_light" !important;
   font-weight: 300;
@@ -124,6 +135,9 @@
   text-align: left;
   letter-spacing: 1px;
   line-height: 20px;
+
+  overflow: auto;
+  max-height: 525px;
 
   & p {
     & strong {
