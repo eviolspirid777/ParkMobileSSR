@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useReducer, useState } from "react";
+import Media from "react-media";
 import { Header } from "../Header/Header";
 import { HeaderSlider } from "../HeaderSlider/HeaderSlider";
 import { ContentType } from "@/Types/SliderContentType";
@@ -7,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { animateScroll as scroll } from "react-scroll";
 
 import { ShopBucket } from "../ShopBucket/ShopBucket";
+import { MobileHeader } from "../Header/MobileHeader/MobileHeader";
 
 export type ReducerAction = {
   type?: ContentType;
@@ -83,21 +85,41 @@ export const HeaderComponentPack = () => {
 
   return (
     <>
-      <Header
-        mouseEnter={handleMouseEnter}
-        handleMouseClick={(event) => handleRouteCategory(event)}
-        handleMainMenuRoute={handleMainMenu}
-        handleShopBag={handleShopBag}
-      />
-      {isHeaderMenuVisible && (
-        <HeaderSlider
-          contentType={sliderData}
-          handleMouseLeave={handleMouseLeave}
-          isContentVisible={isContentVisible}
-          handleIsContentVisible={handleMouseLeave}
-        />
-      )}
-      <ShopBucket open={open} handleShopBag={handleShopBag} />
+      <Media
+        queries={{
+          telephone: "(max-width: 1024px)",
+          computer: "(min-width: 1025px)",
+        }}
+      >
+        {(matches) => (
+          <>
+            {matches.computer ? (
+              <>
+                <Header
+                  mouseEnter={handleMouseEnter}
+                  handleMouseClick={(event) => handleRouteCategory(event)}
+                  handleMainMenuRoute={handleMainMenu}
+                  handleShopBag={handleShopBag}
+                />
+                {isHeaderMenuVisible && (
+                  <HeaderSlider
+                    contentType={sliderData}
+                    handleMouseLeave={handleMouseLeave}
+                    isContentVisible={isContentVisible}
+                    handleIsContentVisible={handleMouseLeave}
+                  />
+                )}
+                <ShopBucket open={open} handleShopBag={handleShopBag} />
+              </>
+            ) : (
+              <MobileHeader
+                handleMainMenuRoute={handleMainMenu}
+                handleShopBag={handleShopBag}
+              />
+            )}
+          </>
+        )}
+      </Media>
     </>
   );
 };

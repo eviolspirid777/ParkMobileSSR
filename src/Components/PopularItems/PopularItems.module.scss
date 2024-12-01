@@ -60,3 +60,25 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .header {
+    font-size: 2.1rem;
+    font-family: "SF-Pro-Display-Regular";
+    font-weight: 600;
+    width: 100%;
+  }
+
+  .popular-items {
+    padding: 50px 50px 150px 50px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 70px;
+
+    &-block {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+}

@@ -1,3 +1,156 @@
+.card-tiles-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+@media (max-width: 1024px) {
+    .card-tiles-block {
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: 1fr;
+    }
+
+    .card-item-block {
+        position: relative;
+
+        & img {
+            min-width: 100%;
+            min-height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        & h2[data-image="2"] {
+            //Macbook
+            position: absolute;
+            top: 6% !important;
+            left: 37%;
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-family: 'SF-Pro-Display-Regular';
+            opacity: 0;
+        }
+
+        & span[data-image="2"] {
+            position: absolute;
+            top: 17% !important;
+            left: 17%;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: "SF-Pro-Display-Regular_light";
+            opacity: 0;
+        }
+
+        & h2[data-image="1"] {
+            //Watches
+            position: absolute;
+            top: 6% !important;
+            left: 35%;
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-family: 'SF-Pro-Display-Regular';
+            color: white;
+            opacity: 0;
+        }
+
+        & span[data-image="1"] {
+            position: absolute;
+            top: 17% !important;
+            left: 21%;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: "SF-Pro-Display-Regular_light";
+            color: white;
+            opacity: 0;
+        }
+
+        & h2[data-image="3"] {
+            //Ipad
+            position: absolute;
+            top: 6% !important;
+            left: 44%;
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-family: 'SF-Pro-Display-Regular';
+            opacity: 0;
+        }
+
+        & span[data-image="3"] {
+            position: absolute;
+            top: 17% !important;
+            left: 7%;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: "SF-Pro-Display-Regular_light";
+            text-wrap: nowrap;
+            opacity: 0;
+        }
+
+        & h2[data-image="4"] {
+            //AirPods
+            position: absolute;
+            top: 6% !important;
+            left: 38%;
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-family: 'SF-Pro-Display-Regular';
+            color: white;
+            opacity: 0;
+        }
+
+        & span[data-image="4"] {
+            position: absolute;
+            top: 17% !important;
+            left: 15%;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: "SF-Pro-Display-Regular_light";
+            text-wrap: nowrap;
+            color: white;
+            opacity: 0;
+        }
+
+        &-button-block {
+            position: absolute;
+            top: 30% !important;
+            left: 18% !important;
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 20px;
+            opacity: 0;
+
+            & button {
+                font-size: 1rem !important;
+                letter-spacing: 1px;
+                font-family: 'SF-Pro-Display-Regular';
+                border-radius: 10px;
+                height: 40px !important;
+
+                &[data-button="подробнее"] {
+                    width: 130px;
+                    background-color: #f5f5f7;
+                    color: #87a08b;
+                }
+
+                &[data-button="купить"] {
+                    width: 130px;
+                    background-color: #87a08b;
+                    color: #f5f5f7;
+                }
+            }
+
+            & .more {
+                font-size: 2.4rem;
+            }
+
+            & .buy {}
+        }
+    }
+}
+
 .card-item-block {
     position: relative;
     & img{
@@ -12,7 +165,7 @@
         position: absolute;
         top: 10%;
         left: 37%;
-        font-size: 3rem;
+        font-size: 1.2rem;
         font-weight: 500;
         font-family: 'SF-Pro-Display-Regular';
         opacity: 0;
@@ -21,7 +174,7 @@
         position: absolute;
         top: 23%;
         left: 17%;
-        font-size: 2.5rem;
+        font-size: 1rem;
         font-weight: 500;
         font-family: "SF-Pro-Display-Regular_light";
         opacity: 0;
@@ -31,7 +184,7 @@
         position: absolute;
         top: 10%;
         left: 35%;
-        font-size: 3rem;
+        font-size: 1.2rem;
         font-weight: 500;
         font-family: 'SF-Pro-Display-Regular';
         color: white;
@@ -41,7 +194,7 @@
         position: absolute;
         top: 23%;
         left: 21%;
-        font-size: 2.5rem;
+        font-size: 1rem;
         font-weight: 500;
         font-family: "SF-Pro-Display-Regular_light";
         color: white;
@@ -52,7 +205,7 @@
         position: absolute;
         top: 10%;
         left: 44%;
-        font-size: 3rem;
+        font-size: 1.2rem;
         font-weight: 500;
         font-family: 'SF-Pro-Display-Regular';
         opacity: 0;
@@ -61,7 +214,7 @@
         position: absolute;
         top: 23%;
         left: 7%;
-        font-size: 2.5rem;
+        font-size: 1rem;
         font-weight: 500;
         font-family: "SF-Pro-Display-Regular_light";
         text-wrap: nowrap;
@@ -72,7 +225,7 @@
         position: absolute;
         top: 10%;
         left: 38%;
-        font-size: 3rem;
+        font-size: 1.2rem;
         font-weight: 500;
         font-family: 'SF-Pro-Display-Regular';
         color: white;
@@ -83,7 +236,7 @@
         position: absolute;
         top: 23%;
         left: 15%;
-        font-size: 2.5rem;
+        font-size: 1rem;
         font-weight: 500;
         font-family: "SF-Pro-Display-Regular_light";
         text-wrap: nowrap;
@@ -105,12 +258,12 @@
             border-radius: 10px;
             height: 45px;
             &[data-button="подробнее"] {
-                width: 175px;
+                width: 130px;
                 background-color: #f5f5f7;
                 color: #87a08b;
             }
             &[data-button="купить"] {
-                width: 140px;
+                width: 130px;
                 background-color: #87a08b;
                 color: #f5f5f7;
             }

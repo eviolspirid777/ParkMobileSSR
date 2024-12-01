@@ -117,13 +117,7 @@ export const Tiles = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "1fr 1fr",
-      }}
-    >
+    <div className={styles["card-tiles-block"]}>
       {tilesItems.map((el, index) => (
         <div key={index} className={styles["card-item-block"]}>
           <h2
