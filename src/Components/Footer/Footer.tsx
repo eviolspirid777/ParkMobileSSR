@@ -8,9 +8,9 @@ export const Footer = () => {
   const pathName = usePathname();
   const naviagate = useRouter();
 
-  const handlePath = (path: string, scrollValue: number) => {
+  const handlePath = (path: string, scrollValue?: number) => {
     if (pathName === path) {
-      return (() => scroll.scrollTo(scrollValue))();
+      return (() => scroll.scrollTo(scrollValue ?? 0))();
     }
     naviagate.push(path);
   };

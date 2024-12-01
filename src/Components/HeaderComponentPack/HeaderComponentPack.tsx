@@ -65,10 +65,12 @@ export const HeaderComponentPack = () => {
     const category = event.currentTarget.text;
     const selectedCategory = navTitleDictionary.get(category);
     navigate.push(`/categories/${selectedCategory}`);
+    handleMouseLeave();
   };
 
   const handleMainMenu = () => {
     navigate.push("/");
+    handleMouseLeave();
   };
 
   const handleShopBag = () => {
