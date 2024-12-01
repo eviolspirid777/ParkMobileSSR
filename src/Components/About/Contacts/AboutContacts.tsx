@@ -4,9 +4,53 @@ import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
 import { TelegramIcon } from "../../Footer/Telegram";
 
 // import img from "next/img";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
+import { Button, Form, Input, notification } from "antd";
+import axios from "axios";
 
 export const AboutContacts = () => {
+  const [api, contextHolder] = notification.useNotification();
+
+  const handleCallRequest = async () => {
+    api.destroy();
+
+    const handleFormFinish = ({ number }: { number: string }) => {
+      axios
+        .post(`https://localhost:7280/api/ItemsPostgre/TelephoneCall/${number}`)
+        .then(() => api.destroy());
+    };
+
+    api.open({
+      message: "",
+      description: (
+        <Form onFinish={handleFormFinish}>
+          <div className={styles["notification-block"]}>
+            <h3>Свяжитесь со мной</h3>
+            <span>
+              Оставьте свой номер телефона и наш менеджер вам перезвонит
+            </span>
+            <Form.Item name="number">
+              <Input placeholder="+7 999 999 99-99" />
+            </Form.Item>
+            <Button
+              className={styles["submit-button"]}
+              type="primary"
+              htmlType="submit"
+            >
+              Отправить
+            </Button>
+          </div>
+        </Form>
+      ),
+      placement: "bottomRight",
+      onClose: api.destroy,
+      duration: 0,
+      style: {
+        width: "450px",
+      },
+    });
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
@@ -15,6 +59,7 @@ export const AboutContacts = () => {
 
   return (
     <>
+      {contextHolder}
       <YMaps>
         <div className={styles["about-contacts-block"]}>
           <div className={styles["about-contacts-block-info-block"]}>
@@ -23,7 +68,7 @@ export const AboutContacts = () => {
           </div>
           <div className={styles["about-contacts-block-info-block-text"]}>
             <span>
-              Вас приветствует магазин цифровой техники Park Mobile. Мы являемся
+              Вас приветствует салон цифровой техники Park Mobile. Мы являемся
               ведущим поставщиком оригинальной техники в Краснодаре и рады
               предложить вам продукцию топовых марок, включая Apple, Dyson,
               Samsung, DJI, Xiaomi и многие другие.
@@ -48,7 +93,7 @@ export const AboutContacts = () => {
           </Map>
           <div className={styles["about-contacts-block-data-grid"]}>
             <div className={styles["about-contacts-block-data-grid-1"]}>
-              <h3>Наши реквезиты:</h3>
+              <h3>Наши реквизиты:</h3>
               <div
                 className={styles["about-contacts-block-data-grid-1-reqesits"]}
               >
@@ -64,13 +109,15 @@ export const AboutContacts = () => {
                 <span>(Работаем без выходных с 11:00 до 20:00)</span>
               </div>
               <div className={styles["contacts"]}>
-                <a href="tel:79288173475">+7 928 817 34-75</a>
-                <a href="https://t.me/@ParkMobile23">
-                  <TelegramIcon />
-                </a>
-                <a href="https://wa.me/79288173475">
-                  <img src={"/images/AboutContacts/WhatssApp.png"} alt="" />
-                </a>
+                <a href="tel:79337772777">+7 933 777 27-77</a>
+                <div>
+                  <a href="https://t.me/@ParkMobile23">
+                    <TelegramIcon />
+                  </a>
+                  <a href="https://wa.me/79337772777">
+                    <img src={"/images/AboutContacts/WhatssApp.png"} alt="" />
+                  </a>
+                </div>
               </div>
             </div>
             <div className={styles["about-contacts-block-data-grid-2"]}>
@@ -99,8 +146,8 @@ export const AboutContacts = () => {
               <div
                 className={styles["about-contacts-block-questions-data-call"]}
               >
-                <h3>+7 928 817-34-75</h3>
-                <button>Заказать звонок</button>
+                <h3>+7 933 777 27-77</h3>
+                <button onClick={handleCallRequest}>Заказать звонок</button>
               </div>
             </div>
             <img src={"/images/AboutContacts/Phone_demo.png"} alt="" />

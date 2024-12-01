@@ -152,6 +152,7 @@
   &-data {
     display: flex;
     flex-flow: column nowrap;
+    max-width: 100%;
 
     &-user-info {
       display: flex;
@@ -181,7 +182,6 @@
       & span {
         font-size: 1rem;
         font-family: "SF-Pro-Display-Regular_light";
-        letter-spacing: 1px;
       }
     }
 

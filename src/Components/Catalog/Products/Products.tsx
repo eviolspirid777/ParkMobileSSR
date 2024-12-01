@@ -106,6 +106,13 @@ export const Products: FC<ProductsType> = ({
     onPageChange(newSkip, page);
   };
 
+  const handleCreditPrice = (price: string | undefined | number) => {
+    if (typeof price == "string") {
+      const _price = Number((price as string).split(" ").join(""));
+      return ((_price * 1.31) / 36 + 1).toFixed();
+    }
+  };
+
   return (
     <>
       <div className={styles["product"]}>
@@ -169,8 +176,8 @@ export const Products: FC<ProductsType> = ({
                 <button>Купить</button>
                 <div className={styles["credit"]}>
                   <span>Доступно</span>
-                  <a>в рассрочку</a>
-                  <span>от 3 800 ₽/мес.</span>
+                  <a>в кредит</a>
+                  <span>от {handleCreditPrice(CardData?.price)} ₽/мес.</span>
                 </div>
                 <div className={styles["MarkdownContent"]}>
                   <MarkdownRenderer content={CardData?.description ?? ""} />

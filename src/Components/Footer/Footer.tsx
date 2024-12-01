@@ -75,7 +75,7 @@ export const Footer = () => {
                 styles["footer-block-help-items-first-block-number-address"]
               }
             >
-              <h2>+7 928 817-34-75</h2>
+              <h2>+7 933 777 27-77</h2>
               <div>
                 <a href="https://yandex.ru/maps/-/CDxYZJo0">
                   с 11:00 до 20:00, без выходных г. Краснодар ул.Советская, 36

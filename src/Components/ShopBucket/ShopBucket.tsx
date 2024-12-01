@@ -7,13 +7,14 @@ import {
   ConfigProvider,
   Form,
   Select,
+  RadioChangeEvent,
 } from "antd";
 import styles from "./ShopBucket.module.scss";
 import { FC, useCallback, useState } from "react";
-import { Map, YMaps } from "@pbe/react-yandex-maps";
 import axios from "axios";
 import { DataType, shopBucketAtom } from "@/Store/ShopBucket";
 import { useAtom } from "jotai";
+import { deliveryOptions } from "./DeliveryTypes/ShopBucketDeliveryOptions";
 
 type ShopBucketType = {
   handleShopBag: () => void;
@@ -22,6 +23,8 @@ type ShopBucketType = {
 
 export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
   const [childDrawer, setChildDrawer] = useState(false);
+  const [paymentType, setPaymentType] = useState("cash");
+  const [deliveryType, setDeliveryType] = useState("");
   const [cityOptions, setCityOptions] = useState<
     { label: string; value: string }[]
   >([]);
@@ -33,11 +36,15 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
   };
 
   const handleItemsCost = () => {
-    const total = shopBucket.reduce((accumulator, item) => {
+    let total = shopBucket.reduce((accumulator, item) => {
       const price = parseFloat(item.price.split(" ").join(""));
       const count = item.count || 0;
       return accumulator + price * count;
     }, 0);
+
+    if (paymentType === "card") {
+      total *= 1.06;
+    }
 
     const formatter = new Intl.NumberFormat("ru-RU", {
       style: "decimal",
@@ -119,12 +126,20 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
   const debouncedFetchSuggestions = useCallback(
     debounce(async (searchTerm: string) => {
       await fetchSuggestions(searchTerm);
-    }, 2000),
+    }, 1000),
     []
   );
 
+  const handlePayment = (event: RadioChangeEvent) => {
+    if (event.target.value === "card") {
+      setPaymentType("card");
+    } else {
+      setPaymentType("cash");
+    }
+  };
+
   const handleFinish = async (values: object) => {
-    const itemsToProceed = shopBucket.map((el) => ({
+    const itemsToProceed = shopBucket.map(() => ({
       ProductId: 7,
       Quantity: 2,
     }));
@@ -204,242 +219,207 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
         onClose={handleChildrenDrawer}
         title="Ваш заказ"
       >
-        <YMaps>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#87a08b",
-              },
-            }}
-          >
-            <div className={styles["submit-shopping-block"]}>
-              <div className={styles["submit-shopping-block-data"]}>
-                <Form onFinish={handleFinish}>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#87a08b",
+            },
+          }}
+        >
+          <div className={styles["submit-shopping-block"]}>
+            <div className={styles["submit-shopping-block-data"]}>
+              <Form onFinish={handleFinish}>
+                <div className={styles["submit-shopping-block-data-user-info"]}>
+                  <strong>Контактная информация</strong>
                   <div
-                    className={styles["submit-shopping-block-data-user-info"]}
+                    className={
+                      styles["submit-shopping-block-data-user-info-telname"]
+                    }
                   >
-                    <strong>Контактная информация</strong>
-                    <div
-                      className={
-                        styles["submit-shopping-block-data-user-info-telname"]
-                      }
+                    <Form.Item
+                      name="personName"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Пожалуйста, введите имя!",
+                        },
+                      ]}
                     >
-                      <Form.Item
-                        name="personName"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Пожалуйста, введите имя!",
-                          },
-                        ]}
-                      >
-                        <Input type="text" placeholder="Ваше имя*" />
-                      </Form.Item>
-                      <Form.Item
-                        name="telephone"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Пожалуйста, введите телефон!",
-                          },
-                        ]}
-                      >
-                        <Input type="tel" placeholder="+7 (999) 999-99-99" />
-                      </Form.Item>
-                    </div>
-                    <Form.Item name="email">
-                      <Input
-                        type="email"
-                        placeholder="Ваша электронная почта"
-                      />
+                      <Input type="text" placeholder="Ваше имя*" />
+                    </Form.Item>
+                    <Form.Item
+                      name="telephone"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Пожалуйста, введите телефон!",
+                        },
+                      ]}
+                    >
+                      <Input type="tel" placeholder="+7 (999) 999-99-99" />
                     </Form.Item>
                   </div>
-                  <div
-                    className={styles["submit-shopping-block-data-delivery"]}
+                  <Form.Item
+                    name="email"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Заполните электронную почту!",
+                      },
+                    ]}
                   >
-                    <strong>Доставка</strong>
+                    <Input type="email" placeholder="Ваша электронная почта" />
+                  </Form.Item>
+                </div>
+                <div className={styles["submit-shopping-block-data-delivery"]}>
+                  <strong>Доставка</strong>
+                  <div>
                     <div>
-                      <div>
-                        <Form.Item
-                          name="city"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Пожалуйста, выберите город!",
-                            },
-                          ]}
-                        >
-                          <Select
-                            options={cityOptions}
-                            showSearch
-                            onSearch={handleChange}
-                            filterOption={() => true}
-                          />
-                        </Form.Item>
-                        <label></label>
-                      </div>
                       <Form.Item
-                        name="deliveryType"
+                        name="city"
                         rules={[
                           {
                             required: true,
-                            message: "Пожалуйста, выберите тип доставки!",
+                            message: "Пожалуйста, выберите город!",
                           },
                         ]}
                       >
-                        <Radio.Group>
-                          <Space direction="vertical">
-                            <Radio value={"sdek-delivery"}>
-                              <div className={styles["delivery-item-block"]}>
-                                <strong>СДЭК</strong>
-                                <span>от 5 дней, от 748,32 ₽</span>
-                              </div>
-                            </Radio>
-                            <Radio value={"krasnodar-self-delivery"}>
-                              <div className={styles["delivery-item-block"]}>
-                                <strong>Самовывоз</strong>
-                                <span>(г.Краснодар, ул.Советская 36)</span>
-                              </div>
-                            </Radio>
-                            <Radio value={"krasnodar-delivery"}>
-                              <div className={styles["delivery-item-block"]}>
-                                <strong>Доставка по Краснодару</strong>
-                                <span>от 1 дня, 500 ₽</span>
-                              </div>
-                            </Radio>
-                          </Space>
-                        </Radio.Group>
+                        <Select
+                          options={cityOptions}
+                          showSearch
+                          onSearch={handleChange}
+                          filterOption={() => true}
+                          placeholder="Укажите адрес доставки"
+                          style={{ height: "38px" }}
+                        />
                       </Form.Item>
-                      <div>
-                        <Form.Item name="postmat">
-                          <Input
-                            type="text"
-                            placeholder="Выберите пункт получения"
-                          />
-                        </Form.Item>
-                      </div>
-                      <Map
-                        defaultState={{
-                          center: [45.018244, 38.965192],
-                          zoom: 17,
-                        }}
-                        width="100%"
-                        height="360px"
-                        onLoad={(ymaps) => {
-                          console.log(ymaps);
-                        }}
-                      ></Map>
-                      <div style={{ marginTop: "10px" }}>
-                        <Form.Item
-                          name="reciver"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Пожалуйста, заполните получателя!",
-                            },
-                          ]}
-                        >
-                          <Input
-                            type="text"
-                            placeholder="Получатель: Иванов Иван Иванович"
-                          />
-                        </Form.Item>
-                      </div>
-                      <div>
-                        <Form.Item name="description">
-                          <Input
-                            type="text"
-                            placeholder="Комментарий к заказу"
-                          />
-                        </Form.Item>
-                      </div>
+                      {/* TODO: Здесь будет адрес вручения */}
+                      <label></label>
                     </div>
-                    <div
-                      className={
-                        styles["submit-shopping-block-data-payment-choose"]
-                      }
+                    <Form.Item
+                      name="deliveryType"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Пожалуйста, выберите тип доставки!",
+                        },
+                      ]}
                     >
-                      <strong>Способ оплаты</strong>
-                      <Form.Item
-                        name="paymentType"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Пожалуйста, выберите тип оплаты!",
-                          },
-                        ]}
+                      <Radio.Group
+                        onChange={(event) =>
+                          setDeliveryType(event.target.value)
+                        }
                       >
-                        <Radio.Group>
-                          <Space direction="vertical">
-                            <Radio value={"cash"}>
-                              <div className={styles["delivery-item-block"]}>
-                                <strong>Наличными при получении</strong>
-                              </div>
-                            </Radio>
-                            <Radio value={"card"}>
-                              <div className={styles["delivery-item-block"]}>
-                                <strong>Qr-кодом при получении</strong>
-                                <span>(+5% к стоимости)</span>
-                              </div>
-                            </Radio>
-                          </Space>
-                        </Radio.Group>
-                      </Form.Item>
+                        <Space direction="vertical">
+                          <Radio value={"sdek-delivery"}>
+                            <div className={styles["delivery-item-block"]}>
+                              <strong>СДЭК</strong>
+                              <span>от 5 дней, от 748,32 ₽</span>
+                            </div>
+                          </Radio>
+                          <Radio value={"krasnodar-self-delivery"}>
+                            <div className={styles["delivery-item-block"]}>
+                              <strong>Самовывоз</strong>
+                              <span>(г.Краснодар, ул.Советская 36)</span>
+                            </div>
+                          </Radio>
+                          <Radio value={"krasnodar-delivery"}>
+                            <div className={styles["delivery-item-block"]}>
+                              <strong>Доставка по Краснодару</strong>
+                              <span>от 1 дня, 500 ₽</span>
+                            </div>
+                          </Radio>
+                        </Space>
+                      </Radio.Group>
+                    </Form.Item>
+                    {deliveryOptions.get(deliveryType)
+                      ? deliveryOptions.get(deliveryType)!()
+                      : null}
+                  </div>
+                  <div
+                    className={
+                      styles["submit-shopping-block-data-payment-choose"]
+                    }
+                  >
+                    <strong>Способ оплаты</strong>
+                    <Form.Item
+                      name="paymentType"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Пожалуйста, выберите тип оплаты!",
+                        },
+                      ]}
+                    >
+                      <Radio.Group onChange={handlePayment}>
+                        <Space direction="vertical">
+                          <Radio value="cash">
+                            <div className={styles["delivery-item-block"]}>
+                              <strong>Наличными при получении</strong>
+                            </div>
+                          </Radio>
+                          <Radio value="card">
+                            <div className={styles["delivery-item-block"]}>
+                              <strong>Qr-кодом при получении</strong>
+                            </div>
+                          </Radio>
+                        </Space>
+                      </Radio.Group>
+                    </Form.Item>
+                  </div>
+                </div>
+                <Button className={styles["submit-button"]} htmlType="submit">
+                  Оформить заказ
+                </Button>
+              </Form>
+            </div>
+            <div className={styles["drawer-items-block"]}>
+              <main>
+                {shopBucket.map((el, index) => (
+                  <div key={index} className={styles["item-block"]}>
+                    <img src={el.image} alt="" width={60} />
+                    <div className={styles["item-block-info"]}>
+                      {Object.entries(el).map(([k, v]) => {
+                        if (!["price", "image", "count"].includes(k)) {
+                          if (k === "name") {
+                            return <strong key={k}>{v}</strong>;
+                          }
+                          return (
+                            <div key={k}>
+                              {k}: {v}
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                    <div className={styles["item-block-count"]}>
+                      <i
+                        className="fa-solid fa-minus"
+                        onClick={handleItemCount.bind(this, el, "minus")}
+                      />
+                      <span>{el.count}</span>
+                      <i
+                        className="fa-solid fa-plus"
+                        onClick={handleItemCount.bind(this, el, "plus")}
+                      />
+                    </div>
+                    <span className={styles["item-block-price"]}>
+                      {el.price} ₽
+                    </span>
+                    <div className={styles["item-block-decline"]}>
+                      <i
+                        className="fa-regular fa-trash fa-lg"
+                        onClick={handleDeleteItem.bind(this, index)}
+                      />
                     </div>
                   </div>
-                  <Button className={styles["submit-button"]} htmlType="submit">
-                    Оформить заказ
-                  </Button>
-                </Form>
-              </div>
-              <div className={styles["drawer-items-block"]}>
-                <main>
-                  {shopBucket.map((el, index) => (
-                    <div key={index} className={styles["item-block"]}>
-                      <img src={el.image} alt="" width={60} />
-                      <div className={styles["item-block-info"]}>
-                        {Object.entries(el).map(([k, v]) => {
-                          if (!["price", "image", "count"].includes(k)) {
-                            if (k === "name") {
-                              return <strong key={k}>{v}</strong>;
-                            }
-                            return (
-                              <div key={k}>
-                                {k}: {v}
-                              </div>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
-                      <div className={styles["item-block-count"]}>
-                        <i
-                          className="fa-solid fa-minus"
-                          onClick={handleItemCount.bind(this, el, "minus")}
-                        />
-                        <span>{el.count}</span>
-                        <i
-                          className="fa-solid fa-plus"
-                          onClick={handleItemCount.bind(this, el, "plus")}
-                        />
-                      </div>
-                      <span className={styles["item-block-price"]}>
-                        {el.price} ₽
-                      </span>
-                      <div className={styles["item-block-decline"]}>
-                        <i
-                          className="fa-regular fa-trash fa-lg"
-                          onClick={handleDeleteItem.bind(this, index)}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                  <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
-                </main>
-              </div>
+                ))}
+                <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
+              </main>
             </div>
-          </ConfigProvider>
-        </YMaps>
+          </div>
+        </ConfigProvider>
       </Drawer>
     </Drawer>
   );
