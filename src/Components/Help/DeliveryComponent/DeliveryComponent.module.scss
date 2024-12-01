@@ -109,3 +109,78 @@
         }
     }
 }
+
+
+.krasnodar-delivery-block {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 35px;
+    &-delivery {
+        & strong {
+            font-weight: 1000;
+            font-family: "SF-Pro-Display-Regular";
+        }
+        & ul {
+            list-style-type: disc;
+            & li {
+                margin-left: 20px;
+            }
+        }
+    }
+    &-payment {
+        & strong {
+            font-weight: 1000;
+            font-family: "SF-Pro-Display-Regular";
+        }
+    
+        & ul {
+            list-style-type: decimal;
+    
+            & li {
+                margin-left: 20px;
+            }
+        }
+    }
+}
+
+.russia-delivery-block {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 25px;
+
+    &-delivery {
+        & strong {
+            font-weight: 1000;
+            font-family: "SF-Pro-Display-Regular";
+        }
+    
+        & ul {
+            list-style-type: disc;
+    
+            & li {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    &-payment {
+        & strong {
+            font-weight: 1000;
+            font-family: "SF-Pro-Display-Regular";
+        }
+    
+        & ul {
+            list-style-type: decimal;
+    
+            & li {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    &-nodes {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 5px;
+    }
+}

@@ -698,3 +698,36 @@ body {
 .ant-notification-notice-wrapper {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 0px !important;
 }
+
+.custom-steps {
+    display: flex !important;
+    flex-flow: column nowrap !important;
+    gap: 40px !important;
+    margin: 60px 0px 0px 0px !important;
+
+    .ant-steps-item-icon {
+        width: 44px !important;
+        height: 44px !important;
+        line-height: 39px !important;
+        font-size: 23px !important;
+    }
+
+    .ant-steps-item-title {
+        font-family: "SF-Pro-Display-Regular" !important;
+        color: black !important;
+        font-weight: 400 !important;
+        font-size: 1.4rem !important;
+        word-spacing: 2px !important;
+    }
+
+    .ant-steps-item-description {
+        font-family: "SF-Pro-Display-Regular_light" !important;
+        font-size: 1.1rem !important;
+        letter-spacing: 1px;
+        margin-top: 5px !important;
+    }
+
+    .ant-steps-item-tail {
+        display: none;
+    }
+}

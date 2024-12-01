@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import styles from "./AccordionComponent.module.scss";
 
 type AccordionComponentType = {
-  data: string[][];
+  data: (string | ReactNode)[][];
 };
 
 export const AccordionComponent: FC<AccordionComponentType> = ({ data }) => {

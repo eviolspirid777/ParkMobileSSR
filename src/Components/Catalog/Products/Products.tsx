@@ -17,15 +17,17 @@ type ProductsType = {
   currentPage: number;
   onPageChange: (skip: number, page: number) => void;
 };
+
+type ReducerType = {
+  skip: number;
+  take: number;
+  currentPage: number;
+  itemsLength: number;
+};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = (
   state: unknown,
-  {
-    skip,
-    take,
-    currentPage,
-    itemsLength,
-  }: { skip: number; take: number; currentPage: number; itemsLength: number }
+  { skip, take, currentPage, itemsLength }: ReducerType
 ) => {
   const totalPages = Math.ceil(itemsLength / take);
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
