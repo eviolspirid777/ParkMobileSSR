@@ -1,11 +1,14 @@
 import { ProductObertka } from "@/Components/Catalog/Products/ProductObertka/ProductObertka";
 
-export const Page = async ({ params }: { params: { category: string } }) => {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
   const selectedCategory = (await params).category;
   return <ProductObertka category={selectedCategory} />;
-};
+}
 
-// Генерация статических параметров
 export const generateStaticParams = async () => {
   const categories = [
     "Apple",
@@ -20,5 +23,3 @@ export const generateStaticParams = async () => {
     category,
   }));
 };
-
-export default Page;

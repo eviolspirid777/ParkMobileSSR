@@ -4,7 +4,7 @@ import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
 import { TelegramIcon } from "../../Footer/Telegram";
 
 // import img from "next/img";
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Form, Input, notification } from "antd";
 import axios from "axios";
 
