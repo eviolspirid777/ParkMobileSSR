@@ -8,9 +8,9 @@ export const Footer = () => {
   const pathName = usePathname();
   const naviagate = useRouter();
 
-  const handlePath = (path: string) => {
+  const handlePath = (path: string, scrollValue: number) => {
     if (pathName === path) {
-      return (() => scroll.scrollTo(0))();
+      return (() => scroll.scrollTo(scrollValue))();
     }
     naviagate.push(path);
   };
@@ -20,28 +20,28 @@ export const Footer = () => {
       <div className={styles["footer-block-help"]}>
         <div className={styles["footer-block-help-items"]}>
           <h2>О компании</h2>
-          <span onClick={handlePath.bind(this, "/about/contacts")}>
+          <span onClick={handlePath.bind(this, "/about/contacts", 0)}>
             Адреса магазинов
           </span>
-          <span onClick={handlePath.bind(this, "/about/contacts")}>
+          <span onClick={handlePath.bind(this, "/about/contacts", 400)}>
             Контакты
           </span>
-          <span onClick={handlePath.bind(this, "/about/contacts")}>
+          <span onClick={handlePath.bind(this, "/about/contacts", 1310)}>
             Обратная связь
           </span>
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Помощь</h2>
-          <span onClick={handlePath.bind(this, "/help/delivery")}>
+          <span onClick={handlePath.bind(this, "/help/delivery", 0)}>
             Доставка и оплата
           </span>
-          <span onClick={handlePath.bind(this, "/help/gurantee")}>
+          <span onClick={handlePath.bind(this, "/help/gurantee", 0)}>
             Гарантии и возврат
           </span>
-          <span onClick={handlePath.bind(this, "/help/trade-in")}>
+          <span onClick={handlePath.bind(this, "/help/trade-in", 0)}>
             Trade-in
           </span>
-          <span onClick={handlePath.bind(this, "/help/credit")}>
+          <span onClick={handlePath.bind(this, "/help/credit", 0)}>
             Рассрочка и кредит
           </span>
         </div>
