@@ -107,7 +107,7 @@ export const Footer = () => {
             являются публичной офертой (ст.435 ГК РФ)., 2012-2024
           </strong>
         </div>
-        <span onClick={handlePath.bind(this, "/policy")}>
+        <span onClick={handlePath.bind(this, "/policy", 0)}>
           Политика конфиденциальности
         </span>
       </div>
