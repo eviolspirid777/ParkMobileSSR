@@ -71,3 +71,35 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    .trade-in-block {
+        margin-top: 0px;
+        margin-left: 0px;
+        & h2 {
+            width: 95vw !important;
+            margin-top: 10%;
+            text-align: center !important;
+            font-size: 2.1rem !important;
+        }
+
+        & span {
+            width: 95vw;
+            font-size: 1.4rem !important;
+        }
+
+        & h4 {
+            width: 95vw;
+        }
+    }
+
+    .images-block {
+        grid-template-columns: none;
+        grid-template-rows: repeat(5, 1fr);
+        width: 95vw !important;
+
+        & .images-block-card {
+            align-self: center !important;
+        }
+    }
+}

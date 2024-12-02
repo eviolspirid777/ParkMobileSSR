@@ -73,3 +73,39 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    .gurantee-block {
+        margin-top: 40px;
+    }
+
+    .gurantee-block-gurantee {
+        width: 90vw;
+        
+        & h3 {
+            text-align: center;
+        }
+
+        & span {
+            padding: 0% 4%;
+        }
+
+        & .gurantee-block-gurantee-telephone {
+            & a {
+                padding-left: 4%;
+            }
+        }
+    }
+
+    .gurantee-block-requirments {
+        width: 90vw;
+
+        & h3 {
+            text-align: center;
+        }
+
+        & ul {
+            padding: 0% 4%;
+        }
+    }
+}

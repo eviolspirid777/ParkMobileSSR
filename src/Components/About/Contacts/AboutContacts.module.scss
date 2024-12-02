@@ -211,3 +211,54 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    .about-contacts-block-info-block-text {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .about-contacts-block-data-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .about-contacts-block-questions {
+        display: flex;
+        flex-flow: column wrap;
+        margin-top: 40px;
+
+        & img {
+            margin-top: 80px;
+        }
+
+        & span {
+            width: 100%;
+        }
+
+        & h3 {
+            width: 100%;
+        }
+    }
+
+    .about-contacts-block {
+        padding-top: 0%;
+    }
+
+    .about-contacts-block-questions-data-call {
+        & h3 {
+            margin-left: 6%;
+        }
+
+        & button {
+            width: 100%;
+        }
+    }
+
+    .contacts {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}

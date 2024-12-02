@@ -115,3 +115,40 @@
     border-bottom: none;
   }
 }
+
+@media (max-width: 1024px) {
+  .credit-component-block {
+    width: 100%;
+    padding: 5% 3%;
+  }
+
+  .credit-component-block-conditions-textblock {
+    & span {
+      font-size: 1rem;
+    }
+  }
+
+  .credit-component-block-requirments {
+    width: 90vw;
+
+    & h4 {
+      font-size: 1.3rem;
+    }
+
+    & ul {
+      & li {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .credit-component-block-partners-grid-images {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+    & .image-container {
+      width: 180px;
+      border: none !important;
+    }
+  }
+}

@@ -184,3 +184,43 @@
         gap: 5px;
     }
 }
+
+@media (max-width:1024px) {
+    .delivery-block-payment-info {
+        width: 80%;
+    }
+
+    .delivery-block-krasnodar-delivery {
+        width: 90%;
+        padding: 4%;
+
+        & h4 {
+            font-size: 1.3rem;
+        }
+        
+        & ul {
+            padding-left: 5%;
+        }
+    }
+    
+    .delivery-block-russia-delivery {
+        width: 90%;
+        padding: 4%;
+
+        & h4 {
+            font-size: 1.3rem;
+        }
+
+        & ul {
+            padding-left: 5%;
+        }
+    }
+
+    .delivery-block-faq {
+        & details {
+            & span {
+                text-wrap: nowrap;
+            }
+        }
+    }
+}

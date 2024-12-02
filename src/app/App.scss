@@ -739,3 +739,23 @@ body {
         display: none;
     }
 }
+
+@media (max-width: 1024px) {
+    .custom-steps {
+        .ant-steps-item-title {
+            font-family: "SF-Pro-Display-Regular" !important;
+            color: black !important;
+            font-weight: 400 !important;
+            font-size: 1.2rem !important;
+            word-spacing: 2px !important;
+        }
+    
+        .ant-steps-item-description {
+            font-family: "SF-Pro-Display-Regular_light" !important;
+            font-size: .9rem !important;
+            letter-spacing: 1px;
+            margin-top: 5px !important;
+            padding-right: 2%;
+        }
+    }
+}

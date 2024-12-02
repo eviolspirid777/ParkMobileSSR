@@ -67,3 +67,15 @@ ol.policy-block {
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .policy-confidential-block {
+    & h2 {
+      text-align: center;
+    }
+
+    & ol {
+      width: 90vw;
+    }
+  }
+}
