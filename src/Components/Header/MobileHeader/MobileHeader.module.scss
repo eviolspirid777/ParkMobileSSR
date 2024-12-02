@@ -180,10 +180,11 @@
 }
 
 .logo-container {
-    margin-left: 17%;
+    margin-left: 19%;
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
+    position: relative;
     cursor: pointer;
     & img {
         align-self: center;
@@ -191,7 +192,9 @@
 }
 
 .nav-bucket-search {
-    margin-left: 37vw;
+    position: absolute;
+    left: 60%;
+    top: 30%;
     align-self: center;
     justify-self: center;
     display: flex;
