@@ -1,13 +1,13 @@
 //https: //alvarotrigo.com/blog/hamburger-menu-css/
 .container {
-    width: 100%;
+    width: 100vw;
     max-width: 100vw;
     margin: auto;
     background-color: #454545;
 }
 
 .navbar {
-    width: 100%;
+    width: 100vw;
     & .menu-items {
         position: absolute;
         z-index: 10;
@@ -15,7 +15,7 @@
         display: flex;
         padding-top: 40px;
         height: 100vh;
-        width: 100%;
+        width: 100vw;
         transform: translate(-100%);
         flex-direction: column;
         padding-left: 0px;
@@ -29,6 +29,7 @@
             font-family: "SF-Pro-Display-Regular";
             padding-left: 40px;
             letter-spacing: 2px;
+            width: 95vw;
         }
 
         &-description {
@@ -47,9 +48,9 @@
             flex-flow: row nowrap;
             align-items: center;
             justify-content: center;
-            gap: 40px;
+            gap: 20px;
             & a[href="tel:89337772777"] {
-                width: 240px;
+                width: fit-content;
                 text-align: center;
                 letter-spacing: 1px;
                 height: auto;
@@ -85,7 +86,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 62px;
         display: block;
         position: relative;
         height: 60px;

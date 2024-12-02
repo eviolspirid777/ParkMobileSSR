@@ -19,14 +19,14 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
   useEffect(() => {
     const _html = document.querySelector("html");
     if(_html) {
-      _html.style.overflowY = isMenuOpened ? "hidden" : "visible";
-      document.body.style.overflowY = isMenuOpened ? "hidden" : "visible"
+      _html.style.overflow = isMenuOpened ? "hidden" : "visible";
+      document.body.style.overflow = isMenuOpened ? "hidden" : "visible"
     }
 
     return () => {
       if(_html) {
-      _html.style.overflowY = isMenuOpened ? "hidden" : "visible";
-      document.body.style.overflowY = isMenuOpened ? "hidden" : "visible"
+      _html.style.overflow = isMenuOpened ? "hidden" : "visible";
+      document.body.style.overflow = isMenuOpened ? "hidden" : "visible"
       }
     };
   }, [isMenuOpened])
