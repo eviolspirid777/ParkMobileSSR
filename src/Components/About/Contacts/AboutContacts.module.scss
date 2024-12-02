@@ -213,10 +213,22 @@
 }
 
 @media (max-width: 1024px) {
+    .about-contacts-block-info-block {
+        align-self: center;
+
+        & h3 {
+            align-self: center;
+        }
+    }
+
     .about-contacts-block-info-block-text {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
+
+        & span {
+            text-align: center;
+        }
     }
 
     .about-contacts-block-data-grid {
@@ -244,7 +256,8 @@
     }
 
     .about-contacts-block {
-        padding-top: 0%;
+        padding: 5% 4% 0% 4% !important;
+        width: 90vw;
     }
 
     .about-contacts-block-questions-data-call {
