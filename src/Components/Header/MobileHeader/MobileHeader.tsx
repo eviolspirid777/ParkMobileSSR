@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./MobileHeader.module.scss";
 import { TelegramIcon } from "@/Components/Footer/Telegram";
 import { shopBucketAtom } from "@/Store/ShopBucket";
@@ -14,13 +14,40 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
   handleShopBag,
 }) => {
   const [shopBucket] = useAtom(shopBucketAtom);
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
+
+  useEffect(() => {
+    const _html = document.querySelector("html");
+    if(_html) {
+      _html.style.overflowY = isMenuOpened ? "hidden" : "visible";
+      document.body.style.overflowY = isMenuOpened ? "hidden" : "visible"
+    }
+
+    return () => {
+      if(_html) {
+      _html.style.overflowY = isMenuOpened ? "hidden" : "visible";
+      document.body.style.overflowY = isMenuOpened ? "hidden" : "visible"
+      }
+    };
+  }, [isMenuOpened])
 
   return (
     <nav>
       <div className={styles["navbar"]}>
-        <div className={`${styles["container"]} ${styles["nav-container"]}`}>
-          <input className={styles["checkbox"]} type="checkbox" name="" id="" />
-          <div className={styles["hamburger-lines"]}>
+        <div
+          className={`${styles["container"]} ${styles["nav-container"]}`}
+        >
+          <input
+            className={styles["checkbox"]}
+            type="checkbox"
+            name=""
+            id="menuToggle"
+            onKeyUp={() => setIsMenuOpened(previousState => !previousState)}
+            onClick={() => setIsMenuOpened(previousState => !previousState)}
+          />
+          <div
+            className={styles["hamburger-lines"]}
+          >
             <span className={`${styles["line"]} ${styles["line1"]}`}></span>
             <span className={`${styles["line"]} ${styles["line2"]}`}></span>
             <span className={`${styles["line"]} ${styles["line3"]}`}></span>

@@ -650,6 +650,14 @@ body {
     align-items: center;
 }
 
+@media (max-width: 1024px) {
+    .swiper-slide {
+        & img {
+            object-fit: contain !important;
+        }
+    }
+}
+
 .swiper-button-next,
 .swiper-button-prev {
     background: none;
