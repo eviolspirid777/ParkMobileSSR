@@ -57,6 +57,7 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
   const handleNavigate = (path: string) => {
     naviagate.push(path);
     setOpen(false);
+    setIsMenuOpened(false);
   };
 
   const handleMenuToggle = () => {
@@ -68,7 +69,6 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
   ) => {
     setOpen(true);
     setSelectedDrawer(category);
-    setIsMenuOpened(false);
   };
 
   return (
