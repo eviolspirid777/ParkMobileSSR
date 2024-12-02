@@ -218,12 +218,36 @@
             padding: 2px 6px;
             color: white;
             color: gray;
-            font-family: "Arial";
+            font-family: "SF-Pro-Display-Regular";
             user-select: none;
         }
 
         & i {
             color: white;
+        }
+    }
+}
+
+.drawer {
+    background-color: #454545 !important;
+    color: white;
+    font-size: 1rem;
+    &-body {
+        display: flex;
+        align-self: center;
+        justify-self: center;
+        height: 100%;
+        width: 100%;
+        & ul {
+            width: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            margin-top: 15%;
+            gap: 10px;
+            color: white;
+            font-family: "SF-Pro-Display-Regular";
+            font-size: 1.4rem;
         }
     }
 }
