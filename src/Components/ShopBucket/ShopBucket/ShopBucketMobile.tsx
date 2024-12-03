@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client"
+import { FC, useEffect } from "react";
 
 import styles from "./ShopBucketMobile.module.scss"
 
@@ -38,22 +39,43 @@ type ShopBucketMobileProps = {
     article: string;
   }), type: "minus" | "plus") => void;
   handleDeleteItem: (index: number) => void;
+  open: boolean,
 }
 
 export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
   shopBucket,
   handleItemCount,
-  handleDeleteItem
+  handleDeleteItem,
+  open
 }) => {
+
+  useEffect(() => {
+    const _html = document.documentElement; // Изменяем html
+    const _body = document.body;
+
+    if (open) {
+      _html.style.overflow = "hidden"; // Отключаем скролл на html
+      _body.style.overflow = "hidden"; // Отключаем скролл на body
+      _body.style.overscrollBehaviorY = "contain" //отключаем обновление страницы через скролл наверх
+    } else {
+      _html.style.overflow = "visible"; // Включаем скролл на html
+      _body.style.overflow = "visible"; // Включаем скролл на body
+      _body.style.overscrollBehaviorY = "auto"
+    }
+
+    return () => {
+      _html.style.overflow = "visible"; // Сбрасываем стили при размонтировании
+      _body.style.overflow = "visible"; // Сбрасываем стили при размонтировании
+    };
+  }, [open]);
+
   return (
     <main
-      style={{
-        maxHeight: "65vh"
-      }}
+      className={styles["main-cls"]}
     >
       {shopBucket.map((el, index) => (
         <div key={index} className={styles["item-block"]}>
-          <img src={el.image} alt="" width={60} />
+          <img src={el.image} alt="" width={80} />
           <div className={styles["item-data-container"]}>
             <div className={styles["item-block-info"]}>
               <strong>{el.name}</strong>

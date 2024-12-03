@@ -170,7 +170,6 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
           <i className="fa-regular fa-xmark fa-2xl" onClick={handleShopBag} />
         </header>
         <hr />
-        <main>
         <Media
           queries={{
             telephone: "(max-width: 1024px)",
@@ -225,12 +224,12 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                   handleDeleteItem={handleDeleteItem}
                   handleItemCount={handleItemCount}
                   shopBucket={shopBucket}
+                  open={open}
                 />
               )}
             </>
           )}
         </Media>
-        </main>
         <footer>
           <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
           <button onClick={handleChildrenDrawer}>Оформить заказ</button>

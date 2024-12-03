@@ -1,14 +1,15 @@
 .item-block {
   margin: 1%;
   display: grid;
-  grid-template-columns: 1fr 5fr  1fr;
+  grid-template-columns: 1fr 4fr  1fr;
   gap: 20px;
   grid-template-rows: none;
   &-info {
       color: #989898;
       & strong {
-          font-size: 1.1rem !important;
+          font-size: 1rem !important;
           font-weight: 600 !important;
+          width: 100% !important;
           color: black;
       }
   }
@@ -26,7 +27,7 @@
       }
       & span {
           align-self: center;
-          font-size: 1.1rem;
+          font-size: .8rem;
           color: black;
       }
   }
@@ -35,7 +36,7 @@
       width: 100%;
       align-self: center;
       justify-self: center;
-      font-size: 1rem;
+      font-size: .9rem;
   }
 
   &-decline {
@@ -65,4 +66,10 @@
   & span {
     text-wrap: nowrap;
   }
+}
+
+.main-cls {
+  min-height: 55vh !important;
+  height: 55vh !important;
+  overflow: auto;
 }
