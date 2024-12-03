@@ -40,13 +40,15 @@ type ShopBucketMobileProps = {
   }), type: "minus" | "plus") => void;
   handleDeleteItem: (index: number) => void;
   open: boolean,
+  price?: string,
 }
 
 export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
   shopBucket,
   handleItemCount,
   handleDeleteItem,
-  open
+  open,
+  price
 }) => {
 
   useEffect(() => {
@@ -103,6 +105,16 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
           </div>
         </div>
       ))}
+      {
+        price && 
+        <strong
+          style={{
+            marginTop:"50px"
+          }}
+        >
+          Сумма: {price} ₽
+        </strong>
+      }
     </main>
   )
 }
