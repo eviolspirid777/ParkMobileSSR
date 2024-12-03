@@ -228,3 +228,14 @@
     color: white;
   }
 }
+
+@media (max-width: 1024px) {
+  .item-block {
+    margin: 10px;
+    gap: 20px;
+
+    & img {
+      width: 80px;
+    }
+  }
+}

@@ -248,6 +248,11 @@
             color: white;
             font-family: "SF-Pro-Display-Regular";
             font-size: 1.4rem;
+
+        & a {
+            text-decoration: none;
+            color: white;
+        }
         }
     }
 }

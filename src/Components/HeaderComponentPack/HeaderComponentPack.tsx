@@ -112,10 +112,13 @@ export const HeaderComponentPack = () => {
                 <ShopBucket open={open} handleShopBag={handleShopBag} />
               </>
             ) : (
-              <MobileHeader
-                handleMainMenuRoute={handleMainMenu}
-                handleShopBag={handleShopBag}
-              />
+              <>
+                <MobileHeader
+                  handleMainMenuRoute={handleMainMenu}
+                  handleShopBag={handleShopBag}
+                />
+                <ShopBucket open={open} handleShopBag={handleShopBag} />
+              </>
             )}
           </>
         )}
