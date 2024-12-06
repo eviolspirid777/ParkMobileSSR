@@ -228,3 +228,34 @@
     color: white;
   }
 }
+
+@media (max-width: 1024px) {
+  .item-block {
+    margin: 10px;
+    gap: 20px;
+
+    & img {
+      width: 80px;
+    }
+  }
+  
+  .submit-shopping-block {
+    display: flex !important;
+    flex-flow: column-reverse nowrap !important;
+    gap: 100px !important;
+    margin: 0px 2% !important;
+    width: 100% !important;
+
+    & .drawer-items-block {
+      & main {
+        max-height: fit-content !important;
+        min-height: fit-content !important;
+        height: fit-content !important;
+      }
+    }
+
+    &-data {
+      margin-bottom: 100px !important;
+    }
+  }
+}

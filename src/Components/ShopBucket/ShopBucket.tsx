@@ -1,3 +1,4 @@
+"use client"
 import {
   Drawer,
   Input,
@@ -15,6 +16,8 @@ import axios from "axios";
 import { DataType, shopBucketAtom } from "@/Store/ShopBucket";
 import { useAtom } from "jotai";
 import { deliveryOptions } from "./DeliveryTypes/ShopBucketDeliveryOptions";
+import Media from "react-media";
+import { ShopBucketMobile } from "./ShopBucket/ShopBucketMobile";
 
 type ShopBucketType = {
   handleShopBag: () => void;
@@ -168,46 +171,66 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
           <i className="fa-regular fa-xmark fa-2xl" onClick={handleShopBag} />
         </header>
         <hr />
-        <main>
-          {shopBucket.map((el, index) => (
-            <div key={index} className={styles["item-block"]}>
-              <img src={el.image} alt="" width={60} />
-              <div className={styles["item-block-info"]}>
-                {Object.entries(el).map(([k, v]) => {
-                  if (!["price", "image", "count"].includes(k)) {
-                    if (k === "name") {
-                      return <strong key={k}>{v}</strong>;
-                    }
-                    return (
-                      <div key={k}>
-                        {k}: {v}
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-              <div className={styles["item-block-count"]}>
-                <i
-                  className="fa-solid fa-minus"
-                  onClick={handleItemCount.bind(this, el, "minus")}
+        <Media
+          queries={{
+            telephone: "(max-width: 1024px)",
+            computer: "(min-width: 1025px)",
+          }}
+        >
+          {(matches) => (
+            <>
+              {matches.computer ? (
+                <main>
+                {shopBucket.map((el, index) => (
+                  <div key={index} className={styles["item-block"]}>
+                    <img src={el.image} alt="" width={60} />
+                    <div className={styles["item-block-info"]}>
+                      {Object.entries(el).map(([k, v]) => {
+                        if (!["price", "image", "count"].includes(k)) {
+                          if (k === "name") {
+                            return <strong key={k}>{v}</strong>;
+                          }
+                          return (
+                            <div key={k}>
+                              {k}: {v}
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                    <div className={styles["item-block-count"]}>
+                      <i
+                        className="fa-solid fa-minus"
+                        onClick={handleItemCount.bind(this, el, "minus")}
+                      />
+                      <span>{el.count}</span>
+                      <i
+                        className="fa-solid fa-plus"
+                        onClick={handleItemCount.bind(this, el, "plus")}
+                      />
+                    </div>
+                    <span className={styles["item-block-price"]}>{el.price} ₽</span>
+                    <div className={styles["item-block-decline"]}>
+                      <i
+                        className="fa-regular fa-trash fa-lg"
+                        onClick={handleDeleteItem.bind(this, index)}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </main>
+              ) : (
+                <ShopBucketMobile
+                  handleDeleteItem={handleDeleteItem}
+                  handleItemCount={handleItemCount}
+                  shopBucket={shopBucket}
+                  open={open}
                 />
-                <span>{el.count}</span>
-                <i
-                  className="fa-solid fa-plus"
-                  onClick={handleItemCount.bind(this, el, "plus")}
-                />
-              </div>
-              <span className={styles["item-block-price"]}>{el.price} ₽</span>
-              <div className={styles["item-block-decline"]}>
-                <i
-                  className="fa-regular fa-trash fa-lg"
-                  onClick={handleDeleteItem.bind(this, index)}
-                />
-              </div>
-            </div>
-          ))}
-        </main>
+              )}
+            </>
+          )}
+        </Media>
         <footer>
           <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
           <button onClick={handleChildrenDrawer}>Оформить заказ</button>
@@ -374,49 +397,70 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
               </Form>
             </div>
             <div className={styles["drawer-items-block"]}>
-              <main>
-                {shopBucket.map((el, index) => (
-                  <div key={index} className={styles["item-block"]}>
-                    <img src={el.image} alt="" width={60} />
-                    <div className={styles["item-block-info"]}>
-                      {Object.entries(el).map(([k, v]) => {
-                        if (!["price", "image", "count"].includes(k)) {
-                          if (k === "name") {
-                            return <strong key={k}>{v}</strong>;
-                          }
-                          return (
-                            <div key={k}>
-                              {k}: {v}
-                            </div>
-                          );
-                        }
-                        return null;
-                      })}
-                    </div>
-                    <div className={styles["item-block-count"]}>
-                      <i
-                        className="fa-solid fa-minus"
-                        onClick={handleItemCount.bind(this, el, "minus")}
+              <Media
+                queries={{
+                  telephone: "(max-width: 1024px)",
+                  computer: "(min-width: 1025px)",
+                }}
+              >
+                {(matches) => (
+                  <>
+                    {matches.computer ? (
+                      <main>
+                      {shopBucket.map((el, index) => (
+                        <div key={index} className={styles["item-block"]}>
+                          <img src={el.image} alt="" width={60} />
+                          <div className={styles["item-block-info"]}>
+                            {Object.entries(el).map(([k, v]) => {
+                              if (!["price", "image", "count"].includes(k)) {
+                                if (k === "name") {
+                                  return <strong key={k}>{v}</strong>;
+                                }
+                                return (
+                                  <div key={k}>
+                                    {k}: {v}
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })}
+                          </div>
+                          <div className={styles["item-block-count"]}>
+                            <i
+                              className="fa-solid fa-minus"
+                              onClick={handleItemCount.bind(this, el, "minus")}
+                            />
+                            <span>{el.count}</span>
+                            <i
+                              className="fa-solid fa-plus"
+                              onClick={handleItemCount.bind(this, el, "plus")}
+                            />
+                          </div>
+                          <span className={styles["item-block-price"]}>
+                            {el.price} ₽
+                          </span>
+                          <div className={styles["item-block-decline"]}>
+                            <i
+                              className="fa-regular fa-trash fa-lg"
+                              onClick={handleDeleteItem.bind(this, index)}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
+                      </main>
+                    ) : (
+                      <ShopBucketMobile
+                        handleDeleteItem={handleDeleteItem}
+                        handleItemCount={handleItemCount}
+                        shopBucket={shopBucket}
+                        open={open}
+                        price={handleItemsCost()}
                       />
-                      <span>{el.count}</span>
-                      <i
-                        className="fa-solid fa-plus"
-                        onClick={handleItemCount.bind(this, el, "plus")}
-                      />
-                    </div>
-                    <span className={styles["item-block-price"]}>
-                      {el.price} ₽
-                    </span>
-                    <div className={styles["item-block-decline"]}>
-                      <i
-                        className="fa-regular fa-trash fa-lg"
-                        onClick={handleDeleteItem.bind(this, index)}
-                      />
-                    </div>
-                  </div>
-                ))}
-                <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
-              </main>
+                    )}
+                  </>
+                )}
+              </Media>
             </div>
           </div>
         </ConfigProvider>

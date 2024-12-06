@@ -5,6 +5,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+import styles from "./Swiper.module.scss"
+
 export const SwiperList = () => {
   const images = [
     "/images/Slides/BaseSlidepng.png",
@@ -25,7 +27,12 @@ export const SwiperList = () => {
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <img src={image} alt="" />
+            <div
+              style={{
+                backgroundImage: `url(${image})`,
+              }}
+              className={styles["image-container"]}
+            />
           </SwiperSlide>
         ))}
         <SwiperSlide>Slide 7</SwiperSlide>
