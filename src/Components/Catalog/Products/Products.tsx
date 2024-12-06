@@ -115,6 +115,33 @@ export const Products: FC<ProductsType> = ({
     }
   };
 
+  const [modalHeight, setModalHeight] = useState<number>(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const modalElement = document.querySelector(".ant-modal-body"); // Получаем элемент модального окна
+      if (modalElement) {
+        const height = modalElement.clientHeight; // Получаем высоту модального окна
+        setModalHeight(height);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    // Получаем высоту при первом рендере
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [openProductCard.state]); // Запускаем эффект при открытии/закрытии модального окна
+
+  useEffect(() => {
+    if (openProductCard.state) document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [openProductCard.state]);
+
   return (
     <>
       <div className={styles["product"]}>
@@ -154,7 +181,11 @@ export const Products: FC<ProductsType> = ({
             centered={true}
             footer={null}
             title={null}
-            closeIcon={null}
+            closeIcon={
+              window.screen.width > 1024 ? null : (
+                <i className="fa-solid fa-xmark" />
+              )
+            }
             className={styles["item-modal-window"]}
           >
             <div className={styles["item-container"]}>
@@ -181,7 +212,13 @@ export const Products: FC<ProductsType> = ({
                   <a>в кредит</a>
                   <span>от {handleCreditPrice(CardData?.price)} ₽/мес.</span>
                 </div>
-                <div className={styles["MarkdownContent"]}>
+                <div
+                  className={styles["MarkdownContent"]}
+                  style={{
+                    maxHeight: `${modalHeight - 500}px`,
+                    overflow: "auto",
+                  }}
+                >
                   <MarkdownRenderer content={CardData?.description ?? ""} />
                 </div>
               </div>

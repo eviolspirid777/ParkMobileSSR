@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import styles from "./Catalog.module.scss";
 import { CatalogHeader } from "./Header/CatalogHeader";
 import { Categories } from "./Categories/Categories";
 import { Products } from "./Products/Products";
-import { FilterTile } from "./Products/FilterTile/FilterTile";
+// import { FilterTile } from "./Products/FilterTile/FilterTile";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { RecivedCardDataType } from "../../Types/CardType";
@@ -28,7 +28,9 @@ export const Catalog = () => {
     queryKey: ["items", skip, take],
     queryFn: async () => {
       const response = await axios.get<RecivedCardDataType>(
-        `api/ItemsPostgre/GetItems?skip=${skip}&take=${take}&category=${categoryDictionary.get(storeCategory ?? "")}`
+        `api/ItemsPostgre/GetItems?skip=${skip}&take=${take}&category=${categoryDictionary.get(
+          storeCategory ?? ""
+        )}`
       );
       const data = response.data;
       return data;
@@ -37,7 +39,7 @@ export const Catalog = () => {
   });
 
   const handleOnPageChange = (newSkip: number, newPage: number) => {
-    scroll.scrollTo(3800, {
+    scroll.scrollTo(window.screen.width > 1024 ? 3600 : 4300, {
       duration: 700,
       smooth: true,
     });
@@ -48,14 +50,14 @@ export const Catalog = () => {
   };
 
   useEffect(() => {
-    refetch()
-  }, [storeCategory])
+    refetch();
+  }, [storeCategory]);
 
   return (
     <div className={styles["catalog-block"]}>
       <CatalogHeader />
       <Categories />
-      <FilterTile itemsCount={items?.count} />
+      {/* <FilterTile itemsCount={items?.count} /> */}
       {isLoadingAll ? (
         <div style={{ height: "2040px", width: "1239px" }}>Loading...</div>
       ) : (
