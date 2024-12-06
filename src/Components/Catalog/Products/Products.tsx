@@ -206,7 +206,7 @@ export const Products: FC<ProductsType> = ({
                   <article>АРТИКУЛ</article>
                 </header>
                 <strong>{CardData?.price} ₽</strong>
-                <button>Купить</button>
+                <button onClick={console.log}>Купить</button>
                 <div className={styles["credit"]}>
                   <span>Доступно</span>
                   <a>в кредит</a>
