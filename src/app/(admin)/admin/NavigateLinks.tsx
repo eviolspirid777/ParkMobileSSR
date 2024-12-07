@@ -5,9 +5,19 @@ import { LogoutOutlined } from "@ant-design/icons";
 
 export const navLinks: MenuProps["items"] = [
   {
-    key: "Items",
+    key: "items",
     icon: <i className="fa-solid fa-boxes-stacked" />,
     label: "Товары",
+  },
+  {
+    key: "brands",
+    icon: <i className="fa-solid fa-table" />,
+    label: "Брэнды",
+  },
+  {
+    key: "categories",
+    icon: <i className="fa-solid fa-list" />,
+    label: "Категории",
   },
   //   {
   //     key: "zones",

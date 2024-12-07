@@ -32,6 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const { sessionToken, logout } = useSession();
+  const links = navLinks;
 
   useLayoutEffect(() => {
     if (!sessionToken) {
@@ -41,8 +42,12 @@ export default function RootLayout({
 
   const navigate = useRouter();
 
-  const navigateClick = () => {
-    apiClient.GetItems(0, 2);
+  const navigateClick = (item: { key: string }) => {
+    if (item.key == "items") {
+      navigate.push("/admin/menu");
+    } else {
+      navigate.push(`/admin/menu/${item.key}`);
+    }
   };
 
   const handleLogout = () => {

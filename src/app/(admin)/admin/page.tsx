@@ -37,7 +37,6 @@ const LoginPage = () => {
   }
 
   const handleFinish = (values: LoginType) => {
-    message.info("HELLO");
     loginMutate(values);
   };
 

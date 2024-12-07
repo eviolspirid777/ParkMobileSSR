@@ -97,6 +97,16 @@ class ApiClient {
         const response = await this.authClient.postForm("https://localhost:7280/api/ItemsPostgre/updatePhoto", formData);
         return response.data;
     }
+
+    async GetBrands() {
+        const response = await this.client.get("https://localhost:7280/api/ItemsPostgre/GetBrands")
+        return response.data;
+    }
+
+    async GetCategories() {
+        const response = await this.client.get("https://localhost:7280/api/ItemsPostgre/GetCategories")
+        return response.data;
+    }
 }
 
 export const apiClient = new ApiClient;

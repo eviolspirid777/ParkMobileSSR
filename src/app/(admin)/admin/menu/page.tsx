@@ -1,7 +1,6 @@
 "use client";
 import { apiClient } from "@/api/ApiClient";
 import { DataType } from "@/Store/ShopBucket";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import {
   Button,
   Form,
@@ -10,6 +9,7 @@ import {
   message,
   Modal,
   Popconfirm,
+  Select,
   Table,
   TableColumnsType,
   Upload,
@@ -22,6 +22,14 @@ import styles from "./Menu.module.scss";
 import { CardItemDTO } from "@/Entities/CardItemDTO";
 import { CardType } from "@/Types/CardType";
 import { useForm } from "antd/es/form/Form";
+import { useAtom } from "jotai";
+import { categoriesAtom } from "@/Store/CategoriesStore";
+import { brandsAtom } from "@/Store/BrandsStore";
+import { useGetItems } from "@/hooks/useGetItems";
+import { useUpdatePhoto } from "@/hooks/useUpdatePhoto";
+import { useDeleteItem } from "@/hooks/useDeleteItem";
+import { useGetCategories } from "@/hooks/useGetCategories";
+import { useGetBrands } from "@/hooks/useGetBrands";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -32,6 +40,8 @@ type FormItemChange = {
   name: string;
   price: string;
   stock: number;
+  categoryId: number;
+  brandId: number;
 };
 
 const columns: TableColumnsType<DataType> = [
@@ -80,22 +90,22 @@ const data: DataType[] = [
 ];
 
 const MenuPage = () => {
-  const {
-    data: itemsList,
-    refetch: refetchItemsList,
-    isSuccess: itemsListIsSuccess,
-  } = useQuery({
-    queryKey: ["itemsList"],
-    queryFn: () => apiClient.GetItems(0, 100),
-  });
+  const { itemsList, itemsListIsSuccess, refetchItemsList } = useGetItems();
+  const { updatePhoto } = useUpdatePhoto();
+  const { deleteItem } = useDeleteItem();
+  useGetCategories();
+  useGetBrands();
 
-  const { mutate: updatePhoto } = useMutation({
-    mutationFn: (formData: FormData) => apiClient.UpdatePhoto(formData),
-  });
-
-  const { mutate: deleteItem } = useMutation({
-    mutationFn: (id: number) => apiClient.DeleteItem(id),
-  });
+  const [categories] = useAtom(categoriesAtom);
+  const categoriesOptions = categories?.map((el) => ({
+    label: el.name,
+    value: el.id,
+  }));
+  const [brands] = useAtom(brandsAtom);
+  const brandsOptions = brands?.map((el) => ({
+    label: el.name,
+    value: el.id,
+  }));
 
   const [form] = useForm();
 
@@ -145,6 +155,7 @@ const MenuPage = () => {
   }, [itemsList]);
 
   const handleRowClick = (record: CardType) => {
+    console.log(record);
     setSelectedItem(record);
     setOpen(true);
   };
@@ -218,8 +229,8 @@ const MenuPage = () => {
         article: newItem.article,
         discountPrice: newItem.discountPrice,
         description: newItem.description,
-        categoryId: 12,
-        itemBrandId: 8,
+        categoryId: newItem.categoryId,
+        itemBrandId: newItem.brandId,
       };
       try {
         await apiClient.UpdateItem(mappedItem);
@@ -242,8 +253,8 @@ const MenuPage = () => {
         article: newItem.article,
         discountPrice: newItem.discountPrice,
         description: newItem.description,
-        categoryId: 12,
-        itemBrandId: 8,
+        categoryId: newItem.categoryId,
+        itemBrandId: newItem.brandId,
       };
       try {
         await apiClient.AddItem(mappedItem);
@@ -281,9 +292,10 @@ const MenuPage = () => {
         onClose={handleCloseModal.bind(this)}
         footer={null}
         width={900}
+        centered
       >
         <Form
-          key={`${selectedItem?.name} ${open}`}
+          key={`${selectedItem?.name}`}
           form={form}
           layout="vertical"
           initialValues={selectedItem ? selectedItem : {}}
@@ -319,6 +331,12 @@ const MenuPage = () => {
                 ]}
               >
                 <Input placeholder="Название товара" />
+              </Form.Item>
+              <Form.Item label="Брэнд" name="brandId">
+                <Select placeholder="Брэнд" options={brandsOptions} />
+              </Form.Item>
+              <Form.Item label="Категория" name="categoryId">
+                <Select placeholder="Категория" options={categoriesOptions} />
               </Form.Item>
               <Form.Item
                 label="На складе"
