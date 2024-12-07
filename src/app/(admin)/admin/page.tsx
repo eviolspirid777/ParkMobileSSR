@@ -75,7 +75,7 @@ const LoginPage = () => {
         <div className={styles["button-block"]}>
           <Form.Item>
             <Button type="link" onClick={handleRegisterAccount}>
-              Зарегестрироваться
+              Зарегистрироваться
             </Button>
           </Form.Item>
           <Form.Item>
