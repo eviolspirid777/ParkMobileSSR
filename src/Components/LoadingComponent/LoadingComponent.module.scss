@@ -1,0 +1,72 @@
+.loading-component {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-fade-animation {
+    height: 40%;
+    -webkit-animation: logo-fade-animation 4s;
+    animation: logo-fade-animation 4s;
+    -moz-animation: logo-fade-animation 4s;
+    -o-animation: logo-fade-animation 4s;
+    animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes logo-fade-animation {
+    0% {
+        opacity: 0.2
+    }
+
+    50% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0.2
+    }
+}
+
+@-moz-keyframes logo-fade-animation {
+    0% {
+        opacity: 0.2
+    }
+
+    50% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0.2
+    }
+}
+
+@keyframes logo-fade-animation {
+    0% {
+        opacity: 0.2
+    }
+
+    50% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0.2
+    }
+}
+
+@-o-keyframes logo-fade-animation {
+    0% {
+        opacity: 0.2
+    }
+
+    50% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0.2
+    }
+}

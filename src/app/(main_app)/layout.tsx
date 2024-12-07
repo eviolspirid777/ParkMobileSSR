@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./App.scss";
+import "../App.scss";
 import { HeaderComponentPack } from "@/Components/HeaderComponentPack/HeaderComponentPack";
 import { Footer } from "@/Components/Footer/Footer";
 import { AntdRegistry } from "@ant-design/nextjs-registry";

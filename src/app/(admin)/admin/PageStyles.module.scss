@@ -1,0 +1,36 @@
+.login-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    gap: 10%;
+    & * {
+        font-size: 1.1rem;
+    }
+
+    & button {
+        & span {
+            font-size: 1.2rem;
+        }
+    }
+
+    & h1 {
+        font-family: "SF-Pro-Display-Regular";
+        font-size: 2.5rem;
+    }
+}
+
+.button-block {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 15px;
+}
+
+.loading-contanier {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}

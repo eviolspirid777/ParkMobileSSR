@@ -6,11 +6,10 @@ import { Categories } from "./Categories/Categories";
 import { Products } from "./Products/Products";
 // import { FilterTile } from "./Products/FilterTile/FilterTile";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { RecivedCardDataType } from "../../Types/CardType";
 import { useAtom } from "jotai";
 import { categoryAtom, categoryDictionary } from "../../Store/FiltersStore";
 import { animateScroll as scroll } from "react-scroll";
+import { apiClient } from "@/api/ApiClient";
 
 export const Catalog = () => {
   const [storeCategory] = useAtom(categoryAtom);
@@ -26,15 +25,12 @@ export const Catalog = () => {
     isLoading: isLoadingAll,
   } = useQuery({
     queryKey: ["items", skip, take],
-    queryFn: async () => {
-      const response = await axios.get<RecivedCardDataType>(
-        `api/ItemsPostgre/GetItems?skip=${skip}&take=${take}&category=${categoryDictionary.get(
-          storeCategory ?? ""
-        )}`
-      );
-      const data = response.data;
-      return data;
-    },
+    queryFn: async () =>
+      apiClient.GetItems(
+        skip,
+        take,
+        categoryDictionary.get(storeCategory ?? "") ?? ""
+      ),
     refetchOnWindowFocus: false,
   });
 

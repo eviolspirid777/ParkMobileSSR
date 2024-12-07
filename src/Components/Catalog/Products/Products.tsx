@@ -2,12 +2,12 @@
 import React, { FC, useEffect, useReducer, useState } from "react";
 import styles from "./Products.module.scss";
 import { ProductCard } from "./ProductCard/ProductCard";
-import { CardItemType, CardType } from "../../../Types/CardType";
+import { CardType } from "../../../Types/CardType";
 import { createPortal } from "react-dom";
 import { Modal } from "antd";
 import MarkdownRenderer from "@/Components/MarkDown/MarkDownRenderer";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { apiClient } from "@/api/ApiClient";
 
 // import Image from "next/image";
 
@@ -74,12 +74,7 @@ export const Products: FC<ProductsType> = ({
   }>({ state: false, id: null });
 
   const { data: CardData, mutate } = useMutation({
-    mutationFn: async () => {
-      const response = await axios.post<CardItemType>(
-        `https://localhost:7280/api/ItemsPostgre/GetItem/${openProductCard.id}`
-      );
-      return response.data;
-    },
+    mutationFn: async () => apiClient.GetItem(openProductCard.id!),
   });
 
   useEffect(() => {

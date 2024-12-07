@@ -740,6 +740,17 @@ body {
     }
 }
 
+.edit-item-image {
+    .ant-upload {
+        width: 100% !important;
+    }
+    
+    .ant-upload-wrapper {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
 @media (max-width: 1024px) {
     .custom-steps {
         .ant-steps-item-title {

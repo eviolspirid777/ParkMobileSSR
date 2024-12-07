@@ -2,6 +2,7 @@ import { atom } from "jotai";
 
 export type DataType =
   | {
+      key: string;
       image: string;
       name: string;
       count: number;
@@ -11,6 +12,7 @@ export type DataType =
       memory?: undefined;
     }
   | {
+      key: string;
       image: string;
       name: string;
       count: number;

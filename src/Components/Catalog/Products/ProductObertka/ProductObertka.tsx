@@ -1,15 +1,14 @@
 "use client";
 import { FC, useState } from "react";
 import { Products } from "../Products";
-import { RecivedCardDataType } from "@/Types/CardType";
 import { animateScroll as scroll } from "react-scroll";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 import styles from "./ProductObertka.module.scss";
 import { Categories } from "../../Categories/Categories";
 import { createPortal } from "react-dom";
 import { Modal } from "antd";
+import { apiClient } from "@/api/ApiClient";
 
 type ProductObertkaProps = {
   category: string;
@@ -39,15 +38,8 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
   } = useQuery({
     queryKey: ["items", skip, take],
     //TODO: Здесь нужно будет пофиксить баг с тем, что категории неправильно отправляются, нужна дополнительная обработка на беке
-    queryFn: async () => {
-      const response = await axios.get<RecivedCardDataType>(
-        `http://localhost:5164/api/ItemsPostgre/GetItems?skip=${skip}&take=${take}&${categoryDictionary.get(
-          category
-        )}`
-      );
-      const data = response.data;
-      return data;
-    },
+    queryFn: async () =>
+      apiClient.GetItems(skip, take, categoryDictionary.get(category)!),
     refetchOnWindowFocus: false,
   });
 
@@ -68,7 +60,7 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
 
   return (
     <div className={styles["product-container"]}>
-      <h4 onClick={setOpen.bind(this,true)}>Каталог</h4>
+      <h4 onClick={setOpen.bind(this, true)}>Каталог</h4>
       <Categories noAnimationHeight />
       <Products
         cards={items?.items}
@@ -76,21 +68,18 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
         currentPage={currentPage}
         onPageChange={handleOnPageChange}
       />
-      {
-        createPortal(
-          <Modal
-            open={open}
-            onCancel={setOpen.bind(this,false)}
-            onClose={setOpen.bind(this,false)}
-            style={{
-              width:"100vw",
-              height: "100vh"
-            }}
-          >
-
-          </Modal>
-        , document.body)
-      }
+      {createPortal(
+        <Modal
+          open={open}
+          onCancel={setOpen.bind(this, false)}
+          onClose={setOpen.bind(this, false)}
+          style={{
+            width: "100vw",
+            height: "100vh",
+          }}
+        ></Modal>,
+        document.body
+      )}
     </div>
   );
 };

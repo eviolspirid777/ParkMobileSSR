@@ -10,7 +10,8 @@ export type CardType = {
     category: ItemCategoriesEnum,
     itemBrand: ItemBrandsEnum,
     stock: number,
-    options?: string
+    options?: string,
+    article?: string,
 }
 
 export type CardItemType = {
