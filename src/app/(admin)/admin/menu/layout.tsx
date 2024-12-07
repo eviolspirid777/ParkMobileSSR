@@ -65,7 +65,7 @@ export default function RootLayout({
                 className={styles["menu-style"]}
                 theme="dark"
                 mode="inline"
-                defaultSelectedKeys={["4"]}
+                defaultSelectedKeys={["Items"]}
                 items={navLinks}
                 onClick={navigateClick}
               />

@@ -1,4 +1,5 @@
 "use client";
+import { ConfigProvider } from "antd";
 import "../App.scss";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -13,9 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <ConfigProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        </ConfigProvider>
       </body>
     </html>
   );

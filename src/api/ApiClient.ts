@@ -2,6 +2,7 @@ import { CardItemDTO } from "@/Entities/CardItemDTO";
 import { CardItemType, RecivedCardDataType } from "@/Types/CardType";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
+export type AuthorizationType = {userName: string, password: string}
 
 const AUTORIZATIONS_PATH = 'https://localhost:7280/api/Autorization'
 
@@ -20,7 +21,7 @@ class ApiClient {
         this.sessionToken = null;
     }
     
-    async Login({ userName, password }: { userName: string, password: string }): Promise<AxiosResponse<unknown, unknown>> {
+    async Login({ userName, password }: AuthorizationType): Promise<AxiosResponse<unknown, unknown>> {
         try {
             const loginResponse = await this.authClient.post(`${AUTORIZATIONS_PATH}/login`, {
                 Username: userName,
@@ -44,7 +45,7 @@ class ApiClient {
         localStorage.setItem("sessionToken", "");
     }
 
-    async Register({userName, password}: {userName: string, password: string}) {
+    async Register({userName, password}: AuthorizationType) {
         const response = await this.authClient.post("api/Autorization/register", {
             Username: userName,
             PasswordHash: password
@@ -77,8 +78,23 @@ class ApiClient {
         return response.data
     }
 
+    async AddItem(item: Omit<CardItemDTO, "id">) {
+        const response = await this.authClient.post("https://localhost:7280/api/ItemsPostgre/CreateItem", item);
+        return response.data;
+    }
+
     async UpdateItem(item: CardItemDTO) {
         const response = await this.authClient.post("https://localhost:7280/api/ItemsPostgre/ChangeItem", item);
+        return response.data;
+    }
+
+    async DeleteItem(id: number) {
+        const response = await this.authClient.delete(`https://localhost:7280/api/ItemsPostgre/DeleteItem/${id}`)
+        return response.data;
+    }
+
+    async UpdatePhoto(formData: FormData) {
+        const response = await this.authClient.postForm("https://localhost:7280/api/ItemsPostgre/updatePhoto", formData);
         return response.data;
     }
 }
