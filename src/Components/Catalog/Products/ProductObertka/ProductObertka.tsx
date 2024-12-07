@@ -39,7 +39,7 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
     queryKey: ["items", skip, take],
     //TODO: Здесь нужно будет пофиксить баг с тем, что категории неправильно отправляются, нужна дополнительная обработка на беке
     queryFn: async () =>
-      apiClient.GetItems(skip, take, categoryDictionary.get(category)!),
+      apiClient.GetItemsCostil(skip, take, categoryDictionary.get(category)!),
     refetchOnWindowFocus: false,
   });
 

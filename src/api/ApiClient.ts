@@ -53,7 +53,7 @@ class ApiClient {
         return response.data;
     }
 
-    async GetItems(skip: number,take: number,category?: string, brand?: string) {
+    async GetItems(skip: number, take: number, category: string = "", brand: string = "") {
         const response = await this.client.get<RecivedCardDataType>(
             `https://localhost:7280/api/ItemsPostgre/GetItems`, {
                 params: {
@@ -63,6 +63,11 @@ class ApiClient {
                     brand: brand
                 }
             });
+        return response.data;
+    }
+
+    async GetItemsCostil(skip: number, take: number, category: string = "") {
+        const response = await this.client.get<RecivedCardDataType>(`https://localhost:7280/api/ItemsPostgre/GetItems?skip=${skip}&take=${take}&${category}`);
         return response.data;
     }
 
