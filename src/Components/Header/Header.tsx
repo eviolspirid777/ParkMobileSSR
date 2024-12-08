@@ -116,7 +116,7 @@ export const Header: FC<HeaderProps> = ({
       }`}
     >
       <img
-        src={"/images/Logo/Logo.png"}
+        src={"/images/Logo/Logo.svg"}
         alt=""
         className={styles["logo"]}
         onClick={handleMainMenuRoute}

@@ -18,6 +18,7 @@ class ApiClient {
             },
         });
         this.authClient = axios.create()
+        // this.sessionToken = localStorage.getItem("sessionToken") ?? null; //TODO: с этой строчкой потом можно добавить запоминание сессии
         this.sessionToken = null;
     }
     

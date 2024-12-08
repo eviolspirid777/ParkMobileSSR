@@ -186,7 +186,7 @@
 
 @media (min-width:401px) and (max-width: 1024px) {
   .product-cards-block {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 20px 0px;
   }
 

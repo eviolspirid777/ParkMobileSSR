@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import { Products } from "../Products";
 import { animateScroll as scroll } from "react-scroll";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +39,7 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
     queryKey: ["items", skip, take],
     //TODO: Здесь нужно будет пофиксить баг с тем, что категории неправильно отправляются, нужна дополнительная обработка на беке
     queryFn: async () =>
-      apiClient.GetItemsCostil(skip, take, categoryDictionary.get(category)!),
+      apiClient.GetItemsCostil(skip, take, categoryDictionary.get(category) ?? ""),
     refetchOnWindowFocus: false,
   });
 
@@ -60,7 +60,7 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
 
   return (
     <div className={styles["product-container"]}>
-      <h4 onClick={setOpen.bind(this, true)}>Каталог</h4>
+      <h4 onClick={setOpen.bind(null, true)} onKeyDown={setOpen.bind(null,true)}>Каталог</h4>
       <Categories noAnimationHeight />
       <Products
         cards={items?.items}
@@ -71,13 +71,13 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
       {createPortal(
         <Modal
           open={open}
-          onCancel={setOpen.bind(this, false)}
-          onClose={setOpen.bind(this, false)}
+          onCancel={setOpen.bind(null, false)}
+          onClose={setOpen.bind(null, false)}
           style={{
             width: "100vw",
             height: "100vh",
           }}
-        ></Modal>,
+        />,
         document.body
       )}
     </div>

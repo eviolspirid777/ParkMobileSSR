@@ -154,7 +154,7 @@ const MenuPage = () => {
     }
   }, [itemsList]);
 
-  const handleRowClick = (record: CardType) => {
+  const handleRowClick = (record: CardType | null) => {
     console.log(record);
     setSelectedItem(record);
     setOpen(true);
@@ -190,7 +190,7 @@ const MenuPage = () => {
 
         const formData = new FormData();
         formData.append("image", blob);
-        formData.append("id", selectedItem?.id?.toString()!);
+        formData.append("id", selectedItem?.id?.toString() ?? "");
         updatePhoto(formData);
       } finally {
         setLoading(false);
@@ -222,7 +222,7 @@ const MenuPage = () => {
     //POST
     if (selectedItem) {
       const mappedItem: CardItemDTO = {
-        id: selectedItem?.id!,
+        id: selectedItem?.id ?? 0,
         name: newItem.name,
         price: newItem.price,
         stock: newItem.stock,
@@ -239,7 +239,7 @@ const MenuPage = () => {
         }, 2000);
         refetchItemsList();
       } catch (error) {
-        message.info("Ошибка с запросом!");
+        message.info(`Ошибка с запросом! ${error}`);
       } finally {
         handleCloseModal();
       }
@@ -260,7 +260,7 @@ const MenuPage = () => {
         await apiClient.AddItem(mappedItem);
         refetchItemsList();
       } catch (error) {
-        message.info("Ошибка с запросом!");
+        message.info(`Ошибка с запросом! ${error}`);
       } finally {
         handleCloseModal();
       }
@@ -282,7 +282,7 @@ const MenuPage = () => {
         onRow={(record) => ({
           onClick: handleRowClick.bind(
             this,
-            itemsList?.items.find((item) => item.id === +record.key)!
+            itemsList?.items.find((item) => item.id === +record.key) ?? null
           ),
         })}
       />
@@ -389,7 +389,7 @@ const MenuPage = () => {
                   <Popconfirm
                     title="Удалить"
                     description="Вы уверены, что хотите удалить товар?"
-                    onConfirm={handleDelete.bind(this, selectedItem?.id!)}
+                    onConfirm={handleDelete.bind(this, selectedItem?.id ?? -1)}
                     okText="Да"
                     cancelText="Нет"
                   >

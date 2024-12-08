@@ -93,7 +93,7 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
             </div>
             <div className={styles["logo-container"]}>
               <img
-                src={"/images/Logo/Logo.png"}
+                src={"/images/Logo/Logo.svg"}
                 alt="Логотип"
                 className={styles["image"]}
                 onClick={handleMainMenuRoute}
