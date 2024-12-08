@@ -35,7 +35,7 @@ export const UnderSwiperCards = () => {
   ];
 
   const handleToCategory = (category: string) => {
-    scroll.scrollTo(window.screen.width > 1024 ? 3200 : 3900, {
+    scroll.scrollTo(window.screen.width > 1024 ? 3200 : 4200, {
       duration: 700,
       smooth: true,
     });

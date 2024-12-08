@@ -122,7 +122,7 @@ export const Tiles = () => {
   }, []);
 
   const handleCategory = (category: string) => {
-    scroll.scrollTo(window.screen.width > 1024 ? 3200 : 3900, {
+    scroll.scrollTo(window.screen.width > 1024 ? 3200 : 4200, {
       duration: 50,
       smooth: true,
     });
