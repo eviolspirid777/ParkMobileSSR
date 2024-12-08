@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { useEffect } from "react";
 
 export const useGetBrands = () => {
-  const [brands, setBrands] = useAtom(brandsAtom);
+  const [, setBrands] = useAtom(brandsAtom);
 
   const {
     data: brandsFromServer,

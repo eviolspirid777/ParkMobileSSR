@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+"use client";
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 import styles from "./Categories.module.scss";
@@ -28,13 +29,22 @@ export const Categories: FC<CategoriesProps> = ({
     "TV и Дом",
     "Популярное",
   ];
-
-  const [categories, setCategories] = useAtom(categoryAtom);
   const [selectedValue, setSelectedValue] = useState(categoriesItems[0]);
+  const [categories, setCategories] = useAtom(categoryAtom);
+
+  const [breakAnimation, setBreakAnimation] = useState(false);
+
+  useLayoutEffect(() => {
+    setCategories("");
+  }, []);
 
   useEffect(() => {
     if (!categories) {
       setSelectedValue(categoriesItems[0]);
+    }
+    if (categories) {
+      setSelectedValue(categories);
+      setBreakAnimation(true);
     }
   }, [categories]);
 
@@ -42,7 +52,6 @@ export const Categories: FC<CategoriesProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY);
       if (window.scrollY >= 2900) {
         setTimeout(() => {
           categoriesItems.forEach((_, index) => {
@@ -84,14 +93,14 @@ export const Categories: FC<CategoriesProps> = ({
   };
 
   return (
-    <div className={styles["categories-block"]}>
+    <div key={categories} className={styles["categories-block"]}>
       {categoriesItems.map((el, index) => (
         <span
           key={index}
           ref={(el) => {
             spanRefs.current[index] = el;
           }}
-          data-no-animation={noAnimationHeight}
+          data-no-animation={noAnimationHeight || breakAnimation}
           style={
             el === selectedValue
               ? {

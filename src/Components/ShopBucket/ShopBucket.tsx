@@ -202,12 +202,20 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                       <div className={styles["item-block-count"]}>
                         <i
                           className="fa-solid fa-minus"
-                          onClick={handleItemCount.bind(this, el, "minus")}
+                          onClick={handleItemCount.bind(
+                            this,
+                            el as DataType,
+                            "minus"
+                          )}
                         />
                         <span>{el.count}</span>
                         <i
                           className="fa-solid fa-plus"
-                          onClick={handleItemCount.bind(this, el, "plus")}
+                          onClick={handleItemCount.bind(
+                            this,
+                            el as DataType,
+                            "plus"
+                          )}
                         />
                       </div>
                       <span className={styles["item-block-price"]}>
@@ -432,14 +440,18 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                                 className="fa-solid fa-minus"
                                 onClick={handleItemCount.bind(
                                   this,
-                                  el,
+                                  el as DataType,
                                   "minus"
                                 )}
                               />
                               <span>{el.count}</span>
                               <i
                                 className="fa-solid fa-plus"
-                                onClick={handleItemCount.bind(this, el, "plus")}
+                                onClick={handleItemCount.bind(
+                                  this,
+                                  el as DataType,
+                                  "plus"
+                                )}
                               />
                             </div>
                             <span className={styles["item-block-price"]}>

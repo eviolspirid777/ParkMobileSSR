@@ -68,6 +68,12 @@ export const Products: FC<ProductsType> = ({
     take: 16,
   });
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const [openProductCard, setOpenProductCard] = useState<{
     state: boolean;
     id: number | null;
@@ -177,7 +183,7 @@ export const Products: FC<ProductsType> = ({
             footer={null}
             title={null}
             closeIcon={
-              window.screen.width > 1024 ? null : (
+              isClient && window.screen.width > 1024 ? null : (
                 <i className="fa-solid fa-xmark" />
               )
             }

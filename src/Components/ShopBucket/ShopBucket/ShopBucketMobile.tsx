@@ -1,56 +1,43 @@
-"use client"
+"use client";
 import { FC, useEffect } from "react";
 
-import styles from "./ShopBucketMobile.module.scss"
+import styles from "./ShopBucketMobile.module.scss";
+import { DataType } from "@/Store/ShopBucket";
 
 type ShopBucketMobileProps = {
-  shopBucket:({
-    image: string;
-    name: string;
-    count: number;
-    price: string;
-    article: string;
-    color?: undefined;
-    memory?: undefined;
-  } | {
-    image: string;
-    name: string;
-    count: number;
-    color: string;
-    memory: string;
-    price: string;
-    article: string;
-  })[]
-  handleItemCount: (el: ({
-    image: string;
-    name: string;
-    count: number;
-    price: string;
-    article: string;
-    color?: undefined;
-    memory?: undefined;
-  } | {
-    image: string;
-    name: string;
-    count: number;
-    color: string;
-    memory: string;
-    price: string;
-    article: string;
-  }), type: "minus" | "plus") => void;
+  shopBucket: (
+    | {
+        image: string;
+        name: string;
+        count: number;
+        price: string;
+        article: string;
+        color?: undefined;
+        memory?: undefined;
+      }
+    | {
+        image: string;
+        name: string;
+        count: number;
+        color: string;
+        memory: string;
+        price: string;
+        article: string;
+      }
+  )[];
+  handleItemCount: (el: DataType, type: "minus" | "plus") => void;
   handleDeleteItem: (index: number) => void;
-  open: boolean,
-  price?: string,
-}
+  open: boolean;
+  price?: string;
+};
 
 export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
   shopBucket,
   handleItemCount,
   handleDeleteItem,
   open,
-  price
+  price,
 }) => {
-
   useEffect(() => {
     const _html = document.documentElement; // Изменяем html
     const _body = document.body;
@@ -58,11 +45,11 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
     if (open) {
       _html.style.overflow = "hidden"; // Отключаем скролл на html
       _body.style.overflow = "hidden"; // Отключаем скролл на body
-      _body.style.overscrollBehaviorY = "contain" //отключаем обновление страницы через скролл наверх
+      _body.style.overscrollBehaviorY = "contain"; //отключаем обновление страницы через скролл наверх
     } else {
       _html.style.overflow = "visible"; // Включаем скролл на html
       _body.style.overflow = "visible"; // Включаем скролл на body
-      _body.style.overscrollBehaviorY = "auto"
+      _body.style.overscrollBehaviorY = "auto";
     }
 
     return () => {
@@ -72,9 +59,7 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
   }, [open]);
 
   return (
-    <main
-      className={styles["main-cls"]}
-    >
+    <main className={styles["main-cls"]}>
       {shopBucket.map((el, index) => (
         <div key={index} className={styles["item-block"]}>
           <img src={el.image} alt="" width={80} />
@@ -86,12 +71,12 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
               <div className={styles["item-block-count"]}>
                 <i
                   className="fa-solid fa-minus"
-                  onClick={handleItemCount.bind(this, el, "minus")}
+                  onClick={handleItemCount.bind(this, el as DataType, "minus")}
                 />
                 <span>{el.count}</span>
                 <i
                   className="fa-solid fa-plus"
-                  onClick={handleItemCount.bind(this, el, "plus")}
+                  onClick={handleItemCount.bind(this, el as DataType, "plus")}
                 />
               </div>
               <span className={styles["item-block-price"]}>{el.price} ₽</span>
@@ -105,16 +90,15 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
           </div>
         </div>
       ))}
-      {
-        price && 
+      {price && (
         <strong
           style={{
-            marginTop:"50px"
+            marginTop: "50px",
           }}
         >
           Сумма: {price} ₽
         </strong>
-      }
+      )}
     </main>
-  )
-}
+  );
+};

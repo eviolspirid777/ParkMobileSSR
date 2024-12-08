@@ -32,7 +32,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const { sessionToken, logout } = useSession();
-  const links = navLinks;
 
   useLayoutEffect(() => {
     if (!sessionToken) {

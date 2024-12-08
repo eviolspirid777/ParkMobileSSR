@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { useEffect } from "react";
 
 export const useGetCategories = () => {
-  const [categories, setCategories] = useAtom(categoriesAtom);
+  const [, setCategories] = useAtom(categoriesAtom);
 
   const {
     data: categoriesFromServer,

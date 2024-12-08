@@ -1,3 +1,4 @@
+"use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -6,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import styles from "./PopularItems.module.scss";
+import { useEffect, useState } from "react";
 
 export const PopularItems = () => {
   const items = [
@@ -21,16 +23,58 @@ export const PopularItems = () => {
       title: "Apple Power Adapter 20W",
       price: "2 490",
     },
+    {
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+      title: "AirPods Pro 2 USB-C",
+      price: "21 190",
+    },
+    {
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+      title: "Apple Power Adapter 20W",
+      price: "2 490",
+    },
+    {
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+      title: "AirPods Pro 2 USB-C",
+      price: "21 190",
+    },
+    {
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+      title: "Apple Power Adapter 20W",
+      price: "2 490",
+    },
+    {
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+      title: "AirPods Pro 2 USB-C",
+      price: "21 190",
+    },
+    {
+      image:
+        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+      title: "Apple Power Adapter 20W",
+      price: "2 490",
+    },
   ];
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className={styles["popular-items"]}>
       <h2 className={styles["header"]}>Популярные товары</h2>
       <div className={styles["popular-items-block"]}>
         <Swiper
-          key={window.screen.width}
           navigation={true}
           modules={[Navigation, Pagination]}
-          slidesPerView={window.screen.width > 1024 ? 5 : 1}
+          slidesPerView={isClient && window.screen.width > 1024 ? 5 : 1}
           style={{
             paddingTop: "3%",
           }}

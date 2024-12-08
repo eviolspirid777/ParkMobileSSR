@@ -39,7 +39,11 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
     queryKey: ["items", skip, take],
     //TODO: Здесь нужно будет пофиксить баг с тем, что категории неправильно отправляются, нужна дополнительная обработка на беке
     queryFn: async () =>
-      apiClient.GetItemsCostil(skip, take, categoryDictionary.get(category) ?? ""),
+      apiClient.GetItemsCostil(
+        skip,
+        take,
+        categoryDictionary.get(category) ?? ""
+      ),
     refetchOnWindowFocus: false,
   });
 
@@ -60,8 +64,12 @@ export const ProductObertka: FC<ProductObertkaProps> = ({ category }) => {
 
   return (
     <div className={styles["product-container"]}>
-      <h4 onClick={setOpen.bind(null, true)} onKeyDown={setOpen.bind(null,true)}>Каталог</h4>
-      <Categories noAnimationHeight />
+      <h4
+        onClick={setOpen.bind(null, true)}
+        onKeyDown={setOpen.bind(null, true)}
+      >
+        Каталог
+      </h4>
       <Products
         cards={items?.items}
         itemsCount={items?.count}

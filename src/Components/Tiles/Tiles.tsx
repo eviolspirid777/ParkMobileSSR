@@ -2,13 +2,16 @@
 import gsap from "gsap";
 import styles from "./Tiles.module.scss";
 import { useEffect, useRef } from "react";
+import { useAtom } from "jotai";
+import { categoryAtom } from "@/Store/FiltersStore";
+import { animateScroll as scroll } from "react-scroll";
 
 type TileItem = {
   title: string;
   description: string;
   img: string;
   key: string;
-  href: string;
+  category: string;
 };
 
 export const Tiles = () => {
@@ -17,28 +20,28 @@ export const Tiles = () => {
       title: "Apple Watch",
       description: "Умнее. Ярче. Могущественнее",
       img: "/images/TilesImages/AppleWatchTile/appleWatchTileReviewed.png",
-      href: "vk.com",
+      category: "Watch",
       key: "1",
     },
     {
       title: "MacBook Pro",
       description: "Сногсшибательный. Вскружит голову.",
       img: "/images/TilesImages/MacBookTile/macBookReviewed.png",
-      href: "vk.com",
+      category: "Mac",
       key: "2",
     },
     {
       title: "iPad",
       description: "Твой следующий компьютер - это не компьютер",
       img: "/images/TilesImages/IpadTile/ipadTileReviewed.png",
-      href: "vk.com",
+      category: "iPad",
       key: "3",
     },
     {
       title: "AirPods Pro",
       description: "Никаких проводов. Только магия звука.",
       img: "/images/TilesImages/AirpodsTile/PodsTileReviewed.png",
-      href: "vk.com",
+      category: "Airpods",
       key: "4",
     },
   ];
@@ -47,9 +50,11 @@ export const Tiles = () => {
   const spanRefs = useRef<HTMLSpanElement[]>([]);
   const buttonRefs = useRef<HTMLDivElement[]>([]);
 
+  const [, setCategories] = useAtom(categoryAtom);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 1600) {
+      if (window.scrollY >= 1400) {
         tilesItems.forEach((_, index) => {
           const h2Element = h2Refs.current[index];
           const spanElement = spanRefs.current[index];
@@ -116,6 +121,15 @@ export const Tiles = () => {
     };
   }, []);
 
+  const handleCategory = (category: string) => {
+    scroll.scrollTo(window.screen.width > 1024 ? 3200 : 3900, {
+      duration: 50,
+      smooth: true,
+    });
+
+    setCategories(category);
+  };
+
   return (
     <div className={styles["card-tiles-block"]}>
       {tilesItems.map((el, index) => (
@@ -144,8 +158,18 @@ export const Tiles = () => {
             }}
             data-buttons={el.key}
           >
-            <button data-button="подробнее">Подробнее</button>
-            <button data-button="купить">Купить</button>
+            <button
+              data-button="подробнее"
+              onClick={handleCategory.bind(null, el.category)}
+            >
+              Подробнее
+            </button>
+            <button
+              data-button="купить"
+              onClick={handleCategory.bind(null, el.category)}
+            >
+              Купить
+            </button>
           </div>
         </div>
       ))}

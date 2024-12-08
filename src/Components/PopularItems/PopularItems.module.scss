@@ -6,7 +6,7 @@
 }
 
 .popular-items {
-  padding: 200px 150px;
+  padding: 100px 150px 200px 150px;
   display: flex;
   flex-flow: column nowrap;
   gap: 70px;
@@ -38,8 +38,8 @@
       & img {
         justify-self: center;
         align-self: center;
-        width: 200px;
-        height: 200px;
+        width: 230px;
+        height: 230px;
       }
       &-tag {
         font-size: 1.1rem;
