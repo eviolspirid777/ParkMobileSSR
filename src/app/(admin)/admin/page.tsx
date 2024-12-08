@@ -61,6 +61,7 @@ const LoginPage = () => {
               label="Логин"
               name="userName"
               rules={[{ required: true, message: "Введите логин!" }]}
+              required={false}
             >
               <Input placeholder="Введите логин" />
             </Form.Item>
@@ -68,6 +69,7 @@ const LoginPage = () => {
               label="Пароль"
               name="password"
               rules={[{ required: true, message: "Введите пароль!" }]}
+              required={false}
             >
               <Input.Password placeholder="Введите пароль" />
             </Form.Item>
