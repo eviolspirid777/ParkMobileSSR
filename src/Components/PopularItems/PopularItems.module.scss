@@ -6,7 +6,7 @@
 }
 
 .popular-items {
-  padding: 250px 150px;
+  padding: 200px 150px;
   display: flex;
   flex-flow: column nowrap;
   gap: 70px;
@@ -23,7 +23,7 @@
       &-gurantee {
         position:absolute;
         top:0px;
-        left:0px;
+        left:25px;
         width:75px;
         height:30px;
         text-align:center;
