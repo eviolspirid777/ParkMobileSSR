@@ -5,7 +5,6 @@ import { animateScroll as scroll } from "react-scroll";
 import { useQuery } from "@tanstack/react-query";
 
 import styles from "./ProductObertka.module.scss";
-import { Categories } from "../../Categories/Categories";
 import { createPortal } from "react-dom";
 import { Modal } from "antd";
 import { apiClient } from "@/api/ApiClient";
