@@ -1,6 +1,6 @@
 "use client";
 import { ConfigProvider } from "antd";
-import "../App.scss";
+import "../../App.scss";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

@@ -8,58 +8,61 @@ import "swiper/css/pagination";
 
 import styles from "./PopularItems.module.scss";
 import { useEffect, useState } from "react";
+import { useGetPopularItems } from "@/hooks/useGetPopularItems";
 
 export const PopularItems = () => {
-  const items = [
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-      title: "AirPods Pro 2 USB-C",
-      price: "21 190",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-      title: "Apple Power Adapter 20W",
-      price: "2 490",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-      title: "AirPods Pro 2 USB-C",
-      price: "21 190",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-      title: "Apple Power Adapter 20W",
-      price: "2 490",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-      title: "AirPods Pro 2 USB-C",
-      price: "21 190",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-      title: "Apple Power Adapter 20W",
-      price: "2 490",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-      title: "AirPods Pro 2 USB-C",
-      price: "21 190",
-    },
-    {
-      image:
-        "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-      title: "Apple Power Adapter 20W",
-      price: "2 490",
-    },
-  ];
+  // const items = [
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+  //     title: "AirPods Pro 2 USB-C",
+  //     price: "21 190",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+  //     title: "Apple Power Adapter 20W",
+  //     price: "2 490",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+  //     title: "AirPods Pro 2 USB-C",
+  //     price: "21 190",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+  //     title: "Apple Power Adapter 20W",
+  //     price: "2 490",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+  //     title: "AirPods Pro 2 USB-C",
+  //     price: "21 190",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+  //     title: "Apple Power Adapter 20W",
+  //     price: "2 490",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
+  //     title: "AirPods Pro 2 USB-C",
+  //     price: "21 190",
+  //   },
+  //   {
+  //     image:
+  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
+  //     title: "Apple Power Adapter 20W",
+  //     price: "2 490",
+  //   },
+  // ];
+
+  const { popularItemsList } = useGetPopularItems();
 
   const [isClient, setIsClient] = useState(false);
 
@@ -79,16 +82,16 @@ export const PopularItems = () => {
             paddingTop: "3%",
           }}
         >
-          {items.map((item, index) => (
+          {popularItemsList?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className={styles["popular-items-block-item"]}>
                 <div className={styles["popular-items-block-item-gurantee"]}>
                   Гарантия
                 </div>
-                <img src={item.image} alt="" />
+                <img src={`data:image/jpeg;base64,${item.image}`} alt="" />
                 <div className={styles["popular-items-block-price-block"]}>
                   <span className={styles["popular-items-block-item-tag"]}>
-                    {item.title}
+                    {item.name}
                   </span>
                   <span className={styles["popular-items-block-item-price"]}>
                     {item.price} ₽

@@ -3,11 +3,11 @@ import React, { FC, useEffect, useReducer, useState } from "react";
 import styles from "./Products.module.scss";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { CardType } from "../../../Types/CardType";
-import { createPortal } from "react-dom";
-import { Modal } from "antd";
-import MarkdownRenderer from "@/Components/MarkDown/MarkDownRenderer";
 import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/api/ApiClient";
+import { useAtom } from "jotai";
+import { DataType, shopBucketAtom } from "@/Store/ShopBucket";
+import { ProductModal } from "./ProductModal/ProductModal";
 
 // import Image from "next/image";
 
@@ -67,12 +67,7 @@ export const Products: FC<ProductsType> = ({
     skip: 0,
     take: 16,
   });
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const [shopBucket, setShopBucket] = useAtom(shopBucketAtom);
 
   const [openProductCard, setOpenProductCard] = useState<{
     state: boolean;
@@ -82,10 +77,6 @@ export const Products: FC<ProductsType> = ({
   const { data: CardData, mutate } = useMutation({
     mutationFn: async () => apiClient.GetItem(openProductCard.id!),
   });
-
-  useEffect(() => {
-    console.log(CardData);
-  }, [CardData]);
 
   useEffect(() => {
     if (openProductCard.id !== null) {
@@ -109,32 +100,39 @@ export const Products: FC<ProductsType> = ({
     onPageChange(newSkip, page);
   };
 
-  const handleCreditPrice = (price: string | undefined | number) => {
-    if (typeof price == "string") {
-      const _price = Number((price as string).split(" ").join(""));
-      return ((_price * 1.31) / 36 + 1).toFixed();
+  useEffect(() => {
+    console.log(CardData);
+  }, [CardData]);
+
+  const handleAddToBucket = () => {
+    if (CardData && Array.isArray(shopBucket)) {
+      setShopBucket((previousShopBucket: DataType[]) => {
+        if (previousShopBucket.some((item) => item.id === CardData.id)) {
+          const newData = previousShopBucket.map((element) => {
+            if (element.id === CardData.id) {
+              return { ...element, count: element.count + 1 };
+            }
+            return element;
+          });
+
+          return newData;
+        }
+
+        return [
+          ...previousShopBucket,
+          {
+            id: CardData.id!,
+            name: CardData.name!,
+            article: CardData.article!,
+            count: 1,
+            image: CardData.image!,
+            price: CardData.price!,
+          },
+        ];
+      });
+      setOpenProductCard({ id: null, state: false });
     }
   };
-
-  const [modalHeight, setModalHeight] = useState<number>(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const modalElement = document.querySelector(".ant-modal-body"); // Получаем элемент модального окна
-      if (modalElement) {
-        const height = modalElement.clientHeight; // Получаем высоту модального окна
-        setModalHeight(height);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    // Получаем высоту при первом рендере
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [openProductCard.state]); // Запускаем эффект при открытии/закрытии модального окна
 
   useEffect(() => {
     if (openProductCard.state) document.body.style.overflow = "hidden";
@@ -173,61 +171,12 @@ export const Products: FC<ProductsType> = ({
           ))}
         </div>
       </div>
-      {createPortal(
-        <div>
-          <Modal
-            open={openProductCard.state}
-            onCancel={setOpenProductCard.bind(this, { state: false, id: null })}
-            onClose={setOpenProductCard.bind(this, { state: false, id: null })}
-            centered={true}
-            footer={null}
-            title={null}
-            closeIcon={
-              isClient && window.screen.width > 1024 ? null : (
-                <i className="fa-solid fa-xmark" />
-              )
-            }
-            className={styles["item-modal-window"]}
-          >
-            <div className={styles["item-container"]}>
-              <div className={styles["item-container-image"]}>
-                <img
-                  src={
-                    CardData && CardData.image
-                      ? `data:image/jpeg;base64,${CardData.image}`
-                      : ""
-                  }
-                  alt=""
-                />
-              </div>
-              <div className={styles["item-container-data"]}>
-                <header>
-                  <h3>{CardData?.name}</h3>
-                  <title>{CardData?.brandName}</title>
-                  <article>АРТИКУЛ</article>
-                </header>
-                <strong>{CardData?.price} ₽</strong>
-                <button onClick={console.log}>Купить</button>
-                <div className={styles["credit"]}>
-                  <span>Доступно</span>
-                  <a>в кредит</a>
-                  <span>от {handleCreditPrice(CardData?.price)} ₽/мес.</span>
-                </div>
-                <div
-                  className={styles["MarkdownContent"]}
-                  style={{
-                    maxHeight: `${modalHeight - 500}px`,
-                    overflow: "auto",
-                  }}
-                >
-                  <MarkdownRenderer content={CardData?.description ?? ""} />
-                </div>
-              </div>
-            </div>
-          </Modal>
-        </div>,
-        document.body
-      )}
+      <ProductModal
+        CardData={CardData}
+        closeModal={setOpenProductCard.bind(this, { state: false, id: null })}
+        handleAddToBucket={handleAddToBucket}
+        openProductCard={openProductCard}
+      />
     </>
   );
 };

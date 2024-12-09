@@ -6,16 +6,18 @@
     grid-template-rows: 3fr 1fr;
     outline: 1px solid rgb(232, 232, 236);
     padding: 100px;
+    cursor: pointer;
     & img {
       justify-self: center;
       align-self: center;
     }
     &-tag {
-      font-size: 1.4rem;
+      font-size: 1.7rem;
       letter-spacing: 2px;
       font-family: "SF-Pro-Display-Regular";
     }
     &-price {
+      font-size: 1.3rem;
       color: #454545;
       font-family: "SF-Pro-Display-Regular_light";
     }

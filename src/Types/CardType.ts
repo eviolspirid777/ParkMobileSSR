@@ -12,6 +12,7 @@ export type CardType = {
     stock: number,
     options?: string,
     article?: string,
+    isPopular?: boolean,
 }
 
 export type CardItemType = {
@@ -24,6 +25,8 @@ export type CardItemType = {
     brandName?: string,
     stock: number,
     options?: string,
+    article?: string,
+    isPopular?: boolean,
 }
 
 export type RecivedCardDataType = {

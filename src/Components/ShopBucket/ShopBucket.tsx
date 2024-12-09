@@ -183,10 +183,14 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                 <main>
                   {shopBucket.map((el, index) => (
                     <div key={index} className={styles["item-block"]}>
-                      <img src={el.image} alt="" width={60} />
+                      <img
+                        src={`data:image/jpeg;base64,${el.image}`}
+                        alt=""
+                        width={60}
+                      />
                       <div className={styles["item-block-info"]}>
                         {Object.entries(el).map(([k, v]) => {
-                          if (!["price", "image", "count"].includes(k)) {
+                          if (!["id", "price", "image", "count"].includes(k)) {
                             if (k === "name") {
                               return <strong key={k}>{v}</strong>;
                             }
@@ -419,10 +423,16 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                       <main>
                         {shopBucket.map((el, index) => (
                           <div key={index} className={styles["item-block"]}>
-                            <img src={el.image} alt="" width={60} />
+                            <img
+                              src={`data:image/jpeg;base64,${el.image}`}
+                              alt=""
+                              width={60}
+                            />
                             <div className={styles["item-block-info"]}>
                               {Object.entries(el).map(([k, v]) => {
-                                if (!["price", "image", "count"].includes(k)) {
+                                if (
+                                  !["id", "price", "image", "count"].includes(k)
+                                ) {
                                   if (k === "name") {
                                     return <strong key={k}>{v}</strong>;
                                   }

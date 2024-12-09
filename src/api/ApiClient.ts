@@ -1,5 +1,6 @@
 import { CardItemDTO } from "@/Entities/CardItemDTO";
-import { CardItemType, RecivedCardDataType } from "@/Types/CardType";
+import { CardItemType, CardType, RecivedCardDataType } from "@/Types/CardType";
+import { RecivedCardDataAdminType } from "@/Types/CardTypeAdmin";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export type AuthorizationType = {userName: string, password: string}
@@ -64,6 +65,24 @@ class ApiClient {
                     brand: brand
                 }
             });
+        return response.data;
+    }
+
+    async GetItemsAdmin(skip: number, take: number, category: string = "", brand: string = "") {
+        const response = await this.client.get<RecivedCardDataAdminType>(
+            `https://localhost:7280/api/ItemsPostgre/GetItems`, {
+                params: {
+                    skip: skip,
+                    take: take,
+                    category: category,
+                    brand: brand
+                }
+            });
+        return response.data;
+    }
+
+    async GetPopularItems() {
+        const response = await this.client.get<(CardType)[]>("https://localhost:7280/api/ItemsPostgre/GetPopularItems");
         return response.data;
     }
 
