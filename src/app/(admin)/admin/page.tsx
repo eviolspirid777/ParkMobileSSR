@@ -62,15 +62,7 @@ const LoginPage = () => {
       {contextHolder}
 
         {isLoginPending || isRegisterPending || isLoadingForm ? (
-          <div style={{
-            width:"100vw",
-            height: "100vh",
-            backgroundColor: "black",
-            display: "flex",
-            flexFlow: "column nowrap",
-            alignItems: "center",
-            justifyContent: "center"
-          }}>
+          <div className={styles["loading-contanier"]}>
             <LoadingComponent />
           </div>
         ) : (
