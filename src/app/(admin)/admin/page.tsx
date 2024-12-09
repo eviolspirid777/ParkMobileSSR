@@ -52,9 +52,9 @@ const LoginPage = () => {
     loginMutate(values);
   };
 
-  const handleRegisterAccount = () => {
+  const handleRegisterAccount = async () => {
     const values = form.getFieldsValue();
-    registerAsync(values);
+    await registerAsync(values);
   };
 
   return (
