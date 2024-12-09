@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "antd/es/form/Form";
 import { LoginType, useLoginAdmin } from "@/hooks/useLoginAdmin";
 import { useRegisterAdmin } from "@/hooks/useRegisterAdmin";
+import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const [api, contextHolder] = notification.useNotification();
@@ -21,6 +22,14 @@ const LoginPage = () => {
     registerAsync,
     resetRegisterStatus,
   } = useRegisterAdmin();
+
+  const [isLoadingForm, setIsLoadingForm] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoadingForm(false)
+    }, 100)
+  }, [])
 
   if (isRegisterError) {
     api.open({
@@ -51,43 +60,54 @@ const LoginPage = () => {
   return (
     <>
       {contextHolder}
-      <div className={styles["login-container"]}>
-        <h1>ParkMobile Admin Page</h1>
-        {isLoginPending || isRegisterPending ? (
-          <LoadingComponent />
+
+        {isLoginPending || isRegisterPending || isLoadingForm ? (
+          <div style={{
+            width:"100vw",
+            height: "100vh",
+            backgroundColor: "black",
+            display: "flex",
+            flexFlow: "column nowrap",
+            alignItems: "center",
+            justifyContent: "center"
+          }}>
+            <LoadingComponent />
+          </div>
         ) : (
-          <Form onFinish={handleFinish} form={form}>
-            <Form.Item
-              label="Логин"
-              name="userName"
-              rules={[{ required: true, message: "Введите логин!" }]}
-              required={false}
-            >
-              <Input placeholder="Введите логин" />
-            </Form.Item>
-            <Form.Item
-              label="Пароль"
-              name="password"
-              rules={[{ required: true, message: "Введите пароль!" }]}
-              required={false}
-            >
-              <Input.Password placeholder="Введите пароль" />
-            </Form.Item>
-            <div className={styles["button-block"]}>
-              <Form.Item>
-                <Button type="link" onClick={handleRegisterAccount}>
-                  Зарегистрироваться
-                </Button>
+          <div className={styles["login-container"]}>
+            <h1>ParkMobile Admin Page</h1>
+            <Form onFinish={handleFinish} form={form}>
+              <Form.Item
+                label="Логин"
+                name="userName"
+                rules={[{ required: true, message: "Введите логин!" }]}
+                required={false}
+              >
+                <Input placeholder="Введите логин" />
               </Form.Item>
-              <Form.Item>
-                <Button htmlType="submit" type="primary">
-                  Войти
-                </Button>
+              <Form.Item
+                label="Пароль"
+                name="password"
+                rules={[{ required: true, message: "Введите пароль!" }]}
+                required={false}
+              >
+                <Input.Password placeholder="Введите пароль" />
               </Form.Item>
-            </div>
-          </Form>
+              <div className={styles["button-block"]}>
+                <Form.Item>
+                  <Button type="link" onClick={handleRegisterAccount}>
+                    Зарегистрироваться
+                  </Button>
+                </Form.Item>
+                <Form.Item>
+                  <Button htmlType="submit" type="primary">
+                    Войти
+                  </Button>
+                </Form.Item>
+              </div>
+            </Form>
+          </div>
         )}
-      </div>
     </>
   );
 };

@@ -16,7 +16,8 @@ export const navLinks: MenuProps["items"] = [
       },
       {
         key: "items-groups",
-        icon: <i />,
+        icon: <i className="fa-solid fa-memo"/>,
+        label: "Опции товаров"
       },
     ],
   },
