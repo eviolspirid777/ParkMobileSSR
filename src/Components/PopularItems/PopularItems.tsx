@@ -70,6 +70,12 @@ export const PopularItems = () => {
     setIsClient(true);
   }, []);
 
+  console.log(popularItemsList);
+
+  if (!popularItemsList) {
+    return <div className={styles["popular-items-none"]} />;
+  }
+
   return (
     <div className={styles["popular-items"]}>
       <h2 className={styles["header"]}>Популярные товары</h2>

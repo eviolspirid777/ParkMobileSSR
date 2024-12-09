@@ -11,6 +11,10 @@
   flex-flow: column nowrap;
   gap: 70px;
 
+  &-none {
+      padding: 450px 150px 400px 150px;
+  }
+
   &-block {
     width: 100%;
     display: flex;
