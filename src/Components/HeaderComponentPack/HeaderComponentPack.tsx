@@ -9,6 +9,7 @@ import { animateScroll as scroll } from "react-scroll";
 
 import { ShopBucket } from "../ShopBucket/ShopBucket";
 import { MobileHeader } from "../Header/MobileHeader/MobileHeader";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export type ReducerAction = {
   type?: ContentType;
@@ -35,6 +36,7 @@ const navTitleDictionary = new Map([
 
 export const HeaderComponentPack = () => {
   const navigate = useRouter();
+  const queryClient = new QueryClient();
 
   const [isHeaderMenuVisible, setIsHeaderMenuVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
@@ -85,44 +87,46 @@ export const HeaderComponentPack = () => {
 
   return (
     <>
-      <Media
-        queries={{
-          telephone: "(max-width: 1024px)",
-          computer: "(min-width: 1025px)",
-        }}
-      >
-        {(matches) => (
-          <>
-            {matches.computer ? (
-              <>
-                <Header
-                  mouseEnter={handleMouseEnter}
-                  handleMouseClick={(event) => handleRouteCategory(event)}
-                  handleMainMenuRoute={handleMainMenu}
-                  handleShopBag={handleShopBag}
-                />
-                {isHeaderMenuVisible && (
-                  <HeaderSlider
-                    contentType={sliderData}
-                    handleMouseLeave={handleMouseLeave}
-                    isContentVisible={isContentVisible}
-                    handleIsContentVisible={handleMouseLeave}
+      <QueryClientProvider client={queryClient}>
+        <Media
+          queries={{
+            telephone: "(max-width: 1024px)",
+            computer: "(min-width: 1025px)",
+          }}
+        >
+          {(matches) => (
+            <>
+              {matches.computer ? (
+                <>
+                  <Header
+                    mouseEnter={handleMouseEnter}
+                    handleMouseClick={(event) => handleRouteCategory(event)}
+                    handleMainMenuRoute={handleMainMenu}
+                    handleShopBag={handleShopBag}
                   />
-                )}
-                <ShopBucket open={open} handleShopBag={handleShopBag} />
-              </>
-            ) : (
-              <>
-                <MobileHeader
-                  handleMainMenuRoute={handleMainMenu}
-                  handleShopBag={handleShopBag}
-                />
-                <ShopBucket open={open} handleShopBag={handleShopBag} />
-              </>
-            )}
-          </>
-        )}
-      </Media>
+                  {isHeaderMenuVisible && (
+                    <HeaderSlider
+                      contentType={sliderData}
+                      handleMouseLeave={handleMouseLeave}
+                      isContentVisible={isContentVisible}
+                      handleIsContentVisible={handleMouseLeave}
+                    />
+                  )}
+                  <ShopBucket open={open} handleShopBag={handleShopBag} />
+                </>
+              ) : (
+                <>
+                  <MobileHeader
+                    handleMainMenuRoute={handleMainMenu}
+                    handleShopBag={handleShopBag}
+                  />
+                  <ShopBucket open={open} handleShopBag={handleShopBag} />
+                </>
+              )}
+            </>
+          )}
+        </Media>
+      </QueryClientProvider>
     </>
   );
 };

@@ -1,0 +1,23 @@
+.slider-search-card {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+    & img {
+        width: 90px;
+    }
+
+    &-info {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+
+        & span {
+            font-family: "SF-Pro-Display-Regular";
+        }
+
+        & strong {
+            font-family: "SF-Pro-Display-Heavy";
+            font-weight: 100;
+        }
+    }
+}

@@ -19,6 +19,7 @@
     "firebase-tools": "^13.25.0",
     "gsap": "^3.12.5",
     "jotai": "^2.10.2",
+    "lodash": "^4.17.21",
     "next": "^15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -35,6 +36,7 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18",
