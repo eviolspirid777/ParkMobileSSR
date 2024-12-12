@@ -1,7 +1,7 @@
 import { CardItemDTO } from "@/Entities/CardItemDTO";
 import { CardItemType, CardType, RecivedCardDataType } from "@/Types/CardType";
 import { RecivedCardDataAdminType } from "@/Types/CardTypeAdmin";
-import { SearchItemShortType } from "@/Types/SearchItemShortType";
+import { SearchItemsResponseType } from "@/Types/SearchItemShortType";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export type AuthorizationType = {userName: string, password: string}
@@ -92,8 +92,8 @@ class ApiClient {
         return response.data;
     }
 
-    async GetSearchItems(tag: string) {
-        const response = await this.client.post<SearchItemShortType[]>(`https://localhost:7280/api/ItemsPostgre/GetItemByName?name=${tag}`)
+    async GetSearchItems(tag: string, skip: number, take: number) {
+        const response = await this.client.post<SearchItemsResponseType>(`https://localhost:7280/api/ItemsPostgre/GetItemsByName?skip=${skip}&take=${take}&name=${tag}`)
         return response.data;
     }
 

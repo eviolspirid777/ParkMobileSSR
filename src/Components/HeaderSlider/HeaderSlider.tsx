@@ -39,10 +39,37 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
 
   const [inputValue, setInputValue] = useState("");
 
+  const [pages, setPages] = useState<number[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [skip, setSkip] = useState(0);
+  const take = 24;
+
   const handleInputChange = debounce(async (value: string) => {
     setInputValue(value);
-    mutateSearchedItems(value);
+    await mutateSearchedItems({tag: value, skip: skip, take: take});
   }, 700);
+
+  useEffect(() => {
+    mutateSearchedItems({tag: inputValue, skip: skip, take: take})
+  }, [skip])
+
+  const handlePageClick = (page: number) => {
+    console.log(page)
+    const newSkip = (page - 1) * take;
+    setCurrentPage(page)
+    setSkip(newSkip)
+  };
+
+  useEffect(() => {
+    totalCount()
+  }, [searchedItems])
+
+  const totalCount = () => {
+    if(searchedItems?.count) {
+      const totalPages = Math.ceil(searchedItems?.count / 24);
+      setPages(Array.from({ length: totalPages }, (_, index) => index + 1));
+    }
+  }
 
   return (
     <>
@@ -53,12 +80,28 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
         } ${inputValue && searchedItems && styles["has-value-bg"]}`}
       >
         <div className={styles["search-items-block-container"]}>
-          <span>Найдено результатов: {searchedItems?.length}</span>
+          <span>Найдено результатов: {searchedItems?.count}</span>
           <div className={styles["search-items-block-container-data"]}>
-            {searchedItems?.map((item, index) => (
+            {searchedItems?.items?.map((item, index) => (
               <SliderSearchCard key={index} card={item} />
             ))}
           </div>
+          {
+            inputValue && searchedItems &&
+            <div className={styles["pagination-block"]}>
+            {pages.map((el) => (
+              <div
+                key={el}
+                className={`${styles["pagination-block-item"]} ${
+                  currentPage === el ? styles.selected : ""
+                }`}
+                onClick={() => handlePageClick(el)}
+              >
+                {el}
+              </div>
+            ))}
+          </div>
+          }
         </div>
       </div>
       <div

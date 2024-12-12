@@ -100,10 +100,6 @@ export const Products: FC<ProductsType> = ({
     onPageChange(newSkip, page);
   };
 
-  useEffect(() => {
-    console.log(CardData);
-  }, [CardData]);
-
   const handleAddToBucket = () => {
     if (CardData && Array.isArray(shopBucket)) {
       setShopBucket((previousShopBucket: DataType[]) => {

@@ -5,3 +5,8 @@ export type SearchItemShortType = {
     discountPrice: string,
     image: string
 }
+
+export type SearchItemsResponseType = {
+    items: SearchItemShortType[],
+    count: number
+}
