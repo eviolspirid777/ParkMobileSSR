@@ -12,6 +12,7 @@ import { useGetBrands } from "@/hooks/useGetBrands";
 import { ModalWindow } from "./ModalWindow/ModalWindow";
 import { useGetItemsAdmin } from "@/hooks/useGetItemsAdmin";
 import { CardTypeAdmin } from "@/Types/CardTypeAdmin";
+import { AggregationColor } from "antd/es/color-picker/color";
 
 export type FormItemChange = {
   article: string;
@@ -22,6 +23,8 @@ export type FormItemChange = {
   stock: number;
   categoryId: number;
   brandId: number;
+  optionName?: string;
+  optionValue: string | AggregationColor;
 };
 
 type DataType = {

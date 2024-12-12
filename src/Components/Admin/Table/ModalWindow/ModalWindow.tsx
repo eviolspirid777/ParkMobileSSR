@@ -1,6 +1,7 @@
 "use client";
 import {
   Button,
+  // ColorPicker,
   Form,
   GetProp,
   Input,
@@ -12,7 +13,7 @@ import {
   UploadProps,
 } from "antd";
 import styles from "./ModalWindow.module.scss";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { apiClient } from "@/api/ApiClient";
@@ -21,6 +22,7 @@ import { FormItemChange } from "../MenuPage";
 import { useUpdatePhoto } from "@/hooks/useUpdatePhoto";
 import { CardTypeAdmin } from "@/Types/CardTypeAdmin";
 import { useGetItemsAdmin } from "@/hooks/useGetItemsAdmin";
+// import { AggregationColor } from "antd/es/color-picker/color";
 
 type BrandAndOptions = {
   label: string;
@@ -38,6 +40,17 @@ type ModalWindowProps = {
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
+// const selectOptions = [
+//   {
+//     label: "Цвет",
+//     value: "color",
+//   },
+//   {
+//     label: "Текст",
+//     value: "text",
+//   },
+// ];
+
 export const ModalWindow: FC<ModalWindowProps> = ({
   closeModal,
   open,
@@ -52,6 +65,12 @@ export const ModalWindow: FC<ModalWindowProps> = ({
   const [form] = useForm();
   const [loading, setLoading] = useState(false);
 
+  const [currentSelectOption] = useState<string>();
+
+  useEffect(() => {
+    form.setFieldValue("optionValue", "");
+  }, [currentSelectOption]);
+
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -61,6 +80,16 @@ export const ModalWindow: FC<ModalWindowProps> = ({
 
   const handleFinishForm = async (newItem: FormItemChange) => {
     //POST
+    // const options = {
+    //   type: newItem.optionName ?? "",
+    //   value:
+    //     typeof newItem.optionValue === "string"
+    //       ? newItem.optionValue
+    //       : `#${newItem.optionValue.toHex()}`,
+    // };
+
+    // const _options = JSON.stringify(options);
+
     if (selectedItem) {
       const mappedItem: CardItemDTO = {
         id: selectedItem?.id ?? 0,
@@ -72,6 +101,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
         description: newItem.description,
         categoryId: newItem.categoryId,
         itemBrandId: newItem.brandId,
+        // options: _options,
       };
       try {
         await apiClient.UpdateItem(mappedItem);
@@ -96,6 +126,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
         description: newItem.description,
         categoryId: newItem.categoryId,
         itemBrandId: newItem.brandId,
+        // options: _options,
       };
       try {
         await apiClient.AddItem(mappedItem);
@@ -192,11 +223,20 @@ export const ModalWindow: FC<ModalWindowProps> = ({
             >
               <Input placeholder="Название товара" />
             </Form.Item>
-            <Form.Item label="Брэнд" name="brandId">
-              <Select placeholder="Брэнд" options={brandsOptions} />
+            <Form.Item
+              label="Цена"
+              name="price"
+              rules={[
+                {
+                  required: true,
+                  message: "Введите цену на товар!",
+                },
+              ]}
+            >
+              <Input placeholder="Цена" />
             </Form.Item>
-            <Form.Item label="Категория" name="categoryId">
-              <Select placeholder="Категория" options={categoriesOptions} />
+            <Form.Item label="Цена со скидкой" name="discountPrice">
+              <Input placeholder="Цена со скидкой" />
             </Form.Item>
             <Form.Item
               label="На складе"
@@ -222,20 +262,26 @@ export const ModalWindow: FC<ModalWindowProps> = ({
             >
               <Input placeholder="Артикул" />
             </Form.Item>
-            <Form.Item
-              label="Цена"
-              name="price"
-              rules={[
-                {
-                  required: true,
-                  message: "Введите цену на товар!",
-                },
-              ]}
-            >
-              <Input placeholder="Цена" />
+          </div>
+          <div>
+            {/* <Form.Item label="Опция" name="optionName">
+              <Select
+                placeholder="Опция"
+                options={selectOptions}
+                onChange={setCurrentSelectOption}
+              />
             </Form.Item>
-            <Form.Item label="Цена со скидкой" name="discountPrice">
-              <Input placeholder="Цена со скидкой" />
+            <Form.Item
+              label={currentSelectOption === "color" ? "Цвет" : "Значение"}
+              name="optionValue"
+            >
+              {currentSelectOption === "color" ? <ColorPicker /> : <Input />}
+            </Form.Item> */}
+            <Form.Item label="Брэнд" name="brandId">
+              <Select placeholder="Брэнд" options={brandsOptions} />
+            </Form.Item>
+            <Form.Item label="Категория" name="categoryId">
+              <Select placeholder="Категория" options={categoriesOptions} />
             </Form.Item>
             <Form.Item label="Описание товара" name="description">
               <Input.TextArea
@@ -244,33 +290,33 @@ export const ModalWindow: FC<ModalWindowProps> = ({
                 autoSize={{ maxRows: 7, minRows: 7 }}
               />
             </Form.Item>
-            <Form.Item>
-              <div className={styles["button-block"]}>
-                <Popconfirm
-                  title="Удалить"
-                  description="Вы уверены, что хотите удалить товар?"
-                  onConfirm={handleDelete.bind(this, selectedItem?.id ?? -1)}
-                  okText="Да"
-                  cancelText="Нет"
-                >
-                  <Button
-                    color="danger"
-                    variant="solid"
-                    style={{
-                      marginRight: "36%",
-                    }}
-                  >
-                    Удалить
-                  </Button>
-                </Popconfirm>
-                <Button onClick={closeModal}>Отменить</Button>
-                <Button type="primary" htmlType="submit">
-                  Сохранить
-                </Button>
-              </div>
-            </Form.Item>
           </div>
         </div>
+        <Form.Item>
+          <div className={styles["button-block"]}>
+            <Popconfirm
+              title="Удалить"
+              description="Вы уверены, что хотите удалить товар?"
+              onConfirm={handleDelete.bind(this, selectedItem?.id ?? -1)}
+              okText="Да"
+              cancelText="Нет"
+            >
+              <Button
+                color="danger"
+                variant="solid"
+                style={{
+                  marginRight: "30%",
+                }}
+              >
+                Удалить
+              </Button>
+            </Popconfirm>
+            <Button onClick={closeModal}>Отменить</Button>
+            <Button type="primary" htmlType="submit">
+              Сохранить
+            </Button>
+          </div>
+        </Form.Item>
       </Form>
     </Modal>
   );

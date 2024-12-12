@@ -11,6 +11,8 @@ export const useGetCategories = () => {
     data: categoriesFromServer,
     isFetched: isCategoriesFetched,
     isSuccess: isCategoriesSuccess,
+    isRefetching,
+    refetch: refetchCategories,
   } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => apiClient.GetCategories(),
@@ -18,9 +20,10 @@ export const useGetCategories = () => {
 
   useEffect(() => {
     setCategories(categoriesFromServer);
-  }, [isCategoriesSuccess]);
+  }, [isCategoriesSuccess, isRefetching]);
 
   return {
+    refetchCategories,
     categoriesFromServer,
     isCategoriesFetched,
     isCategoriesSuccess,

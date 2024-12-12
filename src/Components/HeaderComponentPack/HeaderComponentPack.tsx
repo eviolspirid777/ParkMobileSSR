@@ -10,6 +10,8 @@ import { animateScroll as scroll } from "react-scroll";
 import { ShopBucket } from "../ShopBucket/ShopBucket";
 import { MobileHeader } from "../Header/MobileHeader/MobileHeader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { searchedItemsAtom } from "@/Store/SearchedItemsStore";
+import { useAtom } from "jotai";
 
 export type ReducerAction = {
   type?: ContentType;
@@ -42,6 +44,8 @@ export const HeaderComponentPack = () => {
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [sliderData, dispatch] = useReducer(reducer, {});
 
+  const [searchedItems, setSearchedItems] = useAtom(searchedItemsAtom);
+
   const [open, setOpen] = useState(false);
 
   const handleMouseEnter = (
@@ -58,6 +62,7 @@ export const HeaderComponentPack = () => {
 
   const handleMouseLeave = () => {
     setIsContentVisible(false);
+    setSearchedItems([]);
     setTimeout(() => {
       setIsHeaderMenuVisible(false);
     }, 800);
@@ -99,7 +104,9 @@ export const HeaderComponentPack = () => {
               {matches.computer ? (
                 <>
                   <Header
-                    mouseEnter={handleMouseEnter}
+                    mouseEnter={
+                      searchedItems.length > 0 ? () => {} : handleMouseEnter
+                    }
                     handleMouseClick={(event) => handleRouteCategory(event)}
                     handleMainMenuRoute={handleMainMenu}
                     handleShopBag={handleShopBag}

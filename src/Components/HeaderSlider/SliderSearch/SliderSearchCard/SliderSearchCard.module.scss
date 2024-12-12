@@ -22,3 +22,15 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    .slider-search-card {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        gap: 10px;
+
+        & img {
+            width: 70px;
+        }
+    }
+}

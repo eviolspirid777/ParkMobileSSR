@@ -11,6 +11,7 @@ import { MobileHeaderCatalog } from "./MobileHeaderBlocks/Catalog/MobileHeaderCa
 import { MobileHeaderAbout } from "./MobileHeaderBlocks/About/MobileHeaderAbout";
 import { MobileHeaderHelp } from "./MobileHeaderBlocks/Help/MobileHeaderHelp";
 import { MobileHeaderSubscribe } from "./MobileHeaderBlocks/Subscribe/MobileHeaderSubscribe";
+import { MobileSearchMenu } from "./MobileSearchMenu/MobileSearchMenu";
 
 type MobileHeaderProps = {
   handleMainMenuRoute: () => void;
@@ -26,6 +27,8 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
 
   const [open, setOpen] = useState(false);
   const [selectedDrawer, setSelectedDrawer] = useState("");
+
+  const [searchMenuOpen, setSearchMenuOpen] = useState(false);
 
   const naviagate = useRouter();
 
@@ -71,6 +74,10 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
     setSelectedDrawer(category);
   };
 
+  const handleSearchMenuToggle = () => {
+    setSearchMenuOpen((previous) => !previous);
+  };
+
   return (
     <>
       <nav>
@@ -100,7 +107,10 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
                 draggable="false"
               />
               <div className={styles["nav-bucket-search"]}>
-                <i className="fa-thin fa-magnifying-glass fa-lg" />
+                <i
+                  className="fa-thin fa-magnifying-glass fa-lg"
+                  onClick={handleSearchMenuToggle}
+                />
                 <div className={styles["nav-bucket-search-shop-block"]}>
                   <span>{shopBucket.length}</span>
                   <i
@@ -162,6 +172,7 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
           </div>
         </div>
       </nav>
+      {searchMenuOpen && <MobileSearchMenu isOpened={searchMenuOpen} />}
       <Drawer
         placement="left"
         open={open}

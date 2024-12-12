@@ -14,11 +14,11 @@ export const navLinks: MenuProps["items"] = [
         icon: <i className="fa-solid fa-boxes-stacked" />,
         label: "Товары",
       },
-      {
-        key: "items-groups",
-        icon: <i className="fa-solid fa-memo"/>,
-        label: "Опции товаров"
-      },
+      // {
+      //   key: "items-groups",
+      //   icon: <i className="fa-solid fa-memo"/>,
+      //   label: "Опции товаров"
+      // },
     ],
   },
   {

@@ -1,10 +1,3 @@
-const BrandsPage = () => {
-  return (
-    <div>
-      Hello
-      <span>It is me BRANDS!</span>
-    </div>
-  );
-};
+import { BrandsPage } from "@/Components/Admin/Brands/Brands";
 
 export default BrandsPage;
