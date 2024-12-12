@@ -6,11 +6,13 @@ import { LoadingComponent } from "@/Shared/Components/Loading/Loading";
 type SliderSearchProps = {
   onInputChange: (values: string) => void;
   isSuccess: boolean;
+  foundItemsCount: number;
 };
 
 export const SliderSearch: FC<SliderSearchProps> = ({
   onInputChange,
   isSuccess,
+  foundItemsCount,
 }) => {
   const items = [
     "iPhone 16 PRO MAX 256 Гб",
@@ -89,6 +91,9 @@ export const SliderSearch: FC<SliderSearchProps> = ({
         className={`${styles["popular-items-block"]} ${
           searchValue !== "" && styles["invisible"]
         }`}
+        style={{
+          display: foundItemsCount > 0 ? "none" : "flex"
+        }}
       >
         <h3 className={styles["search-most-famous-header"]}>
           Самое популярное...

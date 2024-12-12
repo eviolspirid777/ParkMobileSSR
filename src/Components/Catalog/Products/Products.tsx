@@ -3,11 +3,10 @@ import React, { FC, useEffect, useReducer, useState } from "react";
 import styles from "./Products.module.scss";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { CardType } from "../../../Types/CardType";
-import { useMutation } from "@tanstack/react-query";
-import { apiClient } from "@/api/ApiClient";
 import { useAtom } from "jotai";
 import { DataType, shopBucketAtom } from "@/Store/ShopBucket";
 import { ProductModal } from "./ProductModal/ProductModal";
+import { useGetItemById } from "@/hooks/useGetItemById";
 
 // import Image from "next/image";
 
@@ -74,13 +73,14 @@ export const Products: FC<ProductsType> = ({
     id: number | null;
   }>({ state: false, id: null });
 
-  const { data: CardData, mutate } = useMutation({
-    mutationFn: async () => apiClient.GetItem(openProductCard.id!),
-  });
+  const {
+    cardData,
+    mutate
+  } = useGetItemById();
 
   useEffect(() => {
     if (openProductCard.id !== null) {
-      mutate();
+      mutate(openProductCard.id);
     }
   }, [openProductCard.id]);
 
@@ -101,11 +101,11 @@ export const Products: FC<ProductsType> = ({
   };
 
   const handleAddToBucket = () => {
-    if (CardData && Array.isArray(shopBucket)) {
+    if (cardData && Array.isArray(shopBucket)) {
       setShopBucket((previousShopBucket: DataType[]) => {
-        if (previousShopBucket.some((item) => item.id === CardData.id)) {
+        if (previousShopBucket.some((item) => item.id === cardData.id)) {
           const newData = previousShopBucket.map((element) => {
-            if (element.id === CardData.id) {
+            if (element.id === cardData.id) {
               return { ...element, count: element.count + 1 };
             }
             return element;
@@ -117,12 +117,12 @@ export const Products: FC<ProductsType> = ({
         return [
           ...previousShopBucket,
           {
-            id: CardData.id!,
-            name: CardData.name!,
-            article: CardData.article!,
+            id: cardData.id!,
+            name: cardData.name!,
+            article: cardData.article!,
             count: 1,
-            image: CardData.image!,
-            price: CardData.price!,
+            image: cardData.image!,
+            price: cardData.price!,
           },
         ];
       });
@@ -168,7 +168,7 @@ export const Products: FC<ProductsType> = ({
         </div>
       </div>
       <ProductModal
-        CardData={CardData}
+        CardData={cardData}
         closeModal={setOpenProductCard.bind(this, { state: false, id: null })}
         handleAddToBucket={handleAddToBucket}
         openProductCard={openProductCard}

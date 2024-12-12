@@ -1,6 +1,7 @@
 .slider-search-card {
     display: grid;
     grid-template-columns: 1fr 3fr;
+    cursor: pointer;
 
     & img {
         width: 90px;

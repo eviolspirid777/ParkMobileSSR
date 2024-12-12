@@ -33,6 +33,9 @@ export const ProductModal: FC<ProductModalProps> = ({
   const [modalHeight, setModalHeight] = useState<number>(0);
 
   useEffect(() => {
+    if(openProductCard.state) {
+      document.body.style.overflow = "hidden";
+    }
     const handleResize = () => {
       const modalElement = document.querySelector(".ant-modal-body"); // Получаем элемент модального окна
       if (modalElement) {
@@ -47,6 +50,7 @@ export const ProductModal: FC<ProductModalProps> = ({
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      document.body.style.overflow = "auto"
     };
   }, [openProductCard.state]); // Запускаем эффект при открытии/закрытии модального окна
 
