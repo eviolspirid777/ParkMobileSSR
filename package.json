@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "firebaseDeploy": "firebase deploy"
+    "firebaseDeploy": "firebase deploy",
+    "export": "next build && next export",
+    "DeployOnLocal": "npx serve@latest out"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.2",
@@ -39,10 +41,11 @@
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/react": "^18.3.12",
-    "@types/react-dom": "^18",
+    "@types/react-dom": "^18.3.5",
     "@types/react-scroll": "^1.8.10",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
+    "serve": "^14.2.4",
     "typescript": "^5"
   }
 }
