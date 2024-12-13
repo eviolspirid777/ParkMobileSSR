@@ -1,10 +1,3 @@
-const CategoriesPage = () => {
-  return (
-    <div>
-      HEllo
-      <span>It is ME CATEGORIES!</span>
-    </div>
-  );
-};
+import { CategoriesPage } from "@/Components/Admin/Categories/Categories";
 
 export default CategoriesPage;

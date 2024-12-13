@@ -11,6 +11,8 @@ export const useGetBrands = () => {
     data: brandsFromServer,
     isFetched: isBrandsFetched,
     isSuccess: isBrandsSuccess,
+    isRefetching,
+    refetch: refetchBrands,
   } = useQuery({
     queryKey: ["brands"],
     queryFn: async () => await apiClient.GetBrands(),
@@ -18,11 +20,12 @@ export const useGetBrands = () => {
 
   useEffect(() => {
     setBrands(brandsFromServer);
-  }, [isBrandsSuccess]);
+  }, [isBrandsSuccess, isRefetching]);
 
   return {
     isBrandsSuccess,
     isBrandsFetched,
     brandsFromServer,
+    refetchBrands,
   };
 };

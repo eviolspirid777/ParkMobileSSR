@@ -134,9 +134,19 @@ class ApiClient {
         return response.data;
     }
 
+    async PostBrand(name: string) {
+        const response = await this.client.post("https://localhost:7280/api/ItemsPostgre/CreateBrand", {name})
+        return response.data
+    }
+
     async GetCategories() {
         const response = await this.client.get("https://localhost:7280/api/ItemsPostgre/GetCategories")
         return response.data;
+    }
+
+    async PostCategory(name: string) {
+        const response = await this.client.post("https://localhost:7280/api/ItemsPostgre/CreateCategory", {name})
+        return response.data
     }
 }
 

@@ -44,10 +44,7 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
 
   const [inputValue, setInputValue] = useState("");
 
-  const {
-    cardData,
-    mutate,
-  } = useGetItemById();
+  const { cardData, mutate } = useGetItemById();
 
   const [openProductCard, setOpenProductCard] = useState<{
     state: boolean;
@@ -84,47 +81,47 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
       });
       setOpenProductCard({ id: null, state: false });
     }
-  }
+  };
 
   const handleSelectedItem = (item: SearchItemShortType) => {
-    if(item.id) {
-      mutate(item.id)
-      setOpenProductCard(prevState => ({...prevState, state: true}))
+    if (item.id) {
+      mutate(item.id);
+      setOpenProductCard((prevState) => ({ ...prevState, state: true }));
     }
-  }
+  };
 
   const [pages, setPages] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [skip, setSkip] = useState(0);
-  const take = 24;
+  const take = 20;
 
   const handleInputChange = debounce(async (value: string) => {
     setInputValue(value);
-    await mutateSearchedItems({tag: value, skip: skip, take: take});
+    await mutateSearchedItems({ tag: value, skip: skip, take: take });
   }, 700);
 
   useEffect(() => {
-    if(inputValue) {
-      mutateSearchedItems({tag: inputValue, skip: skip, take: take})
+    if (inputValue) {
+      mutateSearchedItems({ tag: inputValue, skip: skip, take: take });
     }
-  }, [skip])
+  }, [skip]);
 
   const handlePageClick = (page: number) => {
     const newSkip = (page - 1) * take;
-    setCurrentPage(page)
-    setSkip(newSkip)
+    setCurrentPage(page);
+    setSkip(newSkip);
   };
 
   useEffect(() => {
-    totalCount()
-  }, [searchedItems])
+    totalCount();
+  }, [searchedItems]);
 
   const totalCount = () => {
-    if(searchedItems?.count) {
+    if (searchedItems?.count) {
       const totalPages = Math.ceil(searchedItems?.count / 24);
       setPages(Array.from({ length: totalPages }, (_, index) => index + 1));
     }
-  }
+  };
 
   return (
     <>
@@ -138,31 +135,37 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
           <span>Найдено результатов: {searchedItems?.count}</span>
           <div className={styles["search-items-block-container-data"]}>
             {searchedItems?.items?.map((item, index) => (
-              <SliderSearchCard key={index} card={item} onClick={handleSelectedItem}/>
+              <SliderSearchCard
+                key={index}
+                card={item}
+                onClick={handleSelectedItem}
+              />
             ))}
           </div>
           <ProductModal
             CardData={cardData}
             openProductCard={openProductCard}
             handleAddToBucket={handleAddToBucket}
-            closeModal={setOpenProductCard.bind(this, {state: false, id: null})}
+            closeModal={setOpenProductCard.bind(this, {
+              state: false,
+              id: null,
+            })}
           />
-          {
-            inputValue && searchedItems &&
+          {inputValue && searchedItems && (
             <div className={styles["pagination-block"]}>
-            {pages.map((el) => (
-              <div
-                key={el}
-                className={`${styles["pagination-block-item"]} ${
-                  currentPage === el ? styles.selected : ""
-                }`}
-                onClick={() => handlePageClick(el)}
-              >
-                {el}
-              </div>
-            ))}
-          </div>
-          }
+              {pages.map((el) => (
+                <div
+                  key={el}
+                  className={`${styles["pagination-block-item"]} ${
+                    currentPage === el ? styles.selected : ""
+                  }`}
+                  onClick={() => handlePageClick(el)}
+                >
+                  {el}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div
