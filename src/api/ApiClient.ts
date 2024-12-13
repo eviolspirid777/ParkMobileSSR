@@ -6,6 +6,7 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export type AuthorizationType = {userName: string, password: string}
 
+//TODO: ТУТ ПО 3001 ПОРТУ НУЖНО БИТЬ ДО БЭКА!!!
 // const AUTORIZATIONS_PATH = 'https://localhost:7280/api/Autorization'
 // const POSTGRE_ITEMS_PATH = "https://localhost:7280/api/ItemsPostgre"
 const AUTORIZATIONS_PATH = "http://aspnet-api/api/Autorization";
