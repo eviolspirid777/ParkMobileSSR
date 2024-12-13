@@ -6,7 +6,7 @@ import { TelegramIcon } from "../../Footer/Telegram";
 // import img from "next/img";
 import { useEffect } from "react";
 import { Button, Form, Input, notification } from "antd";
-import axios from "axios";
+import { apiClient } from "@/api/ApiClient";
 
 export const AboutContacts = () => {
   const [api, contextHolder] = notification.useNotification();
@@ -14,9 +14,8 @@ export const AboutContacts = () => {
   const handleCallRequest = async () => {
     api.destroy();
 
-    const handleFormFinish = ({ number }: { number: string }) => {
-      axios
-        .post(`https://localhost:7280/api/ItemsPostgre/TelephoneCall/${number}`)
+    const handleFormFinish = async ({ number }: { number: string }) => {
+      await apiClient.PostCall(number)
         .then(() => api.destroy());
     };
 
