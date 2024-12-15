@@ -214,10 +214,13 @@
 
 @media (max-width: 1024px) {
     .about-contacts-block-info-block {
-        align-self: center;
+        align-self: flex-start;
 
-        & h3 {
-            align-self: center;
+        &-text {
+            align-self: flex-start;
+            & span {
+                text-align: left !important;
+            }
         }
     }
 
@@ -257,7 +260,7 @@
 
     .about-contacts-block {
         padding: 5% 4% 0% 4% !important;
-        width: 90vw;
+        width: 100vw;
     }
 
     .about-contacts-block-questions-data-call {

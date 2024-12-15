@@ -34,7 +34,7 @@ export const DeliveryComponent = () => {
             <ul>
               <li>Наличными при получении.</li>
               <li>Оплата на сайте через онлайн-кассу.</li>
-              <li>Оплата по QR-коду (+6%).</li>
+              <li>Оплата по QR-коду.</li>
             </ul>
           </div>
         </div>
@@ -61,9 +61,9 @@ export const DeliveryComponent = () => {
           <div className={styles["russia-delivery-block-payment"]}>
             <strong>Варианты оплаты:</strong>
             <ul>
-              <li>Оплата на сайте через онлайн-кассу (+6%).</li>
-              <li>Оплата по QR-коду (+6%).</li>
-              <li>Перевод (+6%)</li>
+              <li>Оплата на сайте через онлайн-кассу.</li>
+              <li>Оплата по QR-коду.</li>
+              <li>Перевод.</li>
             </ul>
           </div>
           <div className={styles["russia-delivery-block-nodes"]}>
@@ -115,8 +115,7 @@ export const DeliveryComponent = () => {
           <div className={styles["delivery-block-krasnodar-delivery-payment"]}>
             <h5>Варианты оплаты:</h5>
             <span>
-              наличными при получении, на сайте через онлайн-кассу(+6%), по
-              QR-коду (+6%).
+              наличными при получении, на сайте через онлайн-кассу, по QR-коду.
             </span>
           </div>
         </div>
@@ -129,9 +128,7 @@ export const DeliveryComponent = () => {
             </ul>
             <div className={styles["delivery-block-russia-delivery-payment"]}>
               <h5>Варианты оплаты</h5>
-              <span>
-                на сайте через онлайн-кассу, переводом (+6%), по QR-коду (+6%).
-              </span>
+              <span>переводом, по QR-коду.</span>
             </div>
           </div>
           <div className={styles["delivery-block-russia-delivery-image-grid"]}>

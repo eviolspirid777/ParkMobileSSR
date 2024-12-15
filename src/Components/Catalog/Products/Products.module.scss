@@ -50,7 +50,7 @@
 
 @media (min-width:401px) and (max-width: 1024px) {
   .product-cards-block {
-    grid-template-columns: 1fr;
-    gap: 20px 0px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 0px;
   }
 }

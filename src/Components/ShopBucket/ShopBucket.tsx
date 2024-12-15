@@ -18,6 +18,7 @@ import { deliveryOptions } from "./DeliveryTypes/ShopBucketDeliveryOptions";
 import Media from "react-media";
 import { ShopBucketMobile } from "./ShopBucket/ShopBucketMobile";
 import { apiClient } from "@/api/ApiClient";
+import { useForm } from "antd/es/form/Form";
 
 type ShopBucketType = {
   handleShopBag: () => void;
@@ -31,6 +32,8 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
   const [cityOptions, setCityOptions] = useState<
     { label: string; value: string }[]
   >([]);
+
+  const [form] = useForm();
 
   const [shopBucket, setShopBucket] = useAtom(shopBucketAtom);
 
@@ -118,7 +121,7 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
 
   const handleDeleteItem = (id: number) => {
     setShopBucket((previousData) =>
-      previousData.filter((item, index) => id !== index)
+      previousData.filter((_, index) => id !== index)
     );
   };
 
@@ -142,19 +145,22 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
   };
 
   const handleFinish = async (values: object) => {
-    const itemsToProceed = shopBucket.map(() => ({
-      ProductId: 7,
-      Quantity: 2,
-    }));
+    try {
+      const itemsToProceed = shopBucket.map((item) => ({
+        ProductId: item.id,
+        Quantity: item.count,
+      }));
 
-    values = { ...values, items: [...itemsToProceed] };
+      values = { ...values, items: [...itemsToProceed] };
 
-    console.log(values);
-
-    await apiClient.OrderData(values);
-
-    setChildDrawer((prev) => !prev);
-    handleShopBag();
+      await apiClient.OrderData(values);
+      setShopBucket([]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setChildDrawer((prev) => !prev);
+      handleShopBag();
+    }
   };
 
   return (
@@ -222,9 +228,14 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                           )}
                         />
                       </div>
-                      <span className={styles["item-block-price"]}>
-                        {el.price} ₽
-                      </span>
+                      <div className={styles["item-block-price"]}>
+                        <span
+                          className={el.discountPrice && styles["discount"]}
+                        >
+                          {el.price} ₽
+                        </span>
+                        {el.discountPrice && <span>{el.discountPrice} ₽</span>}
+                      </div>
                       <div className={styles["item-block-decline"]}>
                         <i
                           className="fa-regular fa-trash fa-lg"
@@ -247,7 +258,12 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
         </Media>
         <footer>
           <strong>Сумма: {handleItemsCost.call(this)} ₽</strong>
-          <button onClick={handleChildrenDrawer}>Оформить заказ</button>
+          <button
+            onClick={handleChildrenDrawer}
+            disabled={shopBucket.length === 0}
+          >
+            Оформить заказ
+          </button>
         </footer>
       </div>
       <Drawer
@@ -265,7 +281,7 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
         >
           <div className={styles["submit-shopping-block"]}>
             <div className={styles["submit-shopping-block-data"]}>
-              <Form onFinish={handleFinish}>
+              <Form onFinish={handleFinish} form={form}>
                 <div className={styles["submit-shopping-block-data-user-info"]}>
                   <strong>Контактная информация</strong>
                   <div
@@ -390,9 +406,19 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                     >
                       <Radio.Group onChange={handlePayment}>
                         <Space direction="vertical">
-                          <Radio value="cash">
+                          <Radio
+                            value={
+                              deliveryType === "sdek-delivery"
+                                ? "transfer"
+                                : "cash"
+                            }
+                          >
                             <div className={styles["delivery-item-block"]}>
-                              <strong>Наличными при получении</strong>
+                              <strong>
+                                {deliveryType === "sdek-delivery"
+                                  ? "Перевод"
+                                  : "Наличными при получении"}
+                              </strong>
                             </div>
                           </Radio>
                           <Radio value="card">
@@ -405,7 +431,11 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                     </Form.Item>
                   </div>
                 </div>
-                <Button className={styles["submit-button"]} htmlType="submit">
+                <Button
+                  className={styles["submit-button"]}
+                  htmlType="submit"
+                  disabled={shopBucket.length === 0}
+                >
                   Оформить заказ
                 </Button>
               </Form>
@@ -464,9 +494,12 @@ export const ShopBucket: FC<ShopBucketType> = ({ open, handleShopBag }) => {
                                 )}
                               />
                             </div>
-                            <span className={styles["item-block-price"]}>
-                              {el.price} ₽
-                            </span>
+                            <div>
+                              <span className={styles["item-block-price"]}>
+                                {el.price} ₽
+                              </span>
+                              <span></span>
+                            </div>
                             <div className={styles["item-block-decline"]}>
                               <i
                                 className="fa-regular fa-trash fa-lg"

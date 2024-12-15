@@ -15,8 +15,7 @@ export const AboutContacts = () => {
     api.destroy();
 
     const handleFormFinish = async ({ number }: { number: string }) => {
-      await apiClient.PostCall(number)
-        .then(() => api.destroy());
+      await apiClient.PostCall(number).then(() => api.destroy());
     };
 
     api.open({

@@ -73,10 +73,7 @@ export const Products: FC<ProductsType> = ({
     id: number | null;
   }>({ state: false, id: null });
 
-  const {
-    cardData,
-    mutate
-  } = useGetItemById();
+  const { cardData, mutate } = useGetItemById();
 
   useEffect(() => {
     if (openProductCard.id !== null) {
@@ -123,6 +120,7 @@ export const Products: FC<ProductsType> = ({
             count: 1,
             image: cardData.image!,
             price: cardData.price!,
+            discountPrice: cardData.discountPrice ?? "",
           },
         ];
       });

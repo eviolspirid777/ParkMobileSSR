@@ -32,7 +32,7 @@ export const Tiles = () => {
     },
     {
       title: "iPad",
-      description: "Твой следующий компьютер - это не компьютер",
+      description: "Твой следующий компьютер - не компьютер",
       img: "/images/TilesImages/IpadTile/ipadTileReviewed.png",
       category: "iPad",
       key: "3",

@@ -76,6 +76,7 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
             count: 1,
             image: cardData.image!,
             price: cardData.price!,
+            discountPrice: cardData.discountPrice ?? "",
           },
         ];
       });

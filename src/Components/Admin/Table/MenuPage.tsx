@@ -25,6 +25,7 @@ export type FormItemChange = {
   brandId: number;
   optionName?: string;
   optionValue: string | AggregationColor;
+  isPopular?: boolean;
 };
 
 type DataType = {

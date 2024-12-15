@@ -10,4 +10,5 @@ export type CardItemDTO = {
     categoryId: number,
     itemBrandId: number,
     options?: string,
+    isPopular?: boolean,
 }

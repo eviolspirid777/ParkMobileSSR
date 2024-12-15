@@ -67,6 +67,8 @@ export const ModalWindow: FC<ModalWindowProps> = ({
 
   const [currentSelectOption] = useState<string>();
 
+  console.log(selectedItem);
+
   useEffect(() => {
     form.setFieldValue("optionValue", "");
   }, [currentSelectOption]);
@@ -101,6 +103,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
         description: newItem.description,
         categoryId: newItem.categoryId,
         itemBrandId: newItem.brandId,
+        isPopular: newItem.isPopular,
         // options: _options,
       };
       try {
@@ -126,6 +129,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
         description: newItem.description,
         categoryId: newItem.categoryId,
         itemBrandId: newItem.brandId,
+        isPopular: newItem.isPopular,
         // options: _options,
       };
       try {
@@ -277,6 +281,20 @@ export const ModalWindow: FC<ModalWindowProps> = ({
             >
               {currentSelectOption === "color" ? <ColorPicker /> : <Input />}
             </Form.Item> */}
+            <Form.Item label="Популярный" name="isPopular">
+              <Select
+                options={[
+                  {
+                    label: "Популярный",
+                    value: true,
+                  },
+                  {
+                    label: "Непопулярный",
+                    value: false,
+                  },
+                ]}
+              />
+            </Form.Item>
             <Form.Item label="Брэнд" name="brandId">
               <Select placeholder="Брэнд" options={brandsOptions} />
             </Form.Item>

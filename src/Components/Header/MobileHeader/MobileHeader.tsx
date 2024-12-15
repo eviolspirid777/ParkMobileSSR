@@ -172,7 +172,12 @@ export const MobileHeader: FC<MobileHeaderProps> = ({
           </div>
         </div>
       </nav>
-      {searchMenuOpen && <MobileSearchMenu isOpened={searchMenuOpen} />}
+      {searchMenuOpen && (
+        <MobileSearchMenu
+          isOpened={searchMenuOpen}
+          handleCloseSearch={setSearchMenuOpen.bind(this, false)}
+        />
+      )}
       <Drawer
         placement="left"
         open={open}

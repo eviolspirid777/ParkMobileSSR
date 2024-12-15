@@ -14,6 +14,7 @@ type ShopBucketMobileProps = {
         article: string;
         color?: undefined;
         memory?: undefined;
+        discountPrice?: string;
       }
     | {
         image: string;
@@ -23,6 +24,7 @@ type ShopBucketMobileProps = {
         memory: string;
         price: string;
         article: string;
+        discountPrice?: string;
       }
   )[];
   handleItemCount: (el: DataType, type: "minus" | "plus") => void;
@@ -62,7 +64,7 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
     <main className={styles["main-cls"]}>
       {shopBucket.map((el, index) => (
         <div key={index} className={styles["item-block"]}>
-          <img src={el.image} alt="" width={80} />
+          <img src={`data:image/jpeg;base64,${el.image}`} alt="" width={80} />
           <div className={styles["item-data-container"]}>
             <div className={styles["item-block-info"]}>
               <strong>{el.name}</strong>
@@ -79,7 +81,12 @@ export const ShopBucketMobile: FC<ShopBucketMobileProps> = ({
                   onClick={handleItemCount.bind(this, el as DataType, "plus")}
                 />
               </div>
-              <span className={styles["item-block-price"]}>{el.price} ₽</span>
+              <div className={styles["item-block-price"]}>
+                <span className={el.discountPrice && styles["discount"]}>
+                  {el.price} ₽
+                </span>
+                {el.discountPrice && <span>{el.discountPrice} ₽</span>}
+              </div>
             </div>
           </div>
           <div className={styles["item-block-decline"]}>

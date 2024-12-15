@@ -14,9 +14,13 @@ import { debounce } from "lodash";
 
 type MobileSearchMenuProps = {
   isOpened: boolean;
+  handleCloseSearch: () => void;
 };
 
-export const MobileSearchMenu: FC<MobileSearchMenuProps> = ({ isOpened }) => {
+export const MobileSearchMenu: FC<MobileSearchMenuProps> = ({
+  isOpened,
+  handleCloseSearch,
+}) => {
   const { mutateSearchedItems, searchedItems } = useGetSearchItems();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -55,6 +59,7 @@ export const MobileSearchMenu: FC<MobileSearchMenuProps> = ({ isOpened }) => {
             count: 1,
             image: cardData.image!,
             price: cardData.price!,
+            discountPrice: cardData.discountPrice ?? "",
           },
         ];
       });
@@ -125,6 +130,7 @@ export const MobileSearchMenu: FC<MobileSearchMenuProps> = ({ isOpened }) => {
     if (inputRef.current) {
       inputRef.current.value = "";
       handleInputChange("");
+      handleCloseSearch();
     }
   };
 

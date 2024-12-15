@@ -33,7 +33,7 @@ export const ProductModal: FC<ProductModalProps> = ({
   const [modalHeight, setModalHeight] = useState<number>(0);
 
   useEffect(() => {
-    if(openProductCard.state) {
+    if (openProductCard.state) {
       document.body.style.overflow = "hidden";
     }
     const handleResize = () => {
@@ -50,7 +50,7 @@ export const ProductModal: FC<ProductModalProps> = ({
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      document.body.style.overflow = "auto"
+      document.body.style.overflow = "auto";
     };
   }, [openProductCard.state]); // Запускаем эффект при открытии/закрытии модального окна
 
@@ -94,7 +94,14 @@ export const ProductModal: FC<ProductModalProps> = ({
               <title>{CardData?.brandName}</title>
               <article>АРТИКУЛ</article>
             </header>
-            <strong>{CardData?.price} ₽</strong>
+            <div className={styles["item-container-data-prices"]}>
+              <strong className={CardData?.discountPrice && styles["discount"]}>
+                {CardData?.price} ₽
+              </strong>
+              {CardData?.discountPrice && (
+                <strong>{CardData?.discountPrice} ₽</strong>
+              )}
+            </div>
             <button onClick={handleAddToBucket}>Купить</button>
             <div className={styles["credit"]}>
               <span>Доступно</span>

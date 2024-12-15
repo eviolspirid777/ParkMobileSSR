@@ -66,6 +66,9 @@
           font-size: 1.2rem;
           letter-spacing: 2px;
           font-weight: 900;
+          &:disabled {
+            opacity: 0.5;
+          }
       }
   }
 
@@ -107,9 +110,17 @@
   }
 
   &-price {
-      align-self: center;
-      justify-self: center;
-      font-size: 1rem;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+    font-size: 1rem;
+    & .discount {
+      font-size: 1rem !important;
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
   }
 
   &-decline {
@@ -220,6 +231,9 @@
   width: 100%;
   min-height: 50px;
   background-color: #87a08b !important;
+  &:disabled {
+    opacity: 0.5;
+  }
   & span {
     font-family: "SF-Pro-Display-Regular";
     letter-spacing: 1px;

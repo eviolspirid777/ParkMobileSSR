@@ -45,11 +45,21 @@
             }
         }
 
-        &>strong {
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 27px;
-            font-family: "SF-Pro-Display-Regular";
+        &-prices {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 15px;
+            & .discount {
+                font-size: 1rem !important;
+                opacity: 0.5;
+                text-decoration: line-through;
+            }
+            & strong {
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 27px;
+                font-family: "SF-Pro-Display-Regular";
+            }
         }
 
         & button {

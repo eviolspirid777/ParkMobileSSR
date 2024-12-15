@@ -34,10 +34,18 @@
   }
 
   &-price {
-      width: 100%;
-      align-self: center;
-      justify-self: center;
-      font-size: .9rem;
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+    font-size: .9rem;
+    & .discount {
+      font-size: .7rem !important;
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
   }
 
   &-decline {

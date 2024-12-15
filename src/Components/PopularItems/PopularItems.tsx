@@ -96,6 +96,7 @@ export const PopularItems = () => {
             count: 1,
             image: cardData.image!,
             price: cardData.price!,
+            discountPrice: cardData.discountPrice ?? "",
           },
         ];
       });
@@ -127,11 +128,21 @@ export const PopularItems = () => {
   return (
     <div className={styles["popular-items"]}>
       <h2 className={styles["header"]}>Популярные товары</h2>
-      <div className={styles["popular-items-block"]}>
+      <div className={`${styles["popular-items-block"]} popular-items`}>
         <Swiper
-          navigation={true}
-          modules={[Navigation, Pagination]}
-          slidesPerView={isClient && window.screen.width > 1024 ? 5 : 1}
+          pagination={
+            isClient && window.screen.width > 1024
+              ? undefined
+              : { clickable: true }
+          }
+          navigation={isClient && window.screen.width > 1024 ? true : false}
+          modules={
+            isClient && window.screen.width > 1024
+              ? [Navigation, Pagination]
+              : [Pagination]
+          }
+          className="mySwiper"
+          slidesPerView={isClient && window.screen.width > 1024 ? 5 : 2}
           style={{
             paddingTop: "3%",
           }}
@@ -150,9 +161,24 @@ export const PopularItems = () => {
                   <span className={styles["popular-items-block-item-tag"]}>
                     {item.name}
                   </span>
-                  <span className={styles["popular-items-block-item-price"]}>
-                    {item.price} ₽
-                  </span>
+                  <div
+                    className={styles["popular-items-block-price-block-prices"]}
+                  >
+                    <span
+                      className={`${styles["popular-items-block-item-price"]} ${
+                        item.discountPrice && styles["discount"]
+                      }`}
+                    >
+                      {item.price} ₽
+                    </span>
+                    {item.discountPrice && (
+                      <span
+                        className={styles["popular-items-block-item-price"]}
+                      >
+                        {item.discountPrice} ₽
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </SwiperSlide>

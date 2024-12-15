@@ -3,16 +3,29 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "./Footer.module.scss";
 import { TelegramIcon } from "./Telegram";
 import { animateScroll as scroll } from "react-scroll";
+import { useAtom } from "jotai";
+import { categoryAtom } from "@/Store/FiltersStore";
 
 export const Footer = () => {
   const pathName = usePathname();
   const naviagate = useRouter();
+
+  const [, setCategories] = useAtom(categoryAtom);
 
   const handlePath = (path: string, scrollValue?: number) => {
     if (pathName === path) {
       return (() => scroll.scrollTo(scrollValue ?? 0))();
     }
     naviagate.push(path);
+  };
+
+  const handleCategory = (category: string) => {
+    scroll.scrollTo(window.screen.width > 1024 ? 3200 : 4200, {
+      duration: 700,
+      smooth: true,
+    });
+
+    setCategories(category);
   };
 
   return (
@@ -47,12 +60,14 @@ export const Footer = () => {
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Каталог</h2>
-          <span>Mac</span>
-          <span>iPhone</span>
-          <span>Watch</span>
-          <span>iPad</span>
-          <span>Аксессуары</span>
-          <span>Гаджеты</span>
+          <span onClick={handleCategory.bind(null, "Mac")}>Mac</span>
+          <span onClick={handleCategory.bind(null, "iPhone")}>iPhone</span>
+          <span onClick={handleCategory.bind(null, "Watch")}>Watch</span>
+          <span onClick={handleCategory.bind(null, "iPad")}>iPad</span>
+          <span onClick={handleCategory.bind(null, "Аксессуары")}>
+            Аксессуары
+          </span>
+          <span onClick={handleCategory.bind(null, "Гаджеты")}>Гаджеты</span>
         </div>
         <div className={styles["footer-block-help-items"]}>
           <h2>Подпишись</h2>

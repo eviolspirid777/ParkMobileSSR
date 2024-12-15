@@ -38,22 +38,24 @@
     grid-template-rows: repeat(2, 1fr);
     &-item {
       display: grid;
-      grid-template-rows: 3fr 1fr;
+      grid-template-rows: 2fr 1fr;
       outline: 1px solid rgb(232, 232, 236);
       padding: 30px;
   
       & img {
         justify-self: center;
         align-self: center;
+        width: 700px;
       }
   
       &-tag {
         font-size: 1.4rem;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         font-family: "SF-Pro-Display-Regular";
       }
   
       &-price {
+        font-size: 1rem;
         color: #454545;
         font-family: "SF-Pro-Display-Regular_light";
       }

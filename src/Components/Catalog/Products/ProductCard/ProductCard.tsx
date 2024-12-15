@@ -4,14 +4,11 @@ import styles from "./ProductCard.module.scss";
 import { CardType } from "@/Types/CardType";
 
 type ProductCardProps = {
-  card: CardType,
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  card: CardType;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ 
-  card,
-  onClick,
-}) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ card, onClick }) => {
   const [image, setImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -30,16 +27,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className={styles["product-card"]} onClick={onClick}>
-      {image && <img src={image} alt="" width="300" height="300" />}
+      {image && (
+        <img
+          src={image}
+          alt=""
+          width={window.screen.width > 1024 ? 300 : 180}
+          height={window.screen.width > 1024 ? 300 : 180}
+        />
+      )}
       <div className={styles["product-card-text-block"]}>
         <label className={styles["product-card-text-block-tag"]}>
           {card.name}
         </label>
         <div className={styles["product-card-text-block-tile"]}>Новинка</div>
       </div>
-      <span className={styles["product-card-text-block-price"]}>
-        {card.price} ₽
-      </span>
+      <div className={styles["product-card-text-block-price-block"]}>
+        <span
+          className={`${styles["product-card-text-block-price"]} ${
+            card.discountPrice && styles["discount"]
+          }`}
+        >
+          {card.price} ₽
+        </span>
+        {card.discountPrice && (
+          <span className={styles["product-card-text-block-price"]}>
+            {card.discountPrice} ₽
+          </span>
+        )}
+      </div>
     </div>
   );
 };

@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
   webpack(config) {
     return config;
   },
+  //Раскоментировать только для сборки FireBase
   // output: "export",
   images: {
     unoptimized: true,

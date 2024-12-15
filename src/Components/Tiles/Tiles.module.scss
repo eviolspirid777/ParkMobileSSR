@@ -6,14 +6,6 @@
 
 .card-item-block {
     position: relative;
-    & img{
-        min-width: 100%;
-        min-height: 100%;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-    }
     & h2[data-image="2"] { //Macbook
         position: absolute;
         top: 10%;
@@ -153,8 +145,8 @@
             //Macbook
             position: absolute;
             top: 6% !important;
-            left: 37% !important;
-            font-size: 1.3rem !important;
+            left: 35% !important;
+            font-size: 1.6rem !important;
             font-weight: 500;
             font-family: 'SF-Pro-Display-Regular';
             opacity: 0;
@@ -163,8 +155,8 @@
         & span[data-image="2"] {
             position: absolute;
             top: 17% !important;
-            left: 18% !important;
-            font-size: 1rem !important;
+            left: 16% !important;
+            font-size: 1.2rem !important;
             font-weight: 500;
             font-family: "SF-Pro-Display-Regular_light";
             opacity: 0;
@@ -174,8 +166,8 @@
             //Watches
             position: absolute;
             top: 6% !important;
-            left: 36% !important;
-            font-size: 1.3rem !important;
+            left: 35% !important;
+            font-size: 1.6rem !important;
             font-weight: 500;
             font-family: 'SF-Pro-Display-Regular';
             color: white;
@@ -185,8 +177,8 @@
         & span[data-image="1"] {
             position: absolute;
             top: 17% !important;
-            left: 23% !important;
-            font-size: 1rem !important;
+            left: 22% !important;
+            font-size: 1.2rem !important;
             font-weight: 500;
             font-family: "SF-Pro-Display-Regular_light";
             color: white;
@@ -198,7 +190,7 @@
             position: absolute;
             top: 6% !important;
             left: 46% !important;
-            font-size: 1.3rem !important;
+            font-size: 1.6rem !important;
             font-weight: 500;
             font-family: 'SF-Pro-Display-Regular';
             opacity: 0;
@@ -207,8 +199,8 @@
         & span[data-image="3"] {
             position: absolute;
             top: 17% !important;
-            left: 8% !important;
-            font-size: 1rem !important;
+            left: 5% !important;
+            font-size: 1.2rem !important;
             font-weight: 500;
             font-family: "SF-Pro-Display-Regular_light";
             text-wrap: nowrap;
@@ -219,8 +211,8 @@
             //AirPods
             position: absolute;
             top: 6% !important;
-            left: 39% !important;
-            font-size: 1.3rem !important;
+            left: 37% !important;
+            font-size: 1.6rem !important;
             font-weight: 500;
             font-family: 'SF-Pro-Display-Regular';
             color: white;
@@ -230,8 +222,8 @@
         & span[data-image="4"] {
             position: absolute;
             top: 17% !important;
-            left: 17% !important;
-            font-size: 1rem !important;
+            left: 14% !important;
+            font-size: 1.2rem !important;
             font-weight: 500;
             font-family: "SF-Pro-Display-Regular_light";
             text-wrap: nowrap;
@@ -249,7 +241,7 @@
             opacity: 0;
 
             & button {
-                font-size: 1rem !important;
+                font-size: 1.25rem !important;
                 letter-spacing: 1px;
                 font-family: 'SF-Pro-Display-Regular';
                 border-radius: 10px;
