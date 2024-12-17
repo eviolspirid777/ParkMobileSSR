@@ -1,6 +1,6 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -15,57 +15,6 @@ import { shopBucketAtom } from "@/Store/ShopBucket";
 import { useGetItemById } from "@/hooks/useGetItemById";
 
 export const PopularItems = () => {
-  // const items = [
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-  //     title: "AirPods Pro 2 USB-C",
-  //     price: "21 190",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-  //     title: "Apple Power Adapter 20W",
-  //     price: "2 490",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-  //     title: "AirPods Pro 2 USB-C",
-  //     price: "21 190",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-  //     title: "Apple Power Adapter 20W",
-  //     price: "2 490",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-  //     title: "AirPods Pro 2 USB-C",
-  //     price: "21 190",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-  //     title: "Apple Power Adapter 20W",
-  //     price: "2 490",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.58.52.png",
-  //     title: "AirPods Pro 2 USB-C",
-  //     price: "21 190",
-  //   },
-  //   {
-  //     image:
-  //       "/images/PopularItemsImages/Снимок экрана 2024-11-09 в 22.59.01.png",
-  //     title: "Apple Power Adapter 20W",
-  //     price: "2 490",
-  //   },
-  // ];
-
   const { popularItemsList } = useGetPopularItems();
 
   const [isClient, setIsClient] = useState(false);
@@ -135,11 +84,15 @@ export const PopularItems = () => {
               ? undefined
               : { clickable: true }
           }
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
           navigation={isClient && window.screen.width > 1024 ? true : false}
           modules={
             isClient && window.screen.width > 1024
-              ? [Navigation, Pagination]
-              : [Pagination]
+              ? [Navigation, Pagination, Autoplay]
+              : [Autoplay]
           }
           className="mySwiper"
           slidesPerView={isClient && window.screen.width > 1024 ? 5 : 2}

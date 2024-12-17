@@ -52,30 +52,63 @@ export const Categories: FC<CategoriesProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 2900) {
-        setTimeout(() => {
-          categoriesItems.forEach((_, index) => {
-            const spanElement = spanRefs.current[index];
-
-            if (spanElement) {
-              // Проверяем, не null ли элемент
-              gsap.fromTo(
-                spanElement,
-                {
-                  opacity: 0,
-                  y: 30,
-                },
-                {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.5,
-                  ease: "power2.out",
+      switch (window.screen.width > 1024) {
+        case true: {
+          if (window.scrollY >= 2900) {
+            setTimeout(() => {
+              categoriesItems.forEach((_, index) => {
+                const spanElement = spanRefs.current[index];
+    
+                if (spanElement) {
+                  // Проверяем, не null ли элемент
+                  gsap.fromTo(
+                    spanElement,
+                    {
+                      opacity: 0,
+                      y: 30,
+                    },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.5,
+                      ease: "power2.out",
+                    }
+                  );
                 }
-              );
-            }
-          });
-        }, 400);
-        window.removeEventListener("scroll", handleScroll);
+              });
+            }, 400);
+            window.removeEventListener("scroll", handleScroll);
+          }
+          break;
+        }
+        case false: {
+          if (window.scrollY >= 1975) {
+            setTimeout(() => {
+              categoriesItems.forEach((_, index) => {
+                const spanElement = spanRefs.current[index];
+    
+                if (spanElement) {
+                  // Проверяем, не null ли элемент
+                  gsap.fromTo(
+                    spanElement,
+                    {
+                      opacity: 0,
+                      y: 30,
+                    },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.5,
+                      ease: "power2.out",
+                    }
+                  );
+                }
+              });
+            }, 400);
+            window.removeEventListener("scroll", handleScroll);
+          }
+          break;
+        }
       }
     };
 

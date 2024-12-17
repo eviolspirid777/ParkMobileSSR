@@ -776,4 +776,10 @@ body {
             padding-right: 2%;
         }
     }
+
+    div.popular-items {
+        & div.mySwiper {
+            height: 290px;
+        }
+    }
 }

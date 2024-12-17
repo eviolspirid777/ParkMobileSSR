@@ -7,6 +7,8 @@ import { PopularItems } from "@/Components/PopularItems/PopularItems";
 import { SwiperList } from "@/Components/Swiper/Swiper";
 import { UnderSwiperCards } from "@/Components/UnderSwiperCards/UnderSwiperCards";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Media from "react-media";
+import { TilesMobile } from "@/Components/Tiles/TilesMobile/TilesMobile";
 
 const Home = () => {
   const queryClient = new QueryClient();
@@ -58,7 +60,22 @@ const Home = () => {
         <SwiperList />
         <UnderSwiperCards />
         <PopularItems />
-        <Tiles />
+        <Media
+          queries={{
+            telephone: "(max-width: 1024px)",
+            computer: "(min-width: 1025px)",
+          }}
+        >
+          {(matches) => (
+            <>
+              {matches.computer ? (
+                <Tiles />
+              ) : (
+                <TilesMobile />
+              )}
+            </>
+          )}
+        </Media>
         <UnderTilesLogos />
         <Catalog />
         {/* TODO:Удали меня! Не ЗАБУДЬ! */}

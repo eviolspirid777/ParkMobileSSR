@@ -10,39 +10,79 @@ export const CatalogHeader = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 2900) {
-        if (spanRef.current && h3Ref.current) {
-          gsap.fromTo(
-            spanRef.current,
-            {
-              opacity: 0,
-              y: 30,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: "power2.out",
+      switch (window.screen.width > 1024) {
+        case true: {
+          if (window.scrollY >= 2900) {
+            if (spanRef.current && h3Ref.current) {
+              gsap.fromTo(
+                spanRef.current,
+                {
+                  opacity: 0,
+                  y: 30,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                }
+              );
+    
+              gsap.fromTo(
+                h3Ref.current,
+                {
+                  opacity: 0,
+                  y: 30,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                  delay: 0.2,
+                }
+              );
             }
-          );
-
-          gsap.fromTo(
-            h3Ref.current,
-            {
-              opacity: 0,
-              y: 30,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: "power2.out",
-              delay: 0.2,
-            }
-          );
+    
+            window.removeEventListener("scroll", handleScroll);
+          }
         }
-
-        window.removeEventListener("scroll", handleScroll);
+        case false: {
+          if (window.scrollY >= 1975) {
+            if (spanRef.current && h3Ref.current) {
+              gsap.fromTo(
+                spanRef.current,
+                {
+                  opacity: 0,
+                  y: 30,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                }
+              );
+    
+              gsap.fromTo(
+                h3Ref.current,
+                {
+                  opacity: 0,
+                  y: 30,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                  delay: 0.2,
+                }
+              );
+            }
+    
+            window.removeEventListener("scroll", handleScroll);
+          }
+        }
       }
     };
 
