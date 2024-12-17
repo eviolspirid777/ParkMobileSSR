@@ -50,6 +50,7 @@ const columns: TableColumnsType<DataType> = [
     render: (image: string) => (
       <img src={`data:image/jpeg;base64,${image}`} width={70} />
     ),
+    align: "center",
   },
   {
     title: "Название",
@@ -68,7 +69,8 @@ const columns: TableColumnsType<DataType> = [
     render: (isPopular: boolean) => {
       console.log(isPopular)
       return isPopular ? <CheckCircleOutlined style={{ color: 'green' }} /> : <CloseCircleOutlined style={{ color: 'red' }} />
-    }
+    },
+    align: "center"
   },
   {
     title: "Новинка",
@@ -77,16 +79,19 @@ const columns: TableColumnsType<DataType> = [
     render: (isNewItem: boolean) => (
       isNewItem ? <CheckCircleOutlined style={{ color: 'green' }} /> : <CloseCircleOutlined style={{ color: 'red' }} />
     ),
+    align: "center"
   },
   {
     title: "Колличество",
     dataIndex: "count",
     key: "count",
+    align: "center"
   },
   {
     title: "Цена",
     dataIndex: "price",
     key: "price",
+    align: "center"
   },
 ];
 
