@@ -14,6 +14,7 @@ export type CardType = {
     options?: string,
     article?: string,
     isPopular?: boolean,
+    isNewItem?: boolean
 }
 
 export type CardItemType = {
@@ -29,6 +30,7 @@ export type CardItemType = {
     options?: string,
     article?: string,
     isPopular?: boolean,
+    isNewItem?: boolean
 }
 
 export type RecivedCardDataType = {

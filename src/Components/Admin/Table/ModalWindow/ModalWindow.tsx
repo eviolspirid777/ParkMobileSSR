@@ -32,24 +32,13 @@ type BrandAndOptions = {
 type ModalWindowProps = {
   closeModal: () => void;
   open: boolean;
-  selectedItem: CardTypeAdmin;
+  selectedItem: CardTypeAdmin | undefined | null;
   brandsOptions: BrandAndOptions[];
   categoriesOptions: BrandAndOptions[];
   handleDelete: (id: number) => void;
 };
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
-
-// const selectOptions = [
-//   {
-//     label: "Цвет",
-//     value: "color",
-//   },
-//   {
-//     label: "Текст",
-//     value: "text",
-//   },
-// ];
 
 export const ModalWindow: FC<ModalWindowProps> = ({
   closeModal,
@@ -67,8 +56,6 @@ export const ModalWindow: FC<ModalWindowProps> = ({
 
   const [currentSelectOption] = useState<string>();
 
-  console.log(selectedItem);
-
   useEffect(() => {
     form.setFieldValue("optionValue", "");
   }, [currentSelectOption]);
@@ -81,6 +68,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
   );
 
   const handleFinishForm = async (newItem: FormItemChange) => {
+    console.log(newItem)
     //POST
     // const options = {
     //   type: newItem.optionName ?? "",
@@ -104,6 +92,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
         categoryId: newItem.categoryId,
         itemBrandId: newItem.brandId,
         isPopular: newItem.isPopular,
+        isNewItem: newItem.isNewItem,
         // options: _options,
       };
       try {
@@ -130,6 +119,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({
         categoryId: newItem.categoryId,
         itemBrandId: newItem.brandId,
         isPopular: newItem.isPopular,
+        isNewItem: newItem.isNewItem,
         // options: _options,
       };
       try {
@@ -192,7 +182,6 @@ export const ModalWindow: FC<ModalWindowProps> = ({
       centered
     >
       <Form
-        key={`${selectedItem?.name}`}
         form={form}
         layout="vertical"
         initialValues={selectedItem ? selectedItem : {}}
@@ -292,6 +281,20 @@ export const ModalWindow: FC<ModalWindowProps> = ({
                     label: "Непопулярный",
                     value: false,
                   },
+                ]}
+              />
+            </Form.Item>
+            <Form.Item label="Новинка" name="isNewItem">
+              <Select
+                options={[
+                  {
+                    label: "Новинка",
+                    value: true,
+                  },
+                  {
+                    label: "Не новинка",
+                    value: false
+                  }
                 ]}
               />
             </Form.Item>

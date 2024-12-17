@@ -39,7 +39,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ card, onClick }) => {
         <label className={styles["product-card-text-block-tag"]}>
           {card.name}
         </label>
-        <div className={styles["product-card-text-block-tile"]}>Новинка</div>
+        {
+          card.isNewItem &&
+          <div className={styles["product-card-text-block-tile"]}>Новинка</div>
+        }
       </div>
       <div className={styles["product-card-text-block-price-block"]}>
         <span

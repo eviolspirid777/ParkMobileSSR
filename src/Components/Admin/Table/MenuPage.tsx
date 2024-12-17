@@ -13,6 +13,7 @@ import { ModalWindow } from "./ModalWindow/ModalWindow";
 import { useGetItemsAdmin } from "@/hooks/useGetItemsAdmin";
 import { CardTypeAdmin } from "@/Types/CardTypeAdmin";
 import { AggregationColor } from "antd/es/color-picker/color";
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 export type FormItemChange = {
   article: string;
@@ -26,6 +27,7 @@ export type FormItemChange = {
   optionName?: string;
   optionValue: string | AggregationColor;
   isPopular?: boolean;
+  isNewItem?: boolean,
 };
 
 type DataType = {
@@ -35,6 +37,8 @@ type DataType = {
   count: number;
   price: string;
   article: string;
+  isPopular: boolean,
+  isNewItem: boolean,
 };
 
 const columns: TableColumnsType<DataType> = [
@@ -55,7 +59,24 @@ const columns: TableColumnsType<DataType> = [
   {
     title: "Артикул",
     dataIndex: "article",
-    key: "article",
+    key: "article"
+  },
+  {
+    title: "Популярное",
+    dataIndex: "isPopular",
+    key: "isPopular",
+    render: (isPopular: boolean) => {
+      console.log(isPopular)
+      return isPopular ? <CheckCircleOutlined style={{ color: 'green' }} /> : <CloseCircleOutlined style={{ color: 'red' }} />
+    }
+  },
+  {
+    title: "Новинка",
+    dataIndex: "isNewItem",
+    key: "isNewItem",
+    render: (isNewItem: boolean) => (
+      isNewItem ? <CheckCircleOutlined style={{ color: 'green' }} /> : <CloseCircleOutlined style={{ color: 'red' }} />
+    ),
   },
   {
     title: "Колличество",
@@ -72,6 +93,9 @@ const columns: TableColumnsType<DataType> = [
 export const MenuPage = () => {
   const { itemsList, itemsListIsSuccess, refetchItemsList } =
     useGetItemsAdmin();
+  useEffect(() => {
+    console.log(itemsList)
+  }, [itemsList])
   const { deleteItem } = useDeleteItem();
   useGetCategories();
   useGetBrands();
@@ -115,6 +139,8 @@ export const MenuPage = () => {
             count: el.stock!,
             price: el.price!,
             image: el.image!,
+            isPopular: el.isPopular!,
+            isNewItem: el.isNewItem!,
           };
         })
       );
@@ -122,7 +148,6 @@ export const MenuPage = () => {
   }, [itemsList]);
 
   const handleRowClick = (record: CardTypeAdmin | null) => {
-    console.log(record);
     setSelectedItem(record);
     setOpen(true);
   };
@@ -165,12 +190,13 @@ export const MenuPage = () => {
         })}
       />
       <ModalWindow
+        key={`${selectedItem?.id}`}
         brandsOptions={brandsOptions!}
         categoriesOptions={categoriesOptions!}
         closeModal={handleCloseModal}
         handleDelete={handleDelete}
         open={open}
-        selectedItem={selectedItem!}
+        selectedItem={selectedItem}
       />
     </div>
   );

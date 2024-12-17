@@ -153,9 +153,9 @@ export const PopularItems = () => {
                 className={styles["popular-items-block-item"]}
                 onClick={handleOpenCard.bind(null, item.id ?? -1)}
               >
-                <div className={styles["popular-items-block-item-gurantee"]}>
+                {/* <div className={styles["popular-items-block-item-gurantee"]}>
                   Гарантия
-                </div>
+                </div> */}
                 <img src={`data:image/jpeg;base64,${item.image}`} alt="" />
                 <div className={styles["popular-items-block-price-block"]}>
                   <span className={styles["popular-items-block-item-tag"]}>

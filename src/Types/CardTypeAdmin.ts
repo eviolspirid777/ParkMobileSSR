@@ -7,6 +7,8 @@ export type CardTypeAdmin = {
     image: string;
     stock?: number;
     id?: number;
+    isPopular: boolean;
+    isNewItem: boolean;
 }
 
 export type RecivedCardDataAdminType = {

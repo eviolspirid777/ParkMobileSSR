@@ -96,7 +96,7 @@ class ApiClient {
     }
 
     async GetPopularItems() {
-        const response = await this.client.get<(CardType)[]>(`${POSTGRE_ITEMS_PATH}/GetPopularItems`);
+        const response = await this.client.get<CardType[]>(`${POSTGRE_ITEMS_PATH}/GetPopularItems`);
         return response.data;
     }
 
