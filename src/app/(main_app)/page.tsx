@@ -13,9 +13,9 @@ import { TilesMobile } from "@/Components/Tiles/TilesMobile/TilesMobile";
 const Home = () => {
   const queryClient = new QueryClient();
 
-  //TODO: В мобильной версии следлать слайдер вместо четырех плашек этих
   //TODO: Заявка на трейд-ин(перекидывает на модалку с шагами) и заявка на ремонт(простая форма)
   //TODO: Большую кнопку (отправить заявку) на трейд-ин. И там шаги с заполнением + отправка сообщения в тг
+  //TODO: В мобильной версии следлать слайдер вместо четырех плашек этих +
   //TODO: Сделать возможность загрузки фоток в слайдер(ну это уже необязательно)
 
   //TODO: Убрать надпись ГАРАНТИЯ +
@@ -66,15 +66,7 @@ const Home = () => {
             computer: "(min-width: 1025px)",
           }}
         >
-          {(matches) => (
-            <>
-              {matches.computer ? (
-                <Tiles />
-              ) : (
-                <TilesMobile />
-              )}
-            </>
-          )}
+          {(matches) => <>{matches.computer ? <Tiles /> : <TilesMobile />}</>}
         </Media>
         <UnderTilesLogos />
         <Catalog />

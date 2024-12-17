@@ -1,17 +1,10 @@
+"use client";
 import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionComponent";
 import styles from "./TradeInComponent.module.scss";
-
-import { ReactNode } from "react";
+import { TradeInModal } from "./TradeInModal/TradeInModal";
+import { useState } from "react";
 
 export const TradeInComponent = () => {
-  const imagesBlock = [
-    ["iPhone", "/images/Devices/iphone.png"],
-    ["iPad", "/images/Devices/Ipad.png"],
-    ["Mac", "/images/Devices/MacBook.png"],
-    ["AirPods", "/images/Devices/w9g8rgeuhicg1q7fa2qh.png"],
-    ["Watch", "/images/Devices/watch.png"],
-  ];
-
   const accordionData = [
     [
       "Каким образом происходит оценка моего устройства?",
@@ -35,6 +28,8 @@ export const TradeInComponent = () => {
     ],
   ];
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className={styles["trade-in-block"]}>
@@ -48,7 +43,7 @@ export const TradeInComponent = () => {
           решили обновить, получить при этом выгоду себе и принести пользу
           окружающей среде.
         </span>
-        <h4>Выберите технику, которую вы хотите сдать</h4>
+        {/* <h4>Выберите технику, которую вы хотите сдать</h4>
         <div className={styles["images-block"]}>
           {imagesBlock.map(([name, photo], key) => (
             <div key={key} className={styles["images-block-card"]}>
@@ -56,12 +51,23 @@ export const TradeInComponent = () => {
               <span>{name as ReactNode}</span>
             </div>
           ))}
-        </div>
+        </div> */}
+        <button
+          className={styles["submit-button"]}
+          onClick={setOpen.bind(this, true)}
+        >
+          Подать заявку на трейд-ин
+        </button>
         <div className={styles["faq-block"]}>
           <h3>Часто задаваемые вопросы</h3>
           <AccordionComponent data={accordionData} />
         </div>
       </div>
+      <TradeInModal
+        key={`${open}`}
+        handleClose={setOpen.bind(this, false)}
+        open={open}
+      />
     </>
   );
 };

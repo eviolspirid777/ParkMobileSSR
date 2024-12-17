@@ -1,0 +1,11 @@
+.fifth-step-block {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+    padding: 1%;
+
+    & h3 {
+        font-size: 1.6rem;
+        font-family: "SF-Pro-Display-Regular_light";
+    }
+}
