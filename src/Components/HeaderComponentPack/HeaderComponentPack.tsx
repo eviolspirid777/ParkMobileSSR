@@ -43,6 +43,7 @@ export const HeaderComponentPack = () => {
   const [isHeaderMenuVisible, setIsHeaderMenuVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [sliderData, dispatch] = useReducer(reducer, {});
+  const [category, setCategory] = useState("")
 
   const [searchedItems, setSearchedItems] = useAtom(searchedItemsAtom);
 
@@ -109,11 +110,13 @@ export const HeaderComponentPack = () => {
                     }
                     handleMouseClick={(event) => handleRouteCategory(event)}
                     handleMainMenuRoute={handleMainMenu}
+                    handleMouseCategoryEnter={(event) => setCategory(event.currentTarget.text)}
                     handleShopBag={handleShopBag}
                   />
                   {isHeaderMenuVisible && (
                     <HeaderSlider
                       contentType={sliderData}
+                      category={navTitleDictionary.get(category)}
                       handleMouseLeave={handleMouseLeave}
                       isContentVisible={isContentVisible}
                       handleIsContentVisible={handleMouseLeave}

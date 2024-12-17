@@ -16,6 +16,7 @@ type HeaderProps = {
   handleMouseClick: (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => void;
+  handleMouseCategoryEnter: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   handleMainMenuRoute: () => void;
   handleShopBag: () => void;
 };
@@ -25,6 +26,7 @@ export const Header: FC<HeaderProps> = ({
   handleMouseClick,
   handleMainMenuRoute,
   handleShopBag,
+  handleMouseCategoryEnter,
 }) => {
   const linkedItems = [
     {
@@ -127,8 +129,10 @@ export const Header: FC<HeaderProps> = ({
           <a
             key={el.navTitle}
             className={styles["nav-item"]}
-            onMouseEnter={() =>
-              handleMouseEnter("menu", el.titles, el.subTitles)
+            onMouseEnter={(event) => {
+                handleMouseEnter("menu", el.titles, el.subTitles);
+                handleMouseCategoryEnter(event);
+              }
             }
             onClick={handleMouseClick}
           >

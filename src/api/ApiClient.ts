@@ -8,7 +8,7 @@ export type AuthorizationType = {userName: string, password: string}
 
 //TODO: ТУТ ПО 3001 ПОРТУ НУЖНО БИТЬ ДО БЭКА!!!
 const AUTORIZATIONS_PATH = 'https://localhost:7280/api/Autorization'
-const POSTGRE_ITEMS_PATH = "https://localhost:7280/api/ItemsPostgre"
+export const POSTGRE_ITEMS_PATH = "https://localhost:7280/api/ItemsPostgre"
 // const AUTORIZATIONS_PATH = "http://aspnet-api/api/Autorization";
 // const POSTGRE_ITEMS_PATH = "http://aspnet-api/api/ItemsPostgre"
 
@@ -71,6 +71,15 @@ class ApiClient {
                 }
             });
         return response.data;
+    }
+
+    async GetItemsByHeader(skip: number, take: number, category: string, items: string) {
+        const response = await axios.post<RecivedCardDataType>(`${POSTGRE_ITEMS_PATH}/GetCategoryItems`, {
+            skip: skip,
+            take: take,
+            query: `${category}/${items}`
+        })
+        return response.data
     }
 
     async GetItemsAdmin(skip: number, take: number, category: string = "", brand: string = "") {

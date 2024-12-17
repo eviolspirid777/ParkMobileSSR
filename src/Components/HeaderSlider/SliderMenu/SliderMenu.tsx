@@ -1,22 +1,35 @@
 import { FC } from "react";
 import styles from "./SliderMenu.module.scss";
 import { CardType } from "@/Types/CardType";
+// import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 
 type SliderMenuProps = {
   titles?: string[];
   subTitles?: string[];
   items?: CardType[];
+  category: string | undefined,
 };
 
 export const SliderMenu: FC<SliderMenuProps> = ({
   titles,
   subTitles,
   items,
+  category,
 }) => {
+
   return (
     <>
       <div className={styles["blur-block-content-visible-titles"]}>
-        {titles && titles.map((el, index) => <span key={index}>{el}</span>)}
+        {titles && titles.map((el, index) => 
+        <Link
+          key={index}
+          className={styles["blur-block-content-visible-titles-link"]}
+          href={`/categories/${category}/${el}`}
+        >
+          {el}
+        </Link>)}
         {subTitles && (
           <>
             <hr style={{ backgroundColor: "#878375" }} />

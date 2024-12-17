@@ -19,6 +19,7 @@ type HeaderSliderProps = {
   handleIsContentVisible: () => void;
   handleMouseLeave: () => void;
   contentType: ReducerAction;
+  category: string | undefined,
 };
 
 export const HeaderSlider: FC<HeaderSliderProps> = ({
@@ -26,6 +27,7 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
   isContentVisible,
   handleIsContentVisible,
   contentType,
+  category,
 }) => {
   const { mutateSearchedItems, searchedItems, isSearchedItemsSuccess } =
     useGetSearchItems();
@@ -182,6 +184,7 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
             items={contentType.items as unknown as CardType[]}
             subTitles={contentType.subTitles}
             titles={contentType.titles}
+            category={category}
           />
         ) : (
           <SliderSearch

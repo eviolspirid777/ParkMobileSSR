@@ -21,7 +21,9 @@
             color: #ffffff;
             transition: color .15s;
 
-            & span {
+            &-link {
+                color: white;
+                text-decoration: none;
                 width: fit-content;
                 cursor: pointer;
 
