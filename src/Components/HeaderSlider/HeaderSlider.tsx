@@ -13,6 +13,9 @@ import { SearchItemShortType } from "@/Types/SearchItemShortType";
 import { useGetItemById } from "@/hooks/useGetItemById";
 import { useAtom } from "jotai";
 import { shopBucketAtom } from "@/Store/ShopBucket";
+import { TradeInModal } from "../Help/TradeInComponent/TradeInModal/TradeInModal";
+import { RepairModal } from "../Help/RepairModal/RepairModal";
+import { RepairRequestType, useAddRepairRequest } from "@/hooks/useAddRepairRequest";
 
 type HeaderSliderProps = {
   isContentVisible: boolean;
@@ -31,6 +34,12 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
 }) => {
   const { mutateSearchedItems, searchedItems, isSearchedItemsSuccess } =
     useGetSearchItems();
+
+  const {mutateAsync} = useAddRepairRequest();
+
+  const handleSubmitData = async (values: RepairRequestType) => {
+    await mutateAsync(values);
+  }
 
   useEffect(() => {
     const controller = new AbortController();
@@ -115,6 +124,17 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
     setSkip(newSkip);
   };
 
+  const [deviceFixOpen, setDeviceFixOpen] = useState(false);
+  const [tradeInOpen, setTradeInOpen] = useState(false);
+
+  const handleDeviceFix = () => {
+    setDeviceFixOpen(prev => !prev);
+  }
+
+  const handleTradeIn = () => {
+    setTradeInOpen(prev => !prev);
+  }
+
   useEffect(() => {
     totalCount();
   }, [searchedItems]);
@@ -185,6 +205,8 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
             subTitles={contentType.subTitles}
             titles={contentType.titles}
             category={category}
+            handleDeviceFix={handleDeviceFix}
+            handleTradeIn={handleTradeIn}
           />
         ) : (
           <SliderSearch
@@ -194,6 +216,17 @@ export const HeaderSlider: FC<HeaderSliderProps> = ({
           />
         )}
       </div>
+      <TradeInModal
+        key={`${tradeInOpen}`}
+        handleClose={setTradeInOpen.bind(this, false)}
+        open={tradeInOpen}
+      />
+      <RepairModal
+        key={`${deviceFixOpen}`}
+        handleClose={setDeviceFixOpen.bind(this, false)}
+        submitData={handleSubmitData}
+        open={deviceFixOpen}
+      />
     </>
   );
 };

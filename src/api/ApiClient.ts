@@ -1,4 +1,5 @@
 import { CardItemDTO } from "@/Entities/CardItemDTO";
+import { RepairRequestType } from "@/hooks/useAddRepairRequest";
 import { TradeInType } from "@/Store/TradeInStore";
 import { CardItemType, CardType, RecivedCardDataType } from "@/Types/CardType";
 import { RecivedCardDataAdminType } from "@/Types/CardTypeAdmin";
@@ -131,6 +132,11 @@ class ApiClient {
     async TradeIn(tradeInRequest: TradeInType) {
         const response = await this.client.post(`${POSTGRE_ITEMS_PATH}/TradeInRequest`, tradeInRequest)
         return response.data;
+    }
+
+    async RepairRequest(request: RepairRequestType) {
+        const response = await this.client.post(`${POSTGRE_ITEMS_PATH}/RepairRequest`, request)
+        return response.data
     }
 
     async AddItem(item: Omit<CardItemDTO, "id">) {

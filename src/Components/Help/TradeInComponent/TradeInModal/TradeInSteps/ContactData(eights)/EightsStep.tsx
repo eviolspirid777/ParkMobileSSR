@@ -1,8 +1,8 @@
 import { useAtom } from "jotai";
-import styles from "./SevenStep.module.scss";
+import styles from "./EightsStep.module.scss";
 import { tradeInAtom } from "@/Store/TradeInStore";
 
-export const SevenStep = () => {
+export const EightsStep = () => {
   const [tradeInStore, setTradeInStore] = useAtom(tradeInAtom);
 
   const handleSelectItem = (itemTag: string, key: "username" | "telephone") => {

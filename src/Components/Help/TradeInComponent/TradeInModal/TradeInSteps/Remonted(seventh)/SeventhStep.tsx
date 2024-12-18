@@ -1,21 +1,21 @@
 import { ConfigProvider, Radio, RadioChangeEvent } from "antd";
-import styles from "./ForthStep.module.scss";
+import styles from "./SeventhStep.module.scss";
 import { useAtom } from "jotai";
 import { tradeInAtom } from "@/Store/TradeInStore";
 
-export const ForthStep = () => {
+export const SeventhStep = () => {
   const [tradeInStore, setTradeInStore] = useAtom(tradeInAtom);
 
   const handleChange = (value: RadioChangeEvent) => {
     setTradeInStore((prevValues) => ({
       ...prevValues,
-      original: value.target.value,
+      remonted: value.target.value,
     }));
   };
 
   return (
     <div className={styles["forth-step-block"]}>
-      <h3>Устройство оригинальное, не восстановленное?</h3>
+      <h3>Ремонитровалось ли устройство?</h3>
       <ConfigProvider
         theme={{
           token: {
@@ -27,10 +27,10 @@ export const ForthStep = () => {
           className={styles["forth-step-block-radio-group"]}
           size="large"
           onChange={handleChange}
-          defaultValue={tradeInStore?.original && tradeInStore.original}
+          defaultValue={tradeInStore?.remonted && tradeInStore.remonted}
         >
-          <Radio value={"original"} style={{fontSize: "1rem"}}>Да, устройство оригинальное</Radio>
-          <Radio value={"not-original"} style={{fontSize: "1rem"}}>Нет, устройство восстановленное</Radio>
+          <Radio value={"Ремонтировалось"} style={{fontSize: "1rem"}}>Да, устройство было в ремонте</Radio>
+          <Radio value={"Не ремонтировалось"} style={{fontSize: "1rem"}}>Нет, устройство не ремонтировалось</Radio>
         </Radio.Group>
       </ConfigProvider>
     </div>

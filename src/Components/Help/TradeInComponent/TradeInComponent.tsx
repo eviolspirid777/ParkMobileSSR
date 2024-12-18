@@ -3,6 +3,7 @@ import { AccordionComponent } from "@/Shared/Components/Accordion/AccordionCompo
 import styles from "./TradeInComponent.module.scss";
 import { TradeInModal } from "./TradeInModal/TradeInModal";
 import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const TradeInComponent = () => {
   const accordionData = [
@@ -27,47 +28,51 @@ export const TradeInComponent = () => {
       "Среднее время удаленной оценки менеджером - 5-10 минут. А второй этап подразумевает диагностику устройства специалистом в магазине, которая занимает не менее 30 минут. Во время обращения будет составлен акт приема передачи с указанием тех недочетов, которые были до диагностики. После того, как специалист сделает заключение, Вам будет сделано предложение с финальной оценкой вашего устройства. Будьте внимательны, что заключение действительно до конца рабочего дня.",
     ],
   ];
+  
+  const queryClient = new QueryClient();
 
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <div className={styles["trade-in-block"]}>
-        <h2>
-          Сдайте свою старую технику и получите скидку на покупку новой по
-          программе Трейд-ин
-        </h2>
-        <span className={styles["header-text"]}>
-          Trade-in — это умный, удобный и экологичный способ покупки новых
-          устройств. Теперь вам есть куда принести свои устройства, которые вы
-          решили обновить, получить при этом выгоду себе и принести пользу
-          окружающей среде.
-        </span>
-        {/* <h4>Выберите технику, которую вы хотите сдать</h4>
-        <div className={styles["images-block"]}>
-          {imagesBlock.map(([name, photo], key) => (
-            <div key={key} className={styles["images-block-card"]}>
-              <img src={photo} alt="" />
-              <span>{name as ReactNode}</span>
-            </div>
-          ))}
-        </div> */}
-        <button
-          className={styles["submit-button"]}
-          onClick={setOpen.bind(this, true)}
-        >
-          Подать заявку на трейд-ин
-        </button>
-        <div className={styles["faq-block"]}>
-          <h3>Часто задаваемые вопросы</h3>
-          <AccordionComponent data={accordionData} />
+      <QueryClientProvider client={queryClient}>
+        <div className={styles["trade-in-block"]}>
+          <h2>
+            Сдайте свою старую технику и получите скидку на покупку новой по
+            программе Трейд-ин
+          </h2>
+          <span className={styles["header-text"]}>
+            Trade-in — это умный, удобный и экологичный способ покупки новых
+            устройств. Теперь вам есть куда принести свои устройства, которые вы
+            решили обновить, получить при этом выгоду себе и принести пользу
+            окружающей среде.
+          </span>
+          {/* <h4>Выберите технику, которую вы хотите сдать</h4>
+          <div className={styles["images-block"]}>
+            {imagesBlock.map(([name, photo], key) => (
+              <div key={key} className={styles["images-block-card"]}>
+                <img src={photo} alt="" />
+                <span>{name as ReactNode}</span>
+              </div>
+            ))}
+          </div> */}
+          <button
+            className={styles["submit-button"]}
+            onClick={setOpen.bind(this, true)}
+          >
+            Подать заявку на трейд-ин
+          </button>
+          <div className={styles["faq-block"]}>
+            <h3>Часто задаваемые вопросы</h3>
+            <AccordionComponent data={accordionData} />
+          </div>
         </div>
-      </div>
-      <TradeInModal
-        key={`${open}`}
-        handleClose={setOpen.bind(this, false)}
-        open={open}
-      />
+        <TradeInModal
+          key={`${open}`}
+          handleClose={setOpen.bind(this, false)}
+          open={open}
+        />
+      </QueryClientProvider>
     </>
   );
 };
