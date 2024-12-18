@@ -13,6 +13,7 @@ import { TilesMobile } from "@/Components/Tiles/TilesMobile/TilesMobile";
 const Home = () => {
   const queryClient = new QueryClient();
 
+  //TODO: ReadMore.js: https://jedfoster.com/Readmore.js/  для подробнее...
   //TODO: Сделать возможность загрузки фоток в слайдер(ну это уже необязательно)
   //TODO: Добавить заявку на ремонт в мобильную версию
   //TODO: Большую кнопку (отправить заявку) на трейд-ин. И там шаги с заполнением + отправка сообщения в тг +
