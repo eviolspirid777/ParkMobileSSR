@@ -7,12 +7,14 @@ export const useAddTradeInRequest = () => {
     isPending: isTradeInPending,
     isSuccess: isTradeInSuccess,
     mutateAsync: mutateAsync,
+    mutate: mutate,
   } = useMutation({
     mutationFn: async (name: TradeInType) => await apiClient.TradeIn(name),
   });
 
   return {
     mutateAsync,
+    mutate,
     isTradeInPending,
     isTradeInSuccess,
   };

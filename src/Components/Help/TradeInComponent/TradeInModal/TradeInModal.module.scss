@@ -48,3 +48,11 @@
         opacity: 0.5;
     }
 }
+
+@media (max-width: 1024px) {
+    .trade-in-modal-content {
+        & .content {
+            min-height: 200px;
+        }
+    }
+}

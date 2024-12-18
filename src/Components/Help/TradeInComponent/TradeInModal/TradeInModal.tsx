@@ -1,5 +1,5 @@
 "use client";
-import { ConfigProvider, Modal, StepProps, Steps } from "antd";
+import {ConfigProvider, Modal, StepProps, Steps, StepsProps } from "antd";
 import { FC, useState } from "react";
 
 import styles from "./TradeInModal.module.scss";
@@ -36,7 +36,7 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
   const [tradeInStore, setTradeInStore] = useAtom(tradeInAtom)
 
   const {
-    mutateAsync
+    mutate
   } = useAddTradeInRequest();
 
   const [items, setItems] = useState<StepProps[]>([
@@ -79,7 +79,7 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
     handleClose();
   }
 
-  const handleChangeStep = async (state: "next" | "previous") => {
+  const handleChangeStep = (state: "next" | "previous") => {
     if (currentStep === 0 && state === "previous") {
       if (!window.confirm("Вы действительно хотите выйти?")) {
         return;
@@ -88,9 +88,8 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
       return;
     }
     if (currentStep === 7 && state === "next") {
-      console.log(tradeInStore)
       if(tradeInStore) {
-        await mutateAsync(tradeInStore);
+        mutate(tradeInStore);
       }
       handleCloseModal()
       return;
@@ -151,6 +150,13 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
     }
   }
 
+  const handleDisplayDataAttributes = () => {
+    if(window.screen.width < 1024) {
+      return {size:"small", progressDot: true} as StepsProps
+    }
+    return {size: "default", progressDot: false} as StepsProps
+  }
+
   return (
     <Modal
       open={open}
@@ -170,7 +176,7 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
             },
           }}
         >
-          <Steps items={items} />
+          <Steps items={items} {...handleDisplayDataAttributes()}/>
         </ConfigProvider>
         </div>
         <div className={styles["content"]}>
