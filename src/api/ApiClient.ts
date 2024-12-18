@@ -1,4 +1,5 @@
 import { CardItemDTO } from "@/Entities/CardItemDTO";
+import { TradeInType } from "@/Store/TradeInStore";
 import { CardItemType, CardType, RecivedCardDataType } from "@/Types/CardType";
 import { RecivedCardDataAdminType } from "@/Types/CardTypeAdmin";
 import { SearchItemsResponseType } from "@/Types/SearchItemShortType";
@@ -123,8 +124,13 @@ class ApiClient {
     }
 
     async OrderData(values: object) {
-        const response = await this.authClient.post(`${POSTGRE_ITEMS_PATH}/orderData`, values)
+        const response = await this.client.post(`${POSTGRE_ITEMS_PATH}/orderData`, values)
         return response.data
+    }
+
+    async TradeIn(tradeInRequest: TradeInType) {
+        const response = await this.client.post(`${POSTGRE_ITEMS_PATH}/TradeInRequest`, tradeInRequest)
+        return response.data;
     }
 
     async AddItem(item: Omit<CardItemDTO, "id">) {

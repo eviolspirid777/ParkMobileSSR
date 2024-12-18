@@ -8,4 +8,11 @@
         font-size: 1.6rem;
         font-family: "SF-Pro-Display-Regular_light";
     }
+
+    &-radio-group {
+        width:100% !important;
+        display: flex !important;
+        flex-flow: column nowrap !important;
+        gap: 10px !important;
+    }
 }

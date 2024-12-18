@@ -1,7 +1,9 @@
 import { atom } from "jotai";
 
-type TradeInAtom = {
+export type TradeInType = {
     deviceType?: string,
+    color?: string,
+    model?: string,
     original?: string,
     reset?: string,
     condition?: string,
@@ -9,4 +11,4 @@ type TradeInAtom = {
     telephone?: string,
 }
 
-export const tradeInAtom = atom<TradeInAtom>();
+export const tradeInAtom = atom<TradeInType>();

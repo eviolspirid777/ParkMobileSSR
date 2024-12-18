@@ -42,3 +42,9 @@
         }
     }
 }
+
+.next-step-button {
+    &:disabled {
+        opacity: 0.5;
+    }
+}

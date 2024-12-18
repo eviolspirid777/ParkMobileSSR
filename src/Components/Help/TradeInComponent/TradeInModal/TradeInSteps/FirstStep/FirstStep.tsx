@@ -29,7 +29,7 @@ const devices = [
 export const FirstStep = () => {
   const [selected, setSelected] = useState("");
 
-  const [, setTradeInStore] = useAtom(tradeInAtom);
+  const [tradeInStore, setTradeInStore] = useAtom(tradeInAtom);
 
   const handleSelectItem = (itemTag: string) => {
     setSelected(itemTag);
@@ -43,7 +43,7 @@ export const FirstStep = () => {
         {devices.map((el) => (
           <div key={el.tag} onClick={handleSelectItem.bind(this, el.tag)}>
             <img src={el.image} alt="" />
-            <span className={el.tag === selected ? styles["selected"] : ""}>
+            <span className={el.tag === selected || el.tag === tradeInStore?.deviceType ? styles["selected"] : ""}>
               {el.tag}
             </span>
           </div>
