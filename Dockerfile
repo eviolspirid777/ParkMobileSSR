@@ -1,7 +1,12 @@
 FROM node:20.11.1 as build
 WORKDIR /app
+
+# Copy only the package files and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm config set registry https://registry.npmjs.org/ \
+    && npm install
+
+# Copy the remaining files and build the application
 COPY . .
 RUN npm run build
 
