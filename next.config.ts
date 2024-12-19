@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   //Раскоментировать только для сборки FireBase
-  output: "export",
+  // output: "export",
   images: {
     unoptimized: true,
   }

@@ -1,6 +1,6 @@
 "use client";
-import {ConfigProvider, Modal, StepProps, Steps, StepsProps } from "antd";
-import { FC, useState } from "react";
+import { ConfigProvider, Modal, StepProps, Steps, StepsProps } from "antd";
+import { FC, useEffect, useState } from "react";
 
 import styles from "./TradeInModal.module.scss";
 import { useAtom } from "jotai";
@@ -28,16 +28,20 @@ const stepsDictionary = new Map([
   [4, () => <FifthStep />],
   [5, () => <SixthStep />],
   [6, () => <SeventhStep />],
-  [7, () => <EightsStep/>]
+  [7, () => <EightsStep />],
 ]);
 
 export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [tradeInStore, setTradeInStore] = useAtom(tradeInAtom)
+  const [tradeInStore, setTradeInStore] = useAtom(tradeInAtom);
 
-  const {
-    mutate
-  } = useAddTradeInRequest();
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    setIsRendered(true);
+  }, []);
+
+  const { mutate } = useAddTradeInRequest();
 
   const [items, setItems] = useState<StepProps[]>([
     {
@@ -53,12 +57,12 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
       description: "",
     },
     {
-      title:"Состояние",
-      description: ""
+      title: "Состояние",
+      description: "",
     },
     {
       title: "Аккумулятор",
-      description: ""
+      description: "",
     },
     {
       title: "Комплектация",
@@ -66,32 +70,32 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
     },
     {
       title: "Было в ремонте",
-      description: ""
+      description: "",
     },
     {
       title: "Контактная информация",
       description: "",
     },
   ]);
-  
+
   const handleCloseModal = () => {
-    setTradeInStore({})
+    setTradeInStore({});
     handleClose();
-  }
+  };
 
   const handleChangeStep = (state: "next" | "previous") => {
     if (currentStep === 0 && state === "previous") {
-      if (!window.confirm("Вы действительно хотите выйти?")) {
+      if (isRendered && !window.confirm("Вы действительно хотите выйти?")) {
         return;
       }
-      handleCloseModal()
+      handleCloseModal();
       return;
     }
     if (currentStep === 7 && state === "next") {
-      if(tradeInStore) {
+      if (tradeInStore) {
         mutate(tradeInStore);
       }
-      handleCloseModal()
+      handleCloseModal();
       return;
     }
 
@@ -120,10 +124,10 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
   };
 
   const handleDisabled = () => {
-    switch(currentStep) {
+    switch (currentStep) {
       case 0: {
         return !tradeInStore?.deviceType;
-      } 
+      }
       case 1: {
         return !tradeInStore?.color;
       }
@@ -140,22 +144,22 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
         return !tradeInStore?.complectation;
       }
       case 6: {
-        return !tradeInStore?.remonted
+        return !tradeInStore?.remonted;
       }
       case 7: {
-        return !(tradeInStore?.telephone && tradeInStore?.username)
+        return !(tradeInStore?.telephone && tradeInStore?.username);
       }
-      default: 
+      default:
         return false;
     }
-  }
+  };
 
   const handleDisplayDataAttributes = () => {
-    if(window.screen.width < 1024) {
-      return {size:"small", progressDot: true} as StepsProps
+    if (isRendered && window.screen.width < 1024) {
+      return { size: "small", progressDot: true } as StepsProps;
     }
-    return {size: "default", progressDot: false} as StepsProps
-  }
+    return { size: "default", progressDot: false } as StepsProps;
+  };
 
   return (
     <Modal
@@ -169,33 +173,47 @@ export const TradeInModal: FC<TradeInModalProps> = ({ handleClose, open }) => {
     >
       <div className={styles["trade-in-modal-content"]}>
         <div className={styles["steps"]}>
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: "#87a08b",
-            },
-          }}
-        >
-          <Steps items={items} {...handleDisplayDataAttributes()}/>
-        </ConfigProvider>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#87a08b",
+              },
+            }}
+          >
+            <Steps items={items} {...handleDisplayDataAttributes()} />
+          </ConfigProvider>
         </div>
         <div className={styles["content"]}>
           {stepsDictionary.get(currentStep)!()}
         </div>
         <div className={styles["button-block"]}>
           <button onClick={handleChangeStep.bind(this, "previous")}>
-            {
-              currentStep === 0 ? <><span>Выйти</span></> : <><i className="fa-thin fa-arrow-left"/>&nbsp; <span>Назад</span></>
-            }
+            {currentStep === 0 ? (
+              <>
+                <span>Выйти</span>
+              </>
+            ) : (
+              <>
+                <i className="fa-thin fa-arrow-left" />
+                &nbsp; <span>Назад</span>
+              </>
+            )}
           </button>
           <button
             className={styles["next-step-button"]}
             disabled={handleDisabled()}
             onClick={handleChangeStep.bind(this, "next")}
           >
-            {
-              currentStep === 7 ? <><span>Отправить</span></> : <><span>Далее</span> &nbsp;<i className="fa-thin fa-arrow-right"/></>
-            }
+            {currentStep === 7 ? (
+              <>
+                <span>Отправить</span>
+              </>
+            ) : (
+              <>
+                <span>Далее</span> &nbsp;
+                <i className="fa-thin fa-arrow-right" />
+              </>
+            )}
           </button>
         </div>
       </div>
