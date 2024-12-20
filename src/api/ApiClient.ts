@@ -9,8 +9,8 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 export type AuthorizationType = {userName: string, password: string}
 
 // Use the service name defined in docker-compose.yml
-const AUTORIZATIONS_PATH = 'http://aspnet-api:3001/api/Autorization'
-const POSTGRE_ITEMS_PATH = "http://aspnet-api:3001/api/ItemsPostgre"
+const AUTORIZATIONS_PATH = `${process.env.NEXT_PUBLIC_API_URL}/api/Autorization`
+const POSTGRE_ITEMS_PATH = `${process.env.NEXT_PUBLIC_API_URL}/api/ItemsPostgre`
 
 class ApiClient {
     client: AxiosInstance;
